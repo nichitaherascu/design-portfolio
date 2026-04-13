@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="Nichita Herascu — Home" data-version="4" width="1200" height="800"><head>
+<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="Nichita Herascu — Home" data-version="5" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>Nichita Herascu — Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7,7 +7,6 @@
     <script src="main.js" defer=""></script>
     <script src="home.js" defer=""></script>
     <style>
-        /* ── Reset ───────────────────────── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -26,7 +25,6 @@
             cursor: none;
         }
 
-        /* ── Custom cursor ───────────────── */
         #cursor {
             position: fixed;
             width: 7px; height: 7px;
@@ -45,7 +43,6 @@
             border: 1px solid var(--black);
         }
 
-        /* ── Entrance animations ─────────── */
         [data-anim] {
             opacity: 0;
             transform: translateY(14px);
@@ -115,30 +112,15 @@
             position: fixed;
             top: 34px; right: 38px;
             z-index: 20;
-            display: flex;
-            align-items: center;
-            gap: 26px;
         }
-        .nav-city {
-            font-size: 11px; font-weight: 300;
-            letter-spacing: .28em;
-            text-transform: uppercase;
+        .nav-instagram {
+            font-size: 12px; font-weight: 400;
             color: var(--gray);
-        }
-        .nav-socials { display: flex; align-items: center; }
-        .nav-socials a {
-            font-size: 12px; font-weight: 500;
-            color: var(--black);
             text-decoration: none;
-            letter-spacing: .05em;
-            text-transform: uppercase;
-            transition: opacity .2s;
+            letter-spacing: .04em;
+            transition: color .2s;
         }
-        .nav-socials a:hover { opacity: .4; }
-        .nav-socials .sep {
-            font-size: 12px; font-weight: 300;
-            color: var(--dim); margin: 0 6px;
-        }
+        .nav-instagram:hover { color: var(--black); }
 
         /* ── Portrait blob ───────────────── */
         .portrait {
@@ -150,10 +132,7 @@
             z-index: 1;
             will-change: transform;
         }
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-        }
+        .blob { position: absolute; border-radius: 50%; }
         .blob-face {
             inset: 0;
             background: radial-gradient(ellipse at 50% 40%,
@@ -212,13 +191,8 @@
     </nav>
 
     <!-- Nav right -->
-    <div class="nav-right">
-        <span class="nav-city" data-anim="">B U C H A R E S T</span>
-        <div class="nav-socials" data-anim="">
-            <a href="#">Instagram</a>
-            <span class="sep">|</span>
-            <a href="#">Behance</a>
-        </div>
+    <div class="nav-right" data-anim="">
+        <a href="https://instagram.com/nichita.hera" target="_blank" class="nav-instagram">@nichita.hera</a>
     </div>
 
     <!-- Portrait -->
