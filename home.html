@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="home.html — Dark Theme" data-version="12" width="1200" height="800"><head>
+<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="home.html — No Projects nav" data-version="13" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>Nichita Herascu — Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,28 +11,20 @@
         html, body {
             width: 100%; height: 100%;
             overflow: hidden;
-            background: #0a0a0a; /* ← black */
+            background: #0a0a0a;
         }
+        html { background: #0a0a0a; } /* prevents white flash */
 
-        /* Subtle fade-in when page loads from black entry */
-        body { animation: pageIn .3s ease; }
-        @keyframes pageIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-
-        /* ── Slider ──────────────────────── */
         #slider {
             position: fixed; inset: 0;
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
-            z-index: 1;
-            scrollbar-width: none;
+            z-index: 1; scrollbar-width: none;
         }
         #slider::-webkit-scrollbar { display: none; }
         .slide { height: 100vh; scroll-snap-align: start; position: relative; overflow: hidden; }
 
-        /* ── Portrait blob ───────────────── */
+        /* ── Portrait ────────────────────── */
         .portrait {
             position: absolute; top: 46%; left: 50%;
             transform: translate(-50%, -50%);
@@ -91,8 +83,7 @@
             position: absolute; bottom: -0.12em; right: -0.04em;
             font-size: 52vw; font-weight: 900;
             color: rgba(0,0,0,.05); line-height: 1;
-            letter-spacing: -.05em;
-            pointer-events: none; user-select: none; z-index: 1;
+            letter-spacing: -.05em; pointer-events: none; user-select: none; z-index: 1;
         }
         .proj-info {
             position: absolute; inset: 0; padding: var(--pad);
@@ -103,8 +94,7 @@
         .proj-bottom { display: flex; flex-direction: column; gap: 18px; }
         .proj-title {
             font-size: clamp(52px, 8vw, 110px);
-            font-weight: 700; letter-spacing: -.03em;
-            line-height: .92; color: var(--black);
+            font-weight: 700; letter-spacing: -.03em; line-height: .92; color: var(--black);
         }
         .proj-meta { display: flex; align-items: center; gap: 20px; }
         .proj-cat, .proj-year {
@@ -130,18 +120,17 @@
         .slide-project[data-theme="dark"] .proj-watermark { color: rgba(255,255,255,.04); }
     </style>
 </head>
-<!-- dark-slide class set by default so nav is white on black background -->
 <body class="dark-slide">
 
     <div id="cursor"></div>
 
+    <!-- ← Projects removed, About is now 01, Contact is 02 -->
     <nav class="nav-left">
         <a href="home.html" class="nav-logo" data-anim="">Nichita Herascu</a>
         <span class="nav-role" data-anim="">Graphic Designer &amp; Art Director</span>
         <ul class="nav-links">
-            <li data-anim=""><span class="num">01</span><a href="projects.html">Projects</a></li>
-            <li data-anim=""><span class="num">02</span><a href="about.html">About</a></li>
-            <li data-anim=""><span class="num">03</span><a href="contact.html">Contact</a></li>
+            <li data-anim=""><span class="num">01</span><a href="about.html">About</a></li>
+            <li data-anim=""><span class="num">02</span><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
@@ -151,7 +140,6 @@
 
     <div id="slider">
 
-        <!-- Slide 0 — Home (dark) -->
         <section class="slide" id="slide-home" data-theme="dark">
             <div id="portrait" class="portrait">
                 <div class="blob blob-hair"></div>
@@ -238,6 +226,5 @@
         </section>
 
     </div>
-
 
 </body></html>

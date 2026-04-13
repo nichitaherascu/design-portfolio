@@ -3,19 +3,26 @@
 // ─────────────────────────────────────────────────────────────────
 
 
-// ── Keyboard navigation ───────────────────────────────────────────
-//  ← arrow key = go to previous project (or back to home)
-//  → arrow key = go to next project
+// ── Keyboard navigation with fade ────────────────────────────────
+//  ← = previous project   → = next project
+//  Fades body out first to match the main.js link transition.
 
 document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('keydown', e => {
+    let href = null;
+
     if (e.key === 'ArrowLeft') {
         const back = document.getElementById('proj-back');
-        if (back) window.location.href = back.href;
+        if (back) href = back.href;
     }
     if (e.key === 'ArrowRight') {
         const next = document.getElementById('proj-next');
-        if (next) window.location.href = next.href;
+        if (next) href = next.href;
+    }
+
+    if (href) {
+        document.body.style.opacity = '0';
+        setTimeout(() => { window.location.href = href; }, 320);
     }
 });
 });

@@ -24,6 +24,8 @@ body {
  background: var(--white);
  color: var(--black);
  cursor: none;
+ opacity: 0;                     /* starts hidden — JS fades in  */
+ transition: opacity 0.32s ease; /* shared fade in / fade out    */
 }
 
 
