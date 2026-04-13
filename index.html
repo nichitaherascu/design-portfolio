@@ -1,25 +1,161 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Test</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-    }
-    .square {
-      width: 100px;
-      height: 100px;
-      background: #000;
-    }
-  </style>
+<html data-type="html" data-identifier="99f371d7-370d-43a1-88ea-05dcb79155fa" data-title="Nichita Herascu — Entry" data-version="1" width="1200" height="800"><head>
+    <meta charset="UTF-8">
+    <title>Nichita Herascu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #141414;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .folder-wrapper {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 13px;
+            padding: 16px 20px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.12s ease;
+        }
+
+        .folder-wrapper:hover {
+            background: rgba(255,255,255,0.06);
+        }
+
+        .folder-wrapper.selected {
+            background: rgba(50, 110, 215, 0.30);
+        }
+
+        .folder-wrapper.opening {
+            animation: openAnim 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes openAnim {
+            0%   { transform: scale(1);    opacity: 1; }
+            40%  { transform: scale(1.07); opacity: 1; }
+            100% { transform: scale(0.88); opacity: 0; }
+        }
+
+        .folder-icon {
+            width: 132px;
+            height: auto;
+            filter: drop-shadow(0 6px 18px rgba(0,0,0,0.55));
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+
+        .folder-wrapper:hover .folder-icon {
+            filter: drop-shadow(0 8px 24px rgba(0,0,0,0.65)) brightness(1.06);
+            transform: translateY(-2px);
+        }
+
+        .folder-label {
+            color: rgba(255,255,255,0.88);
+            font-size: 12.5px;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            text-align: center;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.95);
+            max-width: 220px;
+            line-height: 1.45;
+        }
+
+        .folder-wrapper.selected .folder-label {
+            color: #fff;
+        }
+
+        .hint {
+            position: fixed;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            font-family: 'DM Sans', sans-serif;
+            color: rgba(255,255,255,0.18);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
-  <div class="square"></div>
-</body>
-</html>
+
+    <div class="folder-wrapper" id="folder">
+        <svg class="folder-icon" viewBox="0 0 130 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="tabG" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#EFB02E"></stop>
+                    <stop offset="100%" stop-color="#C98212"></stop>
+                </linearGradient>
+                <linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#FDD068"></stop>
+                    <stop offset="100%" stop-color="#E99B1C"></stop>
+                </linearGradient>
+                <linearGradient id="shineG" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.24)"></stop>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0)"></stop>
+                </linearGradient>
+            </defs>
+
+            <!-- Tab flap -->
+            <path d="M6 36 L6 27 Q6 21 12 21 L46 21 Q53 21 56 27.5 L62 36 Z" fill="url(#tabG)"></path>
+
+            <!-- Body -->
+            <rect x="4" y="34" width="122" height="66" rx="8" fill="url(#bodyG)"></rect>
+
+            <!-- Top shine -->
+            <rect x="4" y="34" width="122" height="26" rx="8" fill="url(#shineG)"></rect>
+
+            <!-- Subtle inner top edge shadow (where tab joins body) -->
+            <rect x="4" y="34" width="122" height="3" rx="2" fill="rgba(0,0,0,0.07)"></rect>
+        </svg>
+
+        <span class="folder-label">Nichita_Herascu_Projects (2020–2026)</span>
+    </div>
+
+    <p class="hint">Double-click to open</p>
+
+    <script>
+        const folder = document.getElementById('folder');
+        let clicks = 0;
+        let timer = null;
+
+        folder.addEventListener('click', function () {
+            clicks++;
+
+            if (clicks === 1) {
+                folder.classList.add('selected');
+                timer = setTimeout(function () {
+                    clicks = 0;
+                }, 380);
+            } else if (clicks >= 2) {
+                clearTimeout(timer);
+                clicks = 0;
+                folder.classList.remove('selected');
+                folder.classList.add('opening');
+                setTimeout(function () {
+                    window.location.href = 'home.html';
+                }, 320);
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!folder.contains(e.target)) {
+                folder.classList.remove('selected');
+                clicks = 0;
+            }
+        });
+    </script>
+
+
+</body></html>
