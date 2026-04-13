@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="99f371d7-370d-43a1-88ea-05dcb79155fa" data-title="index.html — Entry Page" data-version="7" width="1200" height="800"><head>
+<html data-type="html" data-identifier="99f371d7-370d-43a1-88ea-05dcb79155fa" data-title="index.html — Entry Page" data-version="8" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>Nichita Herascu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8,7 +8,6 @@
     <script src="main.js" defer=""></script>
     <script src="index.js" defer=""></script>
     <style>
-        /* ── Page-specific ───────────────── */
         body {
             min-height: 100vh;
             display: flex;
@@ -16,6 +15,7 @@
             justify-content: center;
             overflow: hidden;
             user-select: none;
+            background: var(--white);
         }
 
         .entry-wrapper {
@@ -28,28 +28,22 @@
             cursor: none;
             transition: background 0.15s ease;
         }
-        .entry-wrapper:hover {
-            background: rgba(50, 110, 215, 0.07);
-        }
+        .entry-wrapper:hover { background: rgba(50, 110, 215, 0.07); }
 
+        /* ── Black square ────────────────── */
         .black-square {
             width: 120px; height: 120px;
             background: var(--black);
+            /* hover shrink — expansion is handled in JS */
             transition: transform .4s cubic-bezier(.25,.46,.45,.94);
         }
         .entry-wrapper:hover .black-square { transform: scale(0.7); }
-        .entry-wrapper.opening .black-square {
-            animation: openOut .35s cubic-bezier(.4,0,.2,1) forwards;
-        }
-        @keyframes openOut {
-            0%   { transform: scale(0.7); opacity: 1; }
-            100% { transform: scale(0.4); opacity: 0; }
-        }
 
         .entry-label {
             color: var(--black);
             font-size: 12.5px; font-weight: 400;
             letter-spacing: 0.01em; text-align: center;
+            transition: opacity .25s ease;
         }
 
         .hint {
@@ -59,6 +53,7 @@
             font-size: 11px; color: rgba(0,0,0,0.20);
             letter-spacing: 0.1em; text-transform: uppercase;
             white-space: nowrap;
+            transition: opacity .25s ease;
         }
     </style>
 </head>
@@ -67,11 +62,11 @@
     <div id="cursor"></div>
 
     <div class="entry-wrapper" id="entry">
-        <div class="black-square" data-anim=""></div>
-        <span class="entry-label" data-anim="">Nichita_Herascu_Projects (2020–2026)</span>
+        <div class="black-square" id="square" data-anim=""></div>
+        <span class="entry-label" id="entry-label" data-anim="">Nichita_Herascu_Projects (2020–2026)</span>
     </div>
 
-    <p class="hint" data-anim="">Click to open</p>
+    <p class="hint" id="hint" data-anim="">Click to open</p>
 
 
 </body></html>

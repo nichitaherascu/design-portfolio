@@ -4,9 +4,6 @@
 
 
 // ── Fit name to full viewport width ───────────────────────────────
-//  Binary search finds the largest vw font-size where
-//  #big-name fits inside its container without overflow.
-
 function fitName() {
 const el   = document.getElementById('big-name');
 const wrap = el?.parentElement;
@@ -23,9 +20,6 @@ el.style.fontSize = lo + 'vw';
 
 
 // ── Portrait parallax (rAF lerp) ──────────────────────────────────
-//  Drifts #portrait with the mouse using requestAnimationFrame.
-//  Lerp factor 0.07 creates a smooth, lagging float effect.
-
 function initParallax() {
 const el = document.getElementById('portrait');
 if (!el) return;
@@ -48,9 +42,6 @@ document.addEventListener('mousemove', e => {
 
 
 // ── Full-page slider ──────────────────────────────────────────────
-//  Tracks current slide, inverts nav on dark slides,
-//  handles keyboard navigation, animates project slides on scroll.
-
 function initSlider() {
 const slider = document.getElementById('slider');
 const slides = document.querySelectorAll('.slide');
@@ -58,32 +49,31 @@ if (!slider) return;
 
 let current = 0;
 
-// Scroll to a slide by index
 function navigateTo(idx) {
     idx = Math.max(0, Math.min(slides.length - 1, idx));
     slider.scrollTo({ top: idx * window.innerHeight, behavior: 'smooth' });
 }
 
-// Update UI when slide changes
 function updateUI(idx) {
     current = idx;
+    // Toggle dark/light nav + cursor based on slide theme
     const isDark = slides[idx]?.dataset.theme === 'dark';
     document.body.classList.toggle('dark-slide', isDark);
 }
 
-// Track scroll position
+// Set correct theme immediately on load (home slide is dark)
+updateUI(0);
+
 slider.addEventListener('scroll', () => {
     const idx = Math.round(slider.scrollTop / window.innerHeight);
     if (idx !== current) updateUI(idx);
 });
 
-// Keyboard: arrow + page keys
 document.addEventListener('keydown', e => {
     if (e.key === 'ArrowDown' || e.key === 'PageDown') navigateTo(current + 1);
     if (e.key === 'ArrowUp'   || e.key === 'PageUp')   navigateTo(current - 1);
 });
 
-// Animate project slide elements when scrolled into view
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (!entry.isIntersecting) return;
@@ -101,7 +91,6 @@ document.querySelectorAll('.slide-project').forEach(s => observer.observe(s));
 
 
 // ── Bootstrap ─────────────────────────────────────────────────────
-
 document.addEventListener('DOMContentLoaded', () => {
 fitName();
 initParallax();
