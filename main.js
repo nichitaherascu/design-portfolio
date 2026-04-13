@@ -1,12 +1,11 @@
 // ─────────────────────────────────────────────────────────────────
-//  main.js — shared utilities
-//  Loaded on: all pages
+//  main.js — shared across all pages
 // ─────────────────────────────────────────────────────────────────
 
 
 // ── Custom cursor ─────────────────────────────────────────────────
-//  Moves a <div id="cursor"> to follow the mouse.
-//  Expands to a ring on any <a> hover.
+//  Moves #cursor to follow the mouse.
+//  Expands into a ring on any <a> hover.
 
 function initCursor() {
 const cursor = document.getElementById('cursor');
@@ -25,8 +24,8 @@ document.querySelectorAll('a').forEach(a => {
 
 
 // ── Staggered entrance animation ──────────────────────────────────
-//  Adds class .in to every [data-anim] element, staggered by 85ms.
-//  CSS handles the actual opacity/transform transition.
+//  Adds .in to every [data-anim] element, staggered by 85ms.
+//  CSS handles the opacity/transform transition.
 
 function initEntrance() {
 document.querySelectorAll('[data-anim]').forEach((el, i) => {

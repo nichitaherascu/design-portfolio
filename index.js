@@ -1,12 +1,11 @@
 // ─────────────────────────────────────────────────────────────────
-//  index.js — entry page specific
-//  Loaded on: index.html only
+//  index.js — index.html only
 // ─────────────────────────────────────────────────────────────────
 
 
 // ── Click to enter ────────────────────────────────────────────────
-//  On click: adds .opening class (triggers CSS scale-out animation),
-//  then redirects to home.html after the animation completes (300ms).
+//  Adds .opening class (CSS scale-out animation),
+//  then navigates to home.html after 300ms.
 
 document.addEventListener('DOMContentLoaded', () => {
 const entry = document.getElementById('entry');
