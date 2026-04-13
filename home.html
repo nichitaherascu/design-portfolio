@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="Nichita Herascu — Home" data-version="5" width="1200" height="800"><head>
+<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="Nichita Herascu — Home Slider" data-version="6" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>Nichita Herascu — Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7,6 +7,7 @@
     <script src="main.js" defer=""></script>
     <script src="home.js" defer=""></script>
     <style>
+        /* ── Reset ───────────────────────── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -14,6 +15,7 @@
             --gray:  #b0b0b0;
             --dim:   #d4d4d4;
             --white: #ffffff;
+            --pad:   38px;
         }
 
         html, body {
@@ -25,6 +27,7 @@
             cursor: none;
         }
 
+        /* ── Cursor ──────────────────────── */
         #cursor {
             position: fixed;
             width: 7px; height: 7px;
@@ -34,152 +37,275 @@
             z-index: 9999;
             top: 0; left: 0;
             transform: translate(-50%, -50%);
-            transition: width .25s ease, height .25s ease,
-                        background .25s ease, border .25s ease;
+            transition: width .25s, height .25s, background .25s, border .25s;
         }
         #cursor.hovered {
             width: 34px; height: 34px;
             background: transparent;
             border: 1px solid var(--black);
         }
+        body.dark-slide #cursor { background: var(--white); }
+        body.dark-slide #cursor.hovered { background: transparent; border-color: var(--white); }
 
+        /* ── Entrance animations ─────────── */
         [data-anim] {
-            opacity: 0;
-            transform: translateY(14px);
+            opacity: 0; transform: translateY(14px);
             transition: opacity .7s ease, transform .7s ease;
         }
-        [data-anim].in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        [data-anim].in  { opacity: 1; transform: translateY(0); }
         [data-anim="rise"] {
             transform: translateY(70px);
-            transition: opacity .9s cubic-bezier(.16,1,.3,1),
-                        transform .9s cubic-bezier(.16,1,.3,1);
+            transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
         }
         [data-anim="rise"].in { transform: translateY(0); }
+
+        /* Slide-in animations for project slides */
+        [data-anim-slide] {
+            opacity: 0; transform: translateY(22px);
+            transition: opacity .65s ease, transform .65s ease;
+        }
+        [data-anim-slide].in { opacity: 1; transform: translateY(0); }
 
         /* ── Nav left ────────────────────── */
         .nav-left {
             position: fixed;
-            top: 32px; left: 38px;
-            z-index: 20;
+            top: 32px; left: var(--pad);
+            z-index: 50;
+            transition: color .4s;
         }
         .nav-logo {
             display: block;
             font-size: 13px; font-weight: 400;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-            color: var(--black);
-            text-decoration: none;
+            letter-spacing: .06em; text-transform: uppercase;
+            color: var(--black); text-decoration: none;
             margin-bottom: 5px;
+            transition: color .4s;
         }
         .nav-role {
             display: block;
             font-size: 11px; font-weight: 300;
-            color: var(--gray);
-            letter-spacing: .04em;
+            color: var(--gray); letter-spacing: .04em;
             margin-bottom: 22px;
+            transition: color .4s;
         }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .nav-links li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .nav-links { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+        .nav-links li { display: flex; align-items: center; gap: 10px; }
         .nav-links .num {
             font-size: 10px; font-weight: 300;
-            color: var(--dim);
-            letter-spacing: .05em;
+            color: var(--dim); letter-spacing: .05em;
+            transition: color .4s;
         }
         .nav-links a {
             font-size: 13px; font-weight: 300;
-            color: var(--gray);
-            text-decoration: none;
-            letter-spacing: .06em;
-            text-transform: uppercase;
+            color: var(--gray); text-decoration: none;
+            letter-spacing: .06em; text-transform: uppercase;
             transition: color .2s;
         }
         .nav-links a:hover { color: var(--black); }
 
+        /* Dark slide — invert nav */
+        body.dark-slide .nav-logo,
+        body.dark-slide .nav-links a:hover { color: var(--white); }
+        body.dark-slide .nav-role,
+        body.dark-slide .nav-links a,
+        body.dark-slide .nav-instagram { color: rgba(255,255,255,.5); }
+        body.dark-slide .nav-links .num { color: rgba(255,255,255,.2); }
+
         /* ── Nav right ───────────────────── */
         .nav-right {
             position: fixed;
-            top: 34px; right: 38px;
-            z-index: 20;
+            top: 34px; right: var(--pad);
+            z-index: 50;
         }
         .nav-instagram {
             font-size: 12px; font-weight: 400;
-            color: var(--gray);
-            text-decoration: none;
-            letter-spacing: .04em;
-            transition: color .2s;
+            color: var(--gray); text-decoration: none;
+            letter-spacing: .04em; transition: color .2s;
         }
         .nav-instagram:hover { color: var(--black); }
 
-        /* ── Portrait blob ───────────────── */
-        .portrait {
+        /* ── Slide nav dots ──────────────── */
+        #slide-nav {
             position: fixed;
+            right: var(--pad); top: 50%;
+            transform: translateY(-50%);
+            display: flex; flex-direction: column;
+            gap: 10px; z-index: 50;
+        }
+        .dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: rgba(0,0,0,.18);
+            border: none; padding: 0;
+            cursor: none;
+            transition: background .3s, transform .3s;
+        }
+        .dot.active { background: var(--black); transform: scale(1.5); }
+        #slide-nav.light .dot { background: rgba(255,255,255,.3); }
+        #slide-nav.light .dot.active { background: var(--white); }
+
+        /* ── Slider ──────────────────────── */
+        #slider {
+            position: fixed;
+            inset: 0;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            z-index: 1;
+            /* hide scrollbar */
+            scrollbar-width: none;
+        }
+        #slider::-webkit-scrollbar { display: none; }
+
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+        }
+
+        /* ── Slide 0: Home ───────────────── */
+        #slide-home { overflow: hidden; }
+
+        .portrait {
+            position: absolute;
             top: 44%; left: 50%;
             transform: translate(-50%, -50%);
             width: 330px; height: 460px;
             pointer-events: none;
-            z-index: 1;
             will-change: transform;
         }
         .blob { position: absolute; border-radius: 50%; }
         .blob-face {
             inset: 0;
             background: radial-gradient(ellipse at 50% 40%,
-                rgba(216,172,122,.92) 0%,
-                rgba(204,156,104,.56) 28%,
-                rgba(190,142,92,.2)  56%,
-                transparent 76%);
+                rgba(216,172,122,.92) 0%, rgba(204,156,104,.56) 28%,
+                rgba(190,142,92,.2) 56%, transparent 76%);
             filter: blur(46px);
         }
         .blob-hair {
             top: -20px; left: 15%; right: 15%; height: 48%;
             background: radial-gradient(ellipse at 50% 10%,
-                rgba(155,112,72,.52) 0%,
-                transparent 68%);
+                rgba(155,112,72,.52) 0%, transparent 68%);
             filter: blur(34px);
         }
         .blob-neck {
             bottom: -20px; left: 25%; right: 25%; height: 35%;
             background: radial-gradient(ellipse at 50% 0%,
-                rgba(205,158,106,.44) 0%,
-                transparent 70%);
+                rgba(205,158,106,.44) 0%, transparent 70%);
             filter: blur(30px);
         }
 
-        /* ── Bottom name ─────────────────── */
         .name-wrap {
-            position: fixed;
-            bottom: -.07em; left: 0; right: 0;
-            line-height: 1;
-            z-index: 2;
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            line-height: 1; z-index: 2;
         }
         #big-name {
             display: block;
-            font-weight: 900;
-            letter-spacing: -.025em;
-            text-transform: uppercase;
-            color: var(--black);
-            white-space: nowrap;
-            line-height: .86;
+            font-weight: 900; letter-spacing: -.025em;
+            text-transform: uppercase; color: var(--black);
+            white-space: nowrap; line-height: .86;
         }
+
+        /* scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: var(--pad); left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column;
+            align-items: center; gap: 10px;
+            opacity: .22; z-index: 5;
+            transition: opacity .4s;
+        }
+        .scroll-hint.hidden { opacity: 0; }
+        .scroll-hint span {
+            font-size: 9px; font-weight: 400;
+            letter-spacing: .18em; text-transform: uppercase;
+        }
+        .scroll-bar {
+            width: 1px; height: 36px;
+            background: var(--black);
+            transform-origin: top;
+            animation: scrollAnim 1.8s ease-in-out infinite;
+        }
+        @keyframes scrollAnim {
+            0%   { transform: scaleY(0); opacity: 1; }
+            55%  { transform: scaleY(1); opacity: 1; }
+            100% { transform: scaleY(1); opacity: 0; }
+        }
+
+        /* ── Slide Project ───────────────── */
+        .slide-project {
+            display: grid;
+            grid-template-columns: 38% 62%;
+        }
+
+        .proj-left {
+            background: var(--white);
+            padding: var(--pad);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid var(--dim);
+        }
+
+        .proj-right {
+            position: relative;
+            overflow: hidden;
+        }
+        .proj-right-bg {
+            position: absolute; inset: 0;
+            transition: transform .8s cubic-bezier(.25,.46,.45,.94);
+        }
+        .slide-project:hover .proj-right-bg { transform: scale(1.03); }
+
+        /* watermark number in bg */
+        .proj-watermark {
+            position: absolute;
+            bottom: -0.15em; right: -0.05em;
+            font-size: 38vw; font-weight: 900;
+            color: rgba(0,0,0,.05);
+            line-height: 1; letter-spacing: -.05em;
+            pointer-events: none; user-select: none;
+        }
+
+        .proj-top { /* top of left panel */ }
+        .proj-index {
+            font-size: 11px; font-weight: 300;
+            color: var(--gray); letter-spacing: .1em;
+        }
+
+        .proj-bottom { display: flex; flex-direction: column; gap: 20px; }
+
+        .proj-title {
+            font-size: clamp(32px, 4.5vw, 68px);
+            font-weight: 700; letter-spacing: -.025em;
+            line-height: .95; color: var(--black);
+        }
+
+        .proj-meta { display: flex; gap: 20px; align-items: center; }
+        .proj-cat, .proj-year {
+            font-size: 11px; font-weight: 300;
+            color: var(--gray); text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+        .proj-cat::after { content: '—'; margin-left: 20px; color: var(--dim); }
+
+        .proj-cta {
+            display: inline-flex; align-items: center;
+            gap: 12px; font-size: 11px; font-weight: 500;
+            color: var(--black); text-decoration: none;
+            letter-spacing: .1em; text-transform: uppercase;
+            transition: gap .3s ease; width: fit-content;
+        }
+        .proj-cta:hover { gap: 22px; }
+        .proj-cta .arr { font-size: 16px; font-weight: 300; }
     </style>
 </head>
 <body>
 
     <div id="cursor"></div>
 
-    <!-- Nav left -->
+    <!-- Fixed nav -->
     <nav class="nav-left">
         <a href="home.html" class="nav-logo" data-anim="">Nichita Herascu</a>
         <span class="nav-role" data-anim="">Graphic Designer &amp; Art Director</span>
@@ -190,22 +316,155 @@
         </ul>
     </nav>
 
-    <!-- Nav right -->
     <div class="nav-right" data-anim="">
         <a href="https://instagram.com/nichita.hera" target="_blank" class="nav-instagram">@nichita.hera</a>
     </div>
 
-    <!-- Portrait -->
-    <div id="portrait" class="portrait" data-anim="">
-        <div class="blob blob-hair"></div>
-        <div class="blob blob-face"></div>
-        <div class="blob blob-neck"></div>
-    </div>
+    <!-- Side dots -->
+    <nav id="slide-nav">
+        <button class="dot active" data-target="0"></button>
+        <button class="dot" data-target="1"></button>
+        <button class="dot" data-target="2"></button>
+        <button class="dot" data-target="3"></button>
+        <button class="dot" data-target="4"></button>
+        <button class="dot" data-target="5"></button>
+    </nav>
 
-    <!-- Massive name -->
-    <div class="name-wrap">
-        <span id="big-name" data-anim="rise">Nichita Herascu</span>
-    </div>
+    <!-- Slider -->
+    <div id="slider">
+
+        <!-- Slide 0 — Home -->
+        <section class="slide" id="slide-home" data-theme="light">
+            <div id="portrait" class="portrait">
+                <div class="blob blob-hair"></div>
+                <div class="blob blob-face"></div>
+                <div class="blob blob-neck"></div>
+            </div>
+            <div class="name-wrap">
+                <span id="big-name" data-anim="rise">Nichita Herascu</span>
+            </div>
+            <div class="scroll-hint" id="scroll-hint">
+                <span>Scroll</span>
+                <div class="scroll-bar"></div>
+            </div>
+        </section>
+
+        <!-- Slide 1 — Project 01 -->
+        <section class="slide slide-project" id="slide-1" data-theme="light">
+            <div class="proj-left">
+                <div class="proj-top">
+                    <span class="proj-index" data-anim-slide="">01 — 05</span>
+                </div>
+                <div class="proj-bottom">
+                    <h2 class="proj-title" data-anim-slide="">Noir<br>Studio</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Branding</span>
+                        <span class="proj-year">2025</span>
+                    </div>
+                    <a href="project-01.html" class="proj-cta" data-anim-slide="">
+                        View Project <span class="arr">→</span>
+                    </a>
+                </div>
+            </div>
+            <div class="proj-right">
+                <div class="proj-right-bg" style="background:#EDE9E3;"></div>
+                <span class="proj-watermark">01</span>
+            </div>
+        </section>
+
+        <!-- Slide 2 — Project 02 -->
+        <section class="slide slide-project" id="slide-2" data-theme="light">
+            <div class="proj-left">
+                <div class="proj-top">
+                    <span class="proj-index" data-anim-slide="">02 — 05</span>
+                </div>
+                <div class="proj-bottom">
+                    <h2 class="proj-title" data-anim-slide="">Bloom<br>Campaign</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Art Direction</span>
+                        <span class="proj-year">2025</span>
+                    </div>
+                    <a href="project-02.html" class="proj-cta" data-anim-slide="">
+                        View Project <span class="arr">→</span>
+                    </a>
+                </div>
+            </div>
+            <div class="proj-right">
+                <div class="proj-right-bg" style="background:#E2E2E2;"></div>
+                <span class="proj-watermark">02</span>
+            </div>
+        </section>
+
+        <!-- Slide 3 — Project 03 (dark) -->
+        <section class="slide slide-project" id="slide-3" data-theme="dark">
+            <div class="proj-left" style="background:#0f0f0f; border-color:#2a2a2a;">
+                <div class="proj-top">
+                    <span class="proj-index" data-anim-slide="" style="color:#555;">03 — 05</span>
+                </div>
+                <div class="proj-bottom">
+                    <h2 class="proj-title" data-anim-slide="" style="color:#fff;">Form<br>&amp; Type</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat" style="color:#555;">Design</span>
+                        <span class="proj-year" style="color:#555;">2024</span>
+                    </div>
+                    <a href="project-03.html" class="proj-cta" data-anim-slide="" style="color:#fff;">
+                        View Project <span class="arr">→</span>
+                    </a>
+                </div>
+            </div>
+            <div class="proj-right">
+                <div class="proj-right-bg" style="background:#141414;"></div>
+                <span class="proj-watermark" style="color:rgba(255,255,255,.04);">03</span>
+            </div>
+        </section>
+
+        <!-- Slide 4 — Project 04 -->
+        <section class="slide slide-project" id="slide-4" data-theme="light">
+            <div class="proj-left">
+                <div class="proj-top">
+                    <span class="proj-index" data-anim-slide="">04 — 05</span>
+                </div>
+                <div class="proj-bottom">
+                    <h2 class="proj-title" data-anim-slide="">Vela<br>Identity</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Branding</span>
+                        <span class="proj-year">2024</span>
+                    </div>
+                    <a href="project-04.html" class="proj-cta" data-anim-slide="">
+                        View Project <span class="arr">→</span>
+                    </a>
+                </div>
+            </div>
+            <div class="proj-right">
+                <div class="proj-right-bg" style="background:#D9E5D9;"></div>
+                <span class="proj-watermark">04</span>
+            </div>
+        </section>
+
+        <!-- Slide 5 — Project 05 -->
+        <section class="slide slide-project" id="slide-5" data-theme="light">
+            <div class="proj-left">
+                <div class="proj-top">
+                    <span class="proj-index" data-anim-slide="">05 — 05</span>
+                </div>
+                <div class="proj-bottom">
+                    <h2 class="proj-title" data-anim-slide="">Meridian</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Art Direction</span>
+                        <span class="proj-year">2023</span>
+                    </div>
+                    <a href="project-05.html" class="proj-cta" data-anim-slide="">
+                        View Project <span class="arr">→</span>
+                    </a>
+                </div>
+            </div>
+            <div class="proj-right">
+                <div class="proj-right-bg" style="background:#E8E0EC;"></div>
+                <span class="proj-watermark">05</span>
+            </div>
+        </section>
+
+    </div><!-- /slider -->
 
 
 </body></html>
