@@ -1,6 +1,6 @@
-<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — More padding &amp; rounded" data-version="2" width="1200" height="800"><head>
+<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — Final" data-version="4" width="1200" height="800"><head>
     <meta charset="UTF-8">
-    <title>Noir Studio — Nichita Herascu</title>
+    <title>The Map — Nichita Herascu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&amp;display=swap" rel="stylesheet">
@@ -8,16 +8,15 @@
     <script src="main.js" defer=""></script>
     <script src="project.js" defer=""></script>
     <style>
-        html { background: #ffffff; } /* prevents flash */
+        html { background: #fff; }
         html, body { width: 100%; height: 100%; overflow: hidden; }
 
-        /* ── Top nav ─────────────────────── */
+        /* ── Nav ─────────────────────────── */
         .page-nav {
-            position: fixed; top: 0; left: 0; right: 0;
-            height: 52px; display: flex; align-items: center;
-            justify-content: space-between; padding: 0 32px;
-            border-bottom: 1px solid var(--dim);
-            background: var(--white); z-index: 100;
+            position: fixed; top: 0; left: 0; right: 0; height: 52px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 32px; background: var(--white); z-index: 100;
+            /* no border */
         }
         .page-nav-logo {
             font-size: 13px; font-weight: 500; letter-spacing: .06em;
@@ -31,7 +30,7 @@
         }
         .page-nav-ig:hover { color: var(--black); }
 
-        /* ── Split layout ────────────────── */
+        /* ── Layout ──────────────────────── */
         .proj-page {
             position: fixed; top: 52px; left: 0; right: 0; bottom: 0;
             display: grid; grid-template-columns: 380px 1fr;
@@ -40,8 +39,8 @@
         /* ── Sidebar ─────────────────────── */
         .proj-sidebar {
             height: 100%; display: flex; flex-direction: column;
-            border-right: 1px solid var(--dim);
             background: var(--white); overflow: hidden;
+            /* no border-right */
         }
         .sidebar-top { padding: 28px 32px 0; flex-shrink: 0; }
         .proj-page-title {
@@ -52,7 +51,7 @@
         .proj-nav-row {
             display: flex; justify-content: space-between; align-items: center;
             padding: 11px 0;
-            border-top: 1px solid var(--dim); border-bottom: 1px solid var(--dim);
+            /* no border */
         }
         .proj-nav-link {
             font-size: 12px; font-weight: 400; color: var(--black);
@@ -63,27 +62,22 @@
         .proj-tags {
             font-size: 11px; font-weight: 300; color: var(--gray);
             letter-spacing: .03em; padding: 11px 0;
-            border-bottom: 1px solid var(--dim);
+            /* no border */
         }
         .sidebar-body { flex: 1; padding: 28px 32px 0; overflow: hidden; }
         .proj-desc p {
-            font-size: 13px; font-weight: 300;
-            color: var(--gray); line-height: 1.8; margin-bottom: 14px;
+            font-size: 13px; font-weight: 300; color: var(--gray);
+            line-height: 1.8; margin-bottom: 14px;
         }
         .sidebar-bottom {
-            padding: 16px 32px 28px;
-            border-top: 1px solid var(--dim); flex-shrink: 0;
+            padding: 16px 32px 28px; flex-shrink: 0;
+            /* no border, no client-name */
         }
         .client-meta {
-            font-size: 11px; font-weight: 300;
-            color: var(--gray); line-height: 1.8; margin-bottom: 10px;
-        }
-        .client-name {
-            font-size: clamp(22px, 2.4vw, 34px); font-weight: 700;
-            text-transform: uppercase; letter-spacing: -.02em; line-height: 1.0;
+            font-size: 11px; font-weight: 300; color: var(--gray); line-height: 1.8;
         }
 
-        /* ── Right scrollable panel ──────── */
+        /* ── Scrollable right panel ──────── */
         .proj-content {
             height: 100%; overflow-y: scroll;
             scrollbar-width: none; background: #0f0f0f;
@@ -91,25 +85,33 @@
         .proj-content::-webkit-scrollbar { display: none; }
 
         /* ── Image grid ──────────────────── */
-        .image-grid {
-            display: flex; flex-direction: column;
-            gap: 12px;        /* ← more breathing room between rows  */
-            padding: 16px;    /* ← safe space around the whole grid  */
-        }
+        .image-grid { display: flex; flex-direction: column; gap: 3px; padding: 0; }
 
+        /* No border-radius, no gaps = full bleed grid */
         .img-row-full { width: 100%; }
         .img-row-full .img-block {
             width: 100%; aspect-ratio: 16 / 9;
-            border-radius: 14px; /* ← rounder corners */
             display: block;
+            border-radius: 0; /* no rounded corners */
         }
-
-        .img-row-half { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .img-row-half { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
         .img-row-half .img-block {
             width: 100%; aspect-ratio: 3 / 2;
-            border-radius: 14px; /* ← rounder corners */
             display: block;
+            border-radius: 0; /* no rounded corners */
         }
+
+        /* ── Image fade in on scroll ─────── */
+        .img-block {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .65s ease, transform .65s ease;
+        }
+        .img-block.img-visible { opacity: 1; transform: translateY(0); }
+        .img-row-half .img-block:nth-child(2) { transition-delay: .1s; }
+
+        /* ── Footer inside scroll panel ─── */
+        .proj-content .site-footer { margin-top: 3px; }
     </style>
 </head>
 <body>
@@ -125,52 +127,51 @@
 
         <aside class="proj-sidebar">
             <div class="sidebar-top">
-                <h1 class="proj-page-title">Noir Studio</h1>
+                <h1 class="proj-page-title">The Map</h1>
                 <div class="proj-nav-row">
                     <a href="home.html" id="proj-back" class="proj-nav-link">← Back</a>
                     <a href="project-02.html" id="proj-next" class="proj-nav-link">Next →</a>
                 </div>
-                <p class="proj-tags">Branding // Visual Identity // Logo Design</p>
+                <p class="proj-tags">Branding</p>
             </div>
             <div class="sidebar-body">
                 <div class="proj-desc">
-                    <p>Noir Studio is a full branding project developed for an independent creative consultancy based in Bucharest.</p>
-                    <p>The identity explores tension between elegance and severity — a typographic system built around contrast, precision, and restraint.</p>
-                    <p>The result is a visual language that positions Noir Studio as a premium, editorial-minded creative practice.</p>
+                    <p>Add your project description here.</p>
                 </div>
             </div>
             <div class="sidebar-bottom">
-                <p class="client-meta">Client: Noir Studio<br>Year: 2025</p>
-                <h2 class="client-name">Noir<br>Studio</h2>
+                <p class="client-meta">Client: The Map</p>
+                <!-- client-name removed, year removed -->
             </div>
         </aside>
 
         <main class="proj-content">
             <div class="image-grid">
-
-                <div class="img-row-full">
-                    <div class="img-block" style="background:#D4A843;"></div>
-                </div>
-
+                <div class="img-row-full"><div class="img-block" style="background:#D4A843;"></div></div>
                 <div class="img-row-half">
                     <div class="img-block" style="background:#5B8FA8;"></div>
                     <div class="img-block" style="background:#7A9E7E;"></div>
                 </div>
-
-                <div class="img-row-full">
-                    <div class="img-block" style="background:#C47A7A;"></div>
-                </div>
-
+                <div class="img-row-full"><div class="img-block" style="background:#C47A7A;"></div></div>
                 <div class="img-row-half">
                     <div class="img-block" style="background:#8A9A5B;"></div>
                     <div class="img-block" style="background:#9484B8;"></div>
                 </div>
-
-                <div class="img-row-full">
-                    <div class="img-block" style="background:#B89878;"></div>
-                </div>
-
+                <div class="img-row-full"><div class="img-block" style="background:#B89878;"></div></div>
             </div>
+
+            <footer class="site-footer">
+                <div class="footer-top">
+                    <h2 class="footer-name">Nichita<br>Herascu</h2>
+                    <div class="footer-contact">
+                        <p class="footer-cta-text">Want to work together?</p>
+                        <a href="mailto:nichitaherascu@gmail.com" class="footer-email">nichitaherascu@gmail.com</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="footer-copy">Graphic Designer &amp; Art Director — Bucharest &nbsp;·&nbsp; © 2026 Nichita Herascu</p>
+                </div>
+            </footer>
         </main>
 
     </div>
