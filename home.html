@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="home.html — Updated projects" data-version="14" width="1200" height="800"><head>
+<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="home.html — 5 projects" data-version="15" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>Nichita Herascu — Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,6 @@
         #slider::-webkit-scrollbar { display: none; }
         .slide { height: 100vh; scroll-snap-align: start; position: relative; overflow: hidden; }
 
-        /* ── Portrait ────────────────────── */
         .portrait {
             position: absolute; top: 46%; left: 50%;
             transform: translate(-50%, -50%);
@@ -45,7 +44,6 @@
             filter: blur(30px);
         }
 
-        /* ── Marquee ─────────────────────── */
         .marquee-wrap {
             position: absolute; bottom: 0; left: 0; right: 0;
             background: var(--red); overflow: hidden; padding: 5px 0; z-index: 2;
@@ -64,52 +62,36 @@
             to   { transform: translateX(-50%); }
         }
 
-        /* ── Project slides ──────────────── */
         .slide-project { position: relative; overflow: hidden; }
-
-        /* Full-slide clickable overlay */
-        .proj-overlay {
-            position: absolute; inset: 0; z-index: 10;
-        }
-
+        .proj-overlay { position: absolute; inset: 0; z-index: 10; }
         .proj-bg {
             position: absolute; inset: 0;
             transition: transform .9s cubic-bezier(.25,.46,.45,.94);
         }
         .slide-project:hover .proj-bg { transform: scale(1.025); }
-
         .proj-watermark {
             position: absolute; bottom: -0.12em; right: -0.04em;
             font-size: 52vw; font-weight: 900; color: rgba(0,0,0,.05);
             line-height: 1; letter-spacing: -.05em;
             pointer-events: none; user-select: none; z-index: 1;
         }
-
-        /* Info sits at the bottom only — no index counter at top */
         .proj-info {
             position: absolute; inset: 0; padding: var(--pad);
             display: flex; flex-direction: column;
-            justify-content: flex-end; /* ← content at bottom */
-            z-index: 2; pointer-events: none;
+            justify-content: flex-end; z-index: 2; pointer-events: none;
         }
-
         .proj-bottom { display: flex; flex-direction: column; gap: 14px; }
-
         .proj-title {
             font-size: clamp(48px, 7.5vw, 104px);
-            font-weight: 700; letter-spacing: -.03em;
-            line-height: .92; color: var(--black);
+            font-weight: 700; letter-spacing: -.03em; line-height: .92; color: var(--black);
         }
-
         .proj-meta { display: flex; align-items: center; gap: 16px; }
         .proj-cat, .proj-year {
             font-size: 11px; font-weight: 300; color: var(--gray);
             text-transform: uppercase; letter-spacing: .08em;
         }
-        /* separator dot between cat and year */
         .proj-cat::after { content: '·'; margin-left: 16px; color: var(--dim); }
 
-        /* Dark slide overrides */
         .slide-project[data-theme="dark"] .proj-title { color: var(--white); }
         .slide-project[data-theme="dark"] .proj-cat,
         .slide-project[data-theme="dark"] .proj-year  { color: rgba(255,255,255,.4); }
@@ -189,11 +171,27 @@
             </div>
         </section>
 
-        <!-- Slide 3 — House of Zodiac -->
+        <!-- Slide 3 — Beyond the Perimeter (NEW) -->
         <section class="slide slide-project" id="slide-3" data-theme="dark">
             <a href="project-03.html" class="proj-overlay"></a>
-            <div class="proj-bg" style="background:#1A1A1A;"></div>
+            <div class="proj-bg" style="background:#1C1814;"></div>
             <span class="proj-watermark">03</span>
+            <div class="proj-info">
+                <div class="proj-bottom">
+                    <h2 class="proj-title" data-anim-slide="">Beyond the<br>Perimeter</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Book Design / Art Direction</span>
+                        <span class="proj-year">2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4 — House of Zodiac -->
+        <section class="slide slide-project" id="slide-4" data-theme="light">
+            <a href="project-04.html" class="proj-overlay"></a>
+            <div class="proj-bg" style="background:#D4CAE0;"></div>
+            <span class="proj-watermark">04</span>
             <div class="proj-info">
                 <div class="proj-bottom">
                     <h2 class="proj-title" data-anim-slide="">House of<br>Zodiac</h2>
@@ -205,11 +203,11 @@
             </div>
         </section>
 
-        <!-- Slide 4 — Overti -->
-        <section class="slide slide-project" id="slide-4" data-theme="light">
-            <a href="project-04.html" class="proj-overlay"></a>
+        <!-- Slide 5 — Overti -->
+        <section class="slide slide-project" id="slide-5" data-theme="light">
+            <a href="project-05.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#C4F0D4;"></div>
-            <span class="proj-watermark">04</span>
+            <span class="proj-watermark">05</span>
             <div class="proj-info">
                 <div class="proj-bottom">
                     <h2 class="proj-title" data-anim-slide="">Overti</h2>
