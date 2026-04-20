@@ -36,20 +36,17 @@ body {
 /* ── Custom cursor ───────────────────────────────────────────────── */
 #cursor {
  position: fixed;
- width: 7px;
- height: 7px;
+ width: 7px; height: 7px;
  background: var(--black);
  border-radius: 50%;
  pointer-events: none;
  z-index: 9999;
- top: 0;
- left: 0;
+ top: 0; left: 0;
  transform: translate(-50%, -50%);
  transition: width .25s, height .25s, background .25s, border .25s;
 }
 #cursor.hovered {
- width: 34px;
- height: 34px;
+ width: 34px; height: 34px;
  background: transparent;
  border: 1px solid var(--black);
 }
@@ -89,10 +86,6 @@ body.dark-slide #cursor.hovered { background: transparent; border-color: var(--w
 }
 .nav-links { list-style: none; display: flex; flex-direction: column; gap: 5px; }
 .nav-links li { display: flex; align-items: center; gap: 10px; }
-.nav-links .num {
- font-size: 10px; font-weight: 300;
- color: var(--dim); letter-spacing: .05em; transition: color .4s;
-}
 .nav-links a {
  font-size: 13px; font-weight: 300; color: var(--gray);
  text-decoration: none; letter-spacing: .06em;
@@ -111,7 +104,7 @@ body.dark-slide #cursor.hovered { background: transparent; border-color: var(--w
 .nav-instagram:hover { color: var(--black); }
 
 
-/* ── Dark slide — nav + cursor overrides ─────────────────────────── */
+/* ── Dark slide ──────────────────────────────────────────────────── */
 body.dark-slide .nav-logo,
 body.dark-slide .nav-links a:hover { color: var(--white); }
 
@@ -119,10 +112,8 @@ body.dark-slide .nav-role,
 body.dark-slide .nav-links a,
 body.dark-slide .nav-instagram { color: rgba(255,255,255,.45); }
 
-body.dark-slide .nav-links .num { color: rgba(255,255,255,.2); }
 
-
-/* ── Footer — shared across all pages ───────────────────────────── */
+/* ── Footer ──────────────────────────────────────────────────────── */
 .site-footer {
  background: #0a0a0a;
  color: #fff;
@@ -133,8 +124,8 @@ body.dark-slide .nav-links .num { color: rgba(255,255,255,.2); }
  justify-content: space-between;
  align-items: flex-end;
  padding-bottom: 48px;
- border-bottom: 1px solid rgba(255,255,255,.1);
  margin-bottom: 28px;
+ /* no border */
 }
 .footer-name {
  font-size: clamp(38px, 6.5vw, 92px);
@@ -152,19 +143,14 @@ body.dark-slide .nav-links .num { color: rgba(255,255,255,.2); }
  gap: 10px;
 }
 .footer-cta-text {
- font-size: 10px;
- font-weight: 400;
- letter-spacing: .12em;
- text-transform: uppercase;
+ font-size: 10px; font-weight: 400;
+ letter-spacing: .12em; text-transform: uppercase;
  color: rgba(255,255,255,.35);
 }
 .footer-email {
- font-size: 18px;
- font-weight: 400;
- color: #fff;
- text-decoration: none;
- letter-spacing: -.01em;
- transition: opacity .2s;
+ font-size: 18px; font-weight: 400;
+ color: #fff; text-decoration: none;
+ letter-spacing: -.01em; transition: opacity .2s;
 }
 .footer-email:hover { opacity: .5; }
 .footer-bottom {
@@ -173,22 +159,7 @@ body.dark-slide .nav-links .num { color: rgba(255,255,255,.2); }
  align-items: center;
 }
 .footer-copy {
- font-size: 11px;
- font-weight: 300;
+ font-size: 11px; font-weight: 300;
  color: rgba(255,255,255,.25);
  letter-spacing: .04em;
 }
-.footer-links {
- display: flex;
- gap: 32px;
-}
-.footer-links a {
- font-size: 11px;
- font-weight: 400;
- color: rgba(255,255,255,.45);
- text-decoration: none;
- letter-spacing: .1em;
- text-transform: uppercase;
- transition: color .2s;
-}
-.footer-links a:hover { color: #fff; }
