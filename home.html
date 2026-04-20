@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="home.html — 5 projects" data-version="15" width="1200" height="800"><head>
+<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="home.html — Final" data-version="17" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>Nichita Herascu — Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,10 +64,7 @@
 
         .slide-project { position: relative; overflow: hidden; }
         .proj-overlay { position: absolute; inset: 0; z-index: 10; }
-        .proj-bg {
-            position: absolute; inset: 0;
-            transition: transform .9s cubic-bezier(.25,.46,.45,.94);
-        }
+        .proj-bg { position: absolute; inset: 0; transition: transform .9s cubic-bezier(.25,.46,.45,.94); }
         .slide-project:hover .proj-bg { transform: scale(1.025); }
         .proj-watermark {
             position: absolute; bottom: -0.12em; right: -0.04em;
@@ -91,12 +88,14 @@
             text-transform: uppercase; letter-spacing: .08em;
         }
         .proj-cat::after { content: '·'; margin-left: 16px; color: var(--dim); }
-
         .slide-project[data-theme="dark"] .proj-title { color: var(--white); }
         .slide-project[data-theme="dark"] .proj-cat,
         .slide-project[data-theme="dark"] .proj-year  { color: rgba(255,255,255,.4); }
         .slide-project[data-theme="dark"] .proj-cat::after { color: rgba(255,255,255,.15); }
         .slide-project[data-theme="dark"] .proj-watermark  { color: rgba(255,255,255,.04); }
+
+        .slide-footer { display: flex; flex-direction: column; justify-content: flex-end; background: #0a0a0a; }
+        .slide-footer .site-footer { padding-top: 80px; }
     </style>
 </head>
 <body class="dark-slide">
@@ -107,8 +106,7 @@
         <a href="home.html" class="nav-logo" data-anim="">Nichita Herascu</a>
         <span class="nav-role" data-anim="">Graphic Designer &amp; Art Director</span>
         <ul class="nav-links">
-            <li data-anim=""><span class="num">01</span><a href="about.html">About</a></li>
-            <li data-anim=""><span class="num">02</span><a href="contact.html">Contact</a></li>
+            <li data-anim=""><a href="about.html">About</a></li>
         </ul>
     </nav>
 
@@ -118,7 +116,6 @@
 
     <div id="slider">
 
-        <!-- Slide 0 — Home -->
         <section class="slide" id="slide-home" data-theme="dark">
             <div id="portrait" class="portrait">
                 <div class="blob blob-hair"></div>
@@ -139,7 +136,6 @@
             </div>
         </section>
 
-        <!-- Slide 1 — The Map -->
         <section class="slide slide-project" id="slide-1" data-theme="light">
             <a href="project-01.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#F0E6D2;"></div>
@@ -147,15 +143,11 @@
             <div class="proj-info">
                 <div class="proj-bottom">
                     <h2 class="proj-title" data-anim-slide="">The Map</h2>
-                    <div class="proj-meta" data-anim-slide="">
-                        <span class="proj-cat">Branding</span>
-                        <span class="proj-year">2025</span>
-                    </div>
+                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Branding</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 2 — OPSHOP -->
         <section class="slide slide-project" id="slide-2" data-theme="light">
             <a href="project-02.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#C4D9F0;"></div>
@@ -163,15 +155,11 @@
             <div class="proj-info">
                 <div class="proj-bottom">
                     <h2 class="proj-title" data-anim-slide="">OPSHOP</h2>
-                    <div class="proj-meta" data-anim-slide="">
-                        <span class="proj-cat">Branding / Web Design</span>
-                        <span class="proj-year">2025</span>
-                    </div>
+                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Branding / Web Design</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 3 — Beyond the Perimeter (NEW) -->
         <section class="slide slide-project" id="slide-3" data-theme="dark">
             <a href="project-03.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#1C1814;"></div>
@@ -179,15 +167,11 @@
             <div class="proj-info">
                 <div class="proj-bottom">
                     <h2 class="proj-title" data-anim-slide="">Beyond the<br>Perimeter</h2>
-                    <div class="proj-meta" data-anim-slide="">
-                        <span class="proj-cat">Book Design / Art Direction</span>
-                        <span class="proj-year">2024</span>
-                    </div>
+                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Book Design / Art Direction</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 4 — House of Zodiac -->
         <section class="slide slide-project" id="slide-4" data-theme="light">
             <a href="project-04.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#D4CAE0;"></div>
@@ -195,15 +179,11 @@
             <div class="proj-info">
                 <div class="proj-bottom">
                     <h2 class="proj-title" data-anim-slide="">House of<br>Zodiac</h2>
-                    <div class="proj-meta" data-anim-slide="">
-                        <span class="proj-cat">Branding / Web Design / Graphic Design</span>
-                        <span class="proj-year">2024</span>
-                    </div>
+                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Branding / Web Design / Graphic Design</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 5 — Overti -->
         <section class="slide slide-project" id="slide-5" data-theme="light">
             <a href="project-05.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#C4F0D4;"></div>
@@ -211,15 +191,26 @@
             <div class="proj-info">
                 <div class="proj-bottom">
                     <h2 class="proj-title" data-anim-slide="">Overti</h2>
-                    <div class="proj-meta" data-anim-slide="">
-                        <span class="proj-cat">Branding / Web Design</span>
-                        <span class="proj-year">2024</span>
-                    </div>
+                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Branding / Web Design</span></div>
                 </div>
             </div>
         </section>
 
-    </div>
+        <section class="slide slide-footer" id="slide-footer" data-theme="dark">
+            <footer class="site-footer">
+                <div class="footer-top">
+                    <h2 class="footer-name">Nichita<br>Herascu</h2>
+                    <div class="footer-contact">
+                        <p class="footer-cta-text">Want to work together?</p>
+                        <a href="mailto:nichitaherascu@gmail.com" class="footer-email">nichitaherascu@gmail.com</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="footer-copy">Graphic Designer &amp; Art Director — Bucharest &nbsp;·&nbsp; © 2026 Nichita Herascu</p>
+                </div>
+            </footer>
+        </section>
 
+    </div>
 
 </body></html>
