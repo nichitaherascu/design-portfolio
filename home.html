@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="home.html — No Projects nav" data-version="13" width="1200" height="800"><head>
+<html data-type="html" data-identifier="bc76ed2e-8895-4356-9b32-fb24d8e9389d" data-title="home.html — Updated projects" data-version="14" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>Nichita Herascu — Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8,17 +8,12 @@
     <script src="main.js" defer=""></script>
     <script src="home.js" defer=""></script>
     <style>
-        html, body {
-            width: 100%; height: 100%;
-            overflow: hidden;
-            background: #0a0a0a;
-        }
-        html { background: #0a0a0a; } /* prevents white flash */
+        html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+        html { background: #0a0a0a; }
 
         #slider {
             position: fixed; inset: 0;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
+            overflow-y: scroll; scroll-snap-type: y mandatory;
             z-index: 1; scrollbar-width: none;
         }
         #slider::-webkit-scrollbar { display: none; }
@@ -53,19 +48,16 @@
         /* ── Marquee ─────────────────────── */
         .marquee-wrap {
             position: absolute; bottom: 0; left: 0; right: 0;
-            background: var(--red); overflow: hidden;
-            padding: 5px 0; z-index: 2;
+            background: var(--red); overflow: hidden; padding: 5px 0; z-index: 2;
         }
         .marquee-track {
             display: flex; white-space: nowrap;
-            animation: marqueeScroll 7s linear infinite;
-            will-change: transform;
+            animation: marqueeScroll 7s linear infinite; will-change: transform;
         }
         .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
         .marquee-track span {
-            font-size: 26px; font-weight: 400;
-            color: #ffffff; letter-spacing: .06em;
-            padding-right: 144px; flex-shrink: 0;
+            font-size: 26px; font-weight: 400; color: #fff;
+            letter-spacing: .06em; padding-right: 144px; flex-shrink: 0;
         }
         @keyframes marqueeScroll {
             from { transform: translateX(0); }
@@ -74,57 +66,61 @@
 
         /* ── Project slides ──────────────── */
         .slide-project { position: relative; overflow: hidden; }
+
+        /* Full-slide clickable overlay */
+        .proj-overlay {
+            position: absolute; inset: 0; z-index: 10;
+        }
+
         .proj-bg {
             position: absolute; inset: 0;
             transition: transform .9s cubic-bezier(.25,.46,.45,.94);
         }
         .slide-project:hover .proj-bg { transform: scale(1.025); }
+
         .proj-watermark {
             position: absolute; bottom: -0.12em; right: -0.04em;
-            font-size: 52vw; font-weight: 900;
-            color: rgba(0,0,0,.05); line-height: 1;
-            letter-spacing: -.05em; pointer-events: none; user-select: none; z-index: 1;
+            font-size: 52vw; font-weight: 900; color: rgba(0,0,0,.05);
+            line-height: 1; letter-spacing: -.05em;
+            pointer-events: none; user-select: none; z-index: 1;
         }
+
+        /* Info sits at the bottom only — no index counter at top */
         .proj-info {
             position: absolute; inset: 0; padding: var(--pad);
             display: flex; flex-direction: column;
-            justify-content: space-between; z-index: 2;
+            justify-content: flex-end; /* ← content at bottom */
+            z-index: 2; pointer-events: none;
         }
-        .proj-index { font-size: 11px; font-weight: 300; color: var(--gray); letter-spacing: .1em; }
-        .proj-bottom { display: flex; flex-direction: column; gap: 18px; }
+
+        .proj-bottom { display: flex; flex-direction: column; gap: 14px; }
+
         .proj-title {
-            font-size: clamp(52px, 8vw, 110px);
-            font-weight: 700; letter-spacing: -.03em; line-height: .92; color: var(--black);
+            font-size: clamp(48px, 7.5vw, 104px);
+            font-weight: 700; letter-spacing: -.03em;
+            line-height: .92; color: var(--black);
         }
-        .proj-meta { display: flex; align-items: center; gap: 20px; }
+
+        .proj-meta { display: flex; align-items: center; gap: 16px; }
         .proj-cat, .proj-year {
             font-size: 11px; font-weight: 300; color: var(--gray);
             text-transform: uppercase; letter-spacing: .08em;
         }
-        .proj-cat::after { content: '—'; margin-left: 20px; color: var(--dim); }
-        .proj-cta {
-            display: inline-flex; align-items: center; gap: 12px;
-            font-size: 11px; font-weight: 500; color: var(--black);
-            text-decoration: none; letter-spacing: .1em; text-transform: uppercase;
-            transition: gap .3s ease; width: fit-content;
-        }
-        .proj-cta:hover { gap: 22px; }
-        .proj-cta .arr { font-size: 16px; font-weight: 300; }
+        /* separator dot between cat and year */
+        .proj-cat::after { content: '·'; margin-left: 16px; color: var(--dim); }
 
-        .slide-project[data-theme="dark"] .proj-title  { color: var(--white); }
-        .slide-project[data-theme="dark"] .proj-index  { color: rgba(255,255,255,.3); }
+        /* Dark slide overrides */
+        .slide-project[data-theme="dark"] .proj-title { color: var(--white); }
         .slide-project[data-theme="dark"] .proj-cat,
-        .slide-project[data-theme="dark"] .proj-year   { color: rgba(255,255,255,.4); }
+        .slide-project[data-theme="dark"] .proj-year  { color: rgba(255,255,255,.4); }
         .slide-project[data-theme="dark"] .proj-cat::after { color: rgba(255,255,255,.15); }
-        .slide-project[data-theme="dark"] .proj-cta    { color: var(--white); }
-        .slide-project[data-theme="dark"] .proj-watermark { color: rgba(255,255,255,.04); }
+        .slide-project[data-theme="dark"] .proj-watermark  { color: rgba(255,255,255,.04); }
     </style>
 </head>
 <body class="dark-slide">
 
     <div id="cursor"></div>
 
-    <!-- ← Projects removed, About is now 01, Contact is 02 -->
     <nav class="nav-left">
         <a href="home.html" class="nav-logo" data-anim="">Nichita Herascu</a>
         <span class="nav-role" data-anim="">Graphic Designer &amp; Art Director</span>
@@ -140,6 +136,7 @@
 
     <div id="slider">
 
+        <!-- Slide 0 — Home -->
         <section class="slide" id="slide-home" data-theme="dark">
             <div id="portrait" class="portrait">
                 <div class="blob blob-hair"></div>
@@ -160,71 +157,71 @@
             </div>
         </section>
 
+        <!-- Slide 1 — The Map -->
         <section class="slide slide-project" id="slide-1" data-theme="light">
+            <a href="project-01.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#F0E6D2;"></div>
             <span class="proj-watermark">01</span>
             <div class="proj-info">
-                <span class="proj-index" data-anim-slide="">01 — 05</span>
                 <div class="proj-bottom">
-                    <h2 class="proj-title" data-anim-slide="">Noir<br>Studio</h2>
-                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Branding</span><span class="proj-year">2025</span></div>
-                    <a href="project-01.html" class="proj-cta" data-anim-slide="">View Project <span class="arr">→</span></a>
+                    <h2 class="proj-title" data-anim-slide="">The Map</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Branding</span>
+                        <span class="proj-year">2025</span>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Slide 2 — OPSHOP -->
         <section class="slide slide-project" id="slide-2" data-theme="light">
+            <a href="project-02.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#C4D9F0;"></div>
             <span class="proj-watermark">02</span>
             <div class="proj-info">
-                <span class="proj-index" data-anim-slide="">02 — 05</span>
                 <div class="proj-bottom">
-                    <h2 class="proj-title" data-anim-slide="">Bloom<br>Campaign</h2>
-                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Art Direction</span><span class="proj-year">2025</span></div>
-                    <a href="project-02.html" class="proj-cta" data-anim-slide="">View Project <span class="arr">→</span></a>
+                    <h2 class="proj-title" data-anim-slide="">OPSHOP</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Branding / Web Design</span>
+                        <span class="proj-year">2025</span>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Slide 3 — House of Zodiac -->
         <section class="slide slide-project" id="slide-3" data-theme="dark">
+            <a href="project-03.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#1A1A1A;"></div>
             <span class="proj-watermark">03</span>
             <div class="proj-info">
-                <span class="proj-index" data-anim-slide="">03 — 05</span>
                 <div class="proj-bottom">
-                    <h2 class="proj-title" data-anim-slide="">Form<br>&amp; Type</h2>
-                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Design</span><span class="proj-year">2024</span></div>
-                    <a href="project-03.html" class="proj-cta" data-anim-slide="">View Project <span class="arr">→</span></a>
+                    <h2 class="proj-title" data-anim-slide="">House of<br>Zodiac</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Branding / Web Design / Graphic Design</span>
+                        <span class="proj-year">2024</span>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Slide 4 — Overti -->
         <section class="slide slide-project" id="slide-4" data-theme="light">
+            <a href="project-04.html" class="proj-overlay"></a>
             <div class="proj-bg" style="background:#C4F0D4;"></div>
             <span class="proj-watermark">04</span>
             <div class="proj-info">
-                <span class="proj-index" data-anim-slide="">04 — 05</span>
                 <div class="proj-bottom">
-                    <h2 class="proj-title" data-anim-slide="">Vela<br>Identity</h2>
-                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Branding</span><span class="proj-year">2024</span></div>
-                    <a href="project-04.html" class="proj-cta" data-anim-slide="">View Project <span class="arr">→</span></a>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide slide-project" id="slide-5" data-theme="light">
-            <div class="proj-bg" style="background:#F0C4D9;"></div>
-            <span class="proj-watermark">05</span>
-            <div class="proj-info">
-                <span class="proj-index" data-anim-slide="">05 — 05</span>
-                <div class="proj-bottom">
-                    <h2 class="proj-title" data-anim-slide="">Meridian</h2>
-                    <div class="proj-meta" data-anim-slide=""><span class="proj-cat">Art Direction</span><span class="proj-year">2023</span></div>
-                    <a href="project-05.html" class="proj-cta" data-anim-slide="">View Project <span class="arr">→</span></a>
+                    <h2 class="proj-title" data-anim-slide="">Overti</h2>
+                    <div class="proj-meta" data-anim-slide="">
+                        <span class="proj-cat">Branding / Web Design</span>
+                        <span class="proj-year">2024</span>
+                    </div>
                 </div>
             </div>
         </section>
 
     </div>
+
 
 </body></html>
