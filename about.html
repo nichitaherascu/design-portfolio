@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="a4b5c6d7-e8f9-4a2b-8c3d-1e2f3a4b5c6d" data-title="about.html" data-version="1" width="1200" height="800"><head>
+<html data-type="html" data-identifier="a4b5c6d7-e8f9-4a2b-8c3d-1e2f3a4b5c6d" data-title="about.html — Updated content" data-version="2" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>About — Nichita Herascu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer=""></script>
+    <script src="about.js" defer=""></script>
     <style>
         html { background: #ffffff; }
         html, body { height: auto; overflow-x: hidden; background: #ffffff; }
@@ -39,28 +40,25 @@
 
         /* ── Scrollable content ──────────── */
         .about-main {
-            flex: 1;
-            min-width: 0;
+            flex: 1; min-width: 0;
             padding: 0 48px 100px;
         }
 
-        /* ── Sticky photo column ─────────── */
+        /* ── Sticky photo ────────────────── */
         .about-photo-col {
-            width: 360px;
-            flex-shrink: 0;
+            width: 360px; flex-shrink: 0;
             padding: 60px 48px 60px 0;
         }
         .photo-sticky {
             position: sticky;
             top: 72px;
+            will-change: transform;
         }
         .about-img {
-            width: 100%;
-            display: block;
+            width: 100%; display: block;
             aspect-ratio: 3 / 4;
-            object-fit: cover;
-            object-position: top;
-            background: #e8e4df; /* placeholder until real photo is added */
+            object-fit: cover; object-position: top;
+            background: #e8e4df;
         }
 
         /* ── Hero ────────────────────────── */
@@ -70,11 +68,9 @@
             max-width: 680px;
         }
         .about-hero h1 {
-            font-size: clamp(28px, 4vw, 56px);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -.025em;
-            line-height: 1.04;
+            font-size: clamp(28px, 4vw, 54px);
+            font-weight: 900; text-transform: uppercase;
+            letter-spacing: -.025em; line-height: 1.04;
             color: var(--black);
         }
 
@@ -88,266 +84,192 @@
             max-width: 700px;
         }
         .a-label {
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: var(--gray);
-            padding-top: 4px;
-            line-height: 1.6;
+            font-size: 10px; font-weight: 400;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: var(--gray); padding-top: 4px; line-height: 1.6;
         }
         .a-body p {
-            font-size: 14px;
-            font-weight: 300;
-            color: #3a3a3a;
-            line-height: 1.85;
-            margin-bottom: 18px;
+            font-size: 14px; font-weight: 300;
+            color: #3a3a3a; line-height: 1.85;
+            margin-bottom: 18px; max-width: 520px;
         }
         .a-body p:last-child { margin-bottom: 0; }
         .a-body a {
-            color: var(--black);
-            font-weight: 400;
-            text-decoration: underline;
-            text-underline-offset: 3px;
+            color: var(--black); font-weight: 400;
+            text-decoration: underline; text-underline-offset: 3px;
             transition: opacity .2s;
         }
         .a-body a:hover { opacity: .5; }
 
-        /* ── Services grid ───────────────── */
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            margin-top: 4px;
-        }
-        .svc {
-            font-size: 13px;
-            font-weight: 300;
-            color: var(--black);
-            padding: 10px 0;
-            border-top: 1px solid var(--dim);
-        }
+        /* ── History list (work, education, awards) */
+        .hist-list { margin-top: 4px; }
 
-        /* ── Numbered process ────────────── */
-        .process-list { margin-top: 4px; }
-        .process-item {
+        .hist-item {
             display: flex;
             gap: 20px;
-            padding: 10px 0;
+            padding: 11px 0;
             border-top: 1px solid var(--dim);
-            font-size: 13px;
-            font-weight: 300;
-            color: var(--black);
-        }
-        .process-item .n {
-            font-size: 10px;
-            font-weight: 400;
-            color: var(--gray);
-            letter-spacing: .06em;
-            padding-top: 2px;
-            min-width: 22px;
+            font-size: 13px; font-weight: 300;
+            color: var(--black); line-height: 1.5;
+            align-items: baseline;
         }
 
-        /* ── Experience grid ─────────────── */
-        .exp-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0 40px;
-            margin-top: 4px;
-        }
-        .exp-entry {
-            padding: 14px 0;
-            border-top: 1px solid var(--dim);
-        }
-        .exp-company {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-            color: var(--black);
-            margin-bottom: 3px;
-        }
-        .exp-year {
-            font-size: 12px;
-            font-weight: 300;
-            color: var(--gray);
-        }
-        .exp-role {
-            font-size: 12px;
-            font-weight: 300;
-            color: var(--gray);
+        .hist-date {
+            font-size: 11px; color: var(--gray);
+            min-width: 115px; flex-shrink: 0;
+            letter-spacing: .02em; padding-top: 1px;
         }
 
-        /* ── Footer ──────────────────────── */
-        .site-footer {
-            background: #0a0a0a;
-            color: #fff;
-            padding: 64px 48px 48px;
+        .hist-detail { flex: 1; }
+        .hist-detail strong { font-weight: 600; }
+        .hist-detail .hist-role { color: #555; }
+
+        /* Awards (no date column) */
+        .award-item {
+            padding: 12px 0;
+            border-top: 1px solid var(--dim);
+            font-size: 13px; font-weight: 300;
+            color: var(--black); line-height: 1.6;
         }
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding-bottom: 48px;
-            border-bottom: 1px solid rgba(255,255,255,.1);
-            margin-bottom: 28px;
+        .award-item strong { font-weight: 600; display: block; }
+        .award-item span { color: #555; }
+
+        /* ── CV link ─────────────────────── */
+        .cv-wrap {
+            padding: 48px 0 0;
+            border-top: 1px solid var(--dim);
+            max-width: 700px;
         }
-        .footer-name {
-            font-size: clamp(38px, 6.5vw, 92px);
-            font-weight: 900;
-            letter-spacing: -.03em;
-            text-transform: uppercase;
-            color: #fff;
-            line-height: .9;
-        }
-        .footer-contact {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
-        .footer-cta-text {
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,.35);
-        }
-        .footer-email {
-            font-size: 18px;
-            font-weight: 400;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: -.01em;
+        .cv-link {
+            font-size: 13px; font-weight: 400;
+            color: var(--black); text-decoration: underline;
+            text-underline-offset: 4px; letter-spacing: .02em;
             transition: opacity .2s;
         }
-        .footer-email:hover { opacity: .5; }
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .footer-copy {
-            font-size: 11px;
-            font-weight: 300;
-            color: rgba(255,255,255,.25);
-            letter-spacing: .04em;
-        }
-        .footer-links {
-            display: flex;
-            gap: 32px;
-        }
-        .footer-links a {
-            font-size: 11px;
-            font-weight: 400;
-            color: rgba(255,255,255,.45);
-            text-decoration: none;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            transition: color .2s;
-        }
-        .footer-links a:hover { color: #fff; }
+        .cv-link:hover { opacity: .5; }
     </style>
 </head>
 <body>
 
     <div id="cursor"></div>
 
-    <!-- Nav -->
     <nav class="page-nav">
         <a href="home.html" class="page-nav-logo">Nichita Herascu</a>
         <a href="https://instagram.com/nichita.hera" target="_blank" class="page-nav-ig">@nichita.hera</a>
     </nav>
 
-    <!-- Page layout -->
     <div class="about-wrap">
 
-        <!-- Scrollable content -->
         <main class="about-main">
 
             <!-- Hero -->
             <div class="about-hero">
-                <h1>Nichita Herascu is a graphic designer &amp; art director creating work that shapes identity and moves culture.</h1>
+                <h1>Multidisciplinary art director &amp; graphic designer with agency background and a passion for culture.</h1>
             </div>
 
             <!-- About me -->
             <section class="a-section">
                 <p class="a-label">A Little About Me</p>
                 <div class="a-body">
-                    <p>I'm a Bucharest-based graphic designer and art director with a focus on branding, visual communication, and design that carries meaning beyond aesthetics.</p>
-                    <p>I work with brands and people who believe that design is a tool for building identity, creating culture, and making things that people genuinely care about.</p>
-                    <p>Currently open to new collaborations. Reach me at <a href="mailto:nichita@email.com">nichita@email.com</a></p>
+                    <p>Hello, I am Nichita.</p>
+                    <p>Multidisciplinary Art Director with agency background (Ogilvy) and strong illustration skills. My expertise also spans brand design, video editing, 3D modeling and web design.</p>
+                    <p>With over 6 years of experience with international brands such as DOVE, Mastercard, LIDL, Milka and more. I've collaborated with post-production houses, gaining diverse and interesting experiences.</p>
+                    <p>My inspiration comes from all kinds of art, design, culture and music.</p>
                 </div>
             </section>
 
-            <!-- What I do -->
+            <!-- Work History -->
             <section class="a-section">
-                <p class="a-label">What I Do</p>
+                <p class="a-label">Work History</p>
                 <div class="a-body">
-                    <p>From strategy to execution, I work across the full spectrum of visual design. My capabilities include:</p>
-                    <div class="services-grid">
-                        <p class="svc">Brand Identity</p>
-                        <p class="svc">Art Direction</p>
-                        <p class="svc">Visual Strategy</p>
-                        <p class="svc">Web Design</p>
-                        <p class="svc">Logo Design</p>
-                        <p class="svc">Campaign Design</p>
-                        <p class="svc">Typography</p>
-                        <p class="svc">Print Design</p>
-                        <p class="svc">Brand Guidelines</p>
-                        <p class="svc">Packaging</p>
-                        <p class="svc">Motion Direction</p>
-                        <p class="svc">Social Media Design</p>
+                    <div class="hist-list">
+                        <div class="hist-item">
+                            <span class="hist-date">2024 – Present</span>
+                            <div class="hist-detail">
+                                <strong>Ogilvy</strong>
+                                <span class="hist-role"> — Junior Art Director</span>
+                            </div>
+                        </div>
+                        <div class="hist-item">
+                            <span class="hist-date">2022 – 2024</span>
+                            <div class="hist-detail">
+                                <strong>Nos Praesenti</strong>
+                                <span class="hist-role"> — Brand Designer</span>
+                            </div>
+                        </div>
+                        <div class="hist-item">
+                            <span class="hist-date">2021 – 2022</span>
+                            <div class="hist-detail">
+                                <strong>Freeways Global</strong>
+                                <span class="hist-role"> — Graphic Designer</span>
+                            </div>
+                        </div>
+                        <div class="hist-item">
+                            <span class="hist-date">2019 – 2021</span>
+                            <div class="hist-detail">
+                                <strong>Cromatic Studios</strong>
+                                <span class="hist-role"> — Junior Graphic Designer</span>
+                            </div>
+                        </div>
+                        <div class="hist-item">
+                            <span class="hist-date">2019</span>
+                            <div class="hist-detail">
+                                <strong>Pain Plaisir</strong>
+                                <span class="hist-role"> — Social Media Designer</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- How I work -->
+            <!-- Education -->
             <section class="a-section">
-                <p class="a-label">How I Work</p>
+                <p class="a-label">Education</p>
                 <div class="a-body">
-                    <p>Every project is different, but my process follows the same general framework.</p>
-                    <div class="process-list">
-                        <div class="process-item"><span class="n">01</span><span>Introduction &amp; Brief</span></div>
-                        <div class="process-item"><span class="n">02</span><span>Proposal &amp; Scope</span></div>
-                        <div class="process-item"><span class="n">03</span><span>Research &amp; Discovery</span></div>
-                        <div class="process-item"><span class="n">04</span><span>Concept Development</span></div>
-                        <div class="process-item"><span class="n">05</span><span>Design &amp; Execution</span></div>
-                        <div class="process-item"><span class="n">06</span><span>Presentation</span></div>
-                        <div class="process-item"><span class="n">07</span><span>Feedback &amp; Revisions</span></div>
-                        <div class="process-item"><span class="n">08</span><span>Final Delivery</span></div>
+                    <div class="hist-list">
+                        <div class="hist-item">
+                            <span class="hist-date">2021 – 2022</span>
+                            <div class="hist-detail">
+                                <strong>Bucharest University of Arts</strong>
+                                <span class="hist-role"> — Photography &amp; Film</span>
+                            </div>
+                        </div>
+                        <div class="hist-item">
+                            <span class="hist-date">2015 – 2019</span>
+                            <div class="hist-detail">
+                                <strong>Nicolae Tonitza</strong>
+                                <span class="hist-role"> — Industrial &amp; Product Design</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Experience -->
+            <!-- Awards -->
             <section class="a-section">
-                <p class="a-label">Experience</p>
+                <p class="a-label">Awards</p>
                 <div class="a-body">
-                    <div class="exp-grid">
-                        <div class="exp-entry">
-                            <p class="exp-company">Studio / Agency</p>
-                            <p class="exp-year">2023 — Present</p>
-                            <p class="exp-role">Art Director</p>
+                    <div class="hist-list">
+                        <div class="award-item">
+                            <strong>AAB2025 Awards</strong>
+                            <span>Research through architecture / architecture books section</span>
                         </div>
-                        <div class="exp-entry">
-                            <p class="exp-company">Studio / Agency</p>
-                            <p class="exp-year">2022 — 2023</p>
-                            <p class="exp-role">Graphic Designer</p>
+                        <div class="award-item">
+                            <strong>Internetics 2025 — Silver</strong>
+                            <span>LIDL — Best Community Engagement</span>
                         </div>
-                        <div class="exp-entry">
-                            <p class="exp-company">Studio / Agency</p>
-                            <p class="exp-year">2021 — 2022</p>
-                            <p class="exp-role">Graphic Designer</p>
-                        </div>
-                        <div class="exp-entry">
-                            <p class="exp-company">Freelance</p>
-                            <p class="exp-year">2020 — Present</p>
-                            <p class="exp-role">Designer &amp; Art Director</p>
+                        <div class="award-item">
+                            <strong>Webstock 2025</strong>
+                            <span>LIDL — Best Brand Engagement</span>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <!-- CV Download -->
+            <div class="cv-wrap">
+                <a href="images/cv.pdf" class="cv-link" target="_blank">Download my CV from here</a>
+            </div>
 
         </main>
 
@@ -360,7 +282,7 @@
 
     </div>
 
-    <!-- Footer — copy this block to every page -->
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-top">
             <h2 class="footer-name">Nichita<br>Herascu</h2>
