@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — Final" data-version="4" width="1200" height="800"><head>
+<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — Final" data-version="5" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>The Map — Nichita Herascu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,6 @@
             position: fixed; top: 0; left: 0; right: 0; height: 52px;
             display: flex; align-items: center; justify-content: space-between;
             padding: 0 32px; background: var(--white); z-index: 100;
-            /* no border */
         }
         .page-nav-logo {
             font-size: 13px; font-weight: 500; letter-spacing: .06em;
@@ -40,7 +39,6 @@
         .proj-sidebar {
             height: 100%; display: flex; flex-direction: column;
             background: var(--white); overflow: hidden;
-            /* no border-right */
         }
         .sidebar-top { padding: 28px 32px 0; flex-shrink: 0; }
         .proj-page-title {
@@ -51,7 +49,6 @@
         .proj-nav-row {
             display: flex; justify-content: space-between; align-items: center;
             padding: 11px 0;
-            /* no border */
         }
         .proj-nav-link {
             font-size: 12px; font-weight: 400; color: var(--black);
@@ -62,7 +59,6 @@
         .proj-tags {
             font-size: 11px; font-weight: 300; color: var(--gray);
             letter-spacing: .03em; padding: 11px 0;
-            /* no border */
         }
         .sidebar-body { flex: 1; padding: 28px 32px 0; overflow: hidden; }
         .proj-desc p {
@@ -71,7 +67,6 @@
         }
         .sidebar-bottom {
             padding: 16px 32px 28px; flex-shrink: 0;
-            /* no border, no client-name */
         }
         .client-meta {
             font-size: 11px; font-weight: 300; color: var(--gray); line-height: 1.8;
@@ -85,20 +80,20 @@
         .proj-content::-webkit-scrollbar { display: none; }
 
         /* ── Image grid ──────────────────── */
-        .image-grid { display: flex; flex-direction: column; gap: 3px; padding: 0; }
+        .image-grid {
+            display: flex; flex-direction: column;
+            gap: 3px; padding: 20px;
+        }
 
-        /* No border-radius, no gaps = full bleed grid */
         .img-row-full { width: 100%; }
         .img-row-full .img-block {
             width: 100%; aspect-ratio: 16 / 9;
-            display: block;
-            border-radius: 0; /* no rounded corners */
+            display: block; border-radius: 0;
         }
         .img-row-half { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
         .img-row-half .img-block {
             width: 100%; aspect-ratio: 3 / 2;
-            display: block;
-            border-radius: 0; /* no rounded corners */
+            display: block; border-radius: 0;
         }
 
         /* ── Image fade in on scroll ─────── */
@@ -141,7 +136,6 @@
             </div>
             <div class="sidebar-bottom">
                 <p class="client-meta">Client: The Map</p>
-                <!-- client-name removed, year removed -->
             </div>
         </aside>
 
@@ -175,6 +169,5 @@
         </main>
 
     </div>
-
 
 </body></html>
