@@ -4,9 +4,6 @@
 
 
 // ── Image fade in as you scroll ───────────────────────────────────
-//  Uses IntersectionObserver with the scrollable panel as root
-//  so it works inside the fixed overflow container.
-
 function initImageFadeIn() {
 const container = document.querySelector('.proj-content');
 const images    = document.querySelectorAll('.img-block');
@@ -16,11 +13,11 @@ const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('img-visible');
-            observer.unobserve(entry.target); // fire once only
+            observer.unobserve(entry.target);
         }
     });
 }, {
-    root:       container,   // observe within the scrollable panel
+    root:       container,
     threshold:  0.1,
     rootMargin: '0px 0px -30px 0px'
 });
@@ -29,11 +26,24 @@ images.forEach(img => observer.observe(img));
 }
 
 
-// ── Keyboard navigation with fade ────────────────────────────────
+// ── Block right-click on images ───────────────────────────────────
+function initImageProtection() {
+const content = document.querySelector('.proj-content');
+if (!content) return;
 
+content.addEventListener('contextmenu', e => {
+    if (e.target.closest('.img-block, img')) {
+        e.preventDefault();
+    }
+});
+}
+
+
+// ── Keyboard navigation with fade ────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
 
 initImageFadeIn();
+initImageProtection();
 
 document.addEventListener('keydown', e => {
     let href = null;
