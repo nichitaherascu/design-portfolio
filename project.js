@@ -9,6 +9,9 @@ const container = document.querySelector('.proj-content');
 const images    = document.querySelectorAll('.img-block');
 if (!images.length) return;
 
+// Mobile: page scrolls naturally → use viewport (null) as root
+const isMobile = window.innerWidth <= 768;
+
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -17,7 +20,7 @@ const observer = new IntersectionObserver(entries => {
         }
     });
 }, {
-    root:       container,
+    root:       isMobile ? null : container,
     threshold:  0.1,
     rootMargin: '0px 0px -30px 0px'
 });
@@ -30,18 +33,14 @@ images.forEach(img => observer.observe(img));
 function initImageProtection() {
 const content = document.querySelector('.proj-content');
 if (!content) return;
-
 content.addEventListener('contextmenu', e => {
-    if (e.target.closest('.img-block, img')) {
-        e.preventDefault();
-    }
+    if (e.target.closest('.img-block, img')) e.preventDefault();
 });
 }
 
 
-// ── Keyboard navigation with fade ────────────────────────────────
+// ── Keyboard navigation with fade ─────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-
 initImageFadeIn();
 initImageProtection();
 
