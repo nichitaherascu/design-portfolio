@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — Final" data-version="7" width="1200" height="800"><head>
+<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — Final" data-version="8" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <title>The Map — Nichita Herascu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,7 +131,6 @@
         /* ── Mobile (≤ 768px) ────────────── */
         @media (max-width: 768px) {
 
-            /* Let the page scroll naturally */
             html, body { overflow: auto !important; height: auto !important; }
 
             .page-nav { padding: 0 20px; }
@@ -143,22 +142,63 @@
                 flex-direction: column;
             }
 
+            /* ── Info panel ──────────────── */
             .proj-sidebar {
                 height: auto;
                 overflow: visible;
-                border-bottom: 1px solid var(--dim);
             }
-            .sidebar-top   { padding: 24px 20px 0; }
-            .sidebar-body  { flex: none; overflow: visible; padding: 16px 20px 0; }
-            .sidebar-bottom { padding: 12px 20px 20px; }
 
-            /* Content panel becomes normal flow */
+            .sidebar-top {
+                padding: 28px 24px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            /* 5× bigger, centred hero title */
+            .proj-page-title {
+                font-size: clamp(88px, 28vw, 120px);
+                letter-spacing: -.04em;
+                line-height: .9;
+                margin-bottom: 28px;
+                text-align: center;
+            }
+
+            .proj-nav-row {
+                width: 100%;
+                max-width: 240px;
+                padding: 14px 0;
+            }
+
+            .proj-tags {
+                text-align: center;
+                padding: 8px 0 18px;
+            }
+
+            .sidebar-body {
+                flex: none;
+                overflow: visible;
+                padding: 0 24px 8px;
+            }
+
+            .proj-desc p { text-align: center; }
+
+            .sidebar-bottom {
+                padding: 8px 24px 28px;
+                text-align: center;
+            }
+
+            /* ── Full-bleed image grid ────── */
             .proj-content {
                 height: auto;
                 overflow: visible;
             }
 
-            .image-grid { padding: 12px; }
+            .image-grid {
+                padding: 0;    /* edge-to-edge, no outer gap */
+                gap: 3px;
+            }
         }
 
         /* ── Small phones (≤ 480px) ──────── */
@@ -229,5 +269,6 @@
         </main>
 
     </div>
+
 
 </body></html>
