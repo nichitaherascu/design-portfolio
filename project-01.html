@@ -1,5 +1,6 @@
-<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — Final" data-version="8" width="1200" height="800"><head>
+<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — Final" data-version="9" width="1200" height="800"><head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Map — Nichita Herascu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -101,7 +102,6 @@
         .img-block.img-visible { opacity: 1; transform: translateY(0); }
         .img-row-half .img-block:nth-child(2) { transition-delay: .1s; }
 
-        /* ── Transparent overlay ─────────── */
         .img-block::after {
             content: ''; position: absolute; inset: 0;
             z-index: 2; cursor: none !important;
@@ -121,11 +121,11 @@
 
         /* ── Tablet (≤ 1024px) ───────────── */
         @media (max-width: 1024px) {
-            .proj-page { grid-template-columns: 260px 1fr; }
+            .proj-page    { grid-template-columns: 260px 1fr; }
             .sidebar-top  { padding: 20px 24px 0; }
             .sidebar-body { padding: 20px 24px 0; }
             .sidebar-bottom { padding: 12px 24px 24px; }
-            .page-nav { padding: 0 24px; }
+            .page-nav     { padding: 0 24px; }
         }
 
         /* ── Mobile (≤ 768px) ────────────── */
@@ -135,7 +135,6 @@
 
             .page-nav { padding: 0 20px; }
 
-            /* Stack sidebar above content */
             .proj-page {
                 position: static !important;
                 display: flex;
@@ -156,7 +155,7 @@
                 text-align: center;
             }
 
-            /* 5× bigger, centred hero title */
+            /* 5× hero title */
             .proj-page-title {
                 font-size: clamp(88px, 28vw, 120px);
                 letter-spacing: -.04em;
@@ -182,12 +181,20 @@
                 padding: 0 24px 8px;
             }
 
-            .proj-desc p { text-align: center; }
+            /* Body text — 16px minimum */
+            .proj-desc p {
+                font-size: 1rem;
+                line-height: 1.75;
+                text-align: center;
+            }
 
             .sidebar-bottom {
                 padding: 8px 24px 28px;
                 text-align: center;
             }
+
+            /* UI meta — secondary, 14px acceptable */
+            .client-meta { font-size: 0.875rem; }
 
             /* ── Full-bleed image grid ────── */
             .proj-content {
@@ -195,15 +202,11 @@
                 overflow: visible;
             }
 
-            .image-grid {
-                padding: 0;    /* edge-to-edge, no outer gap */
-                gap: 3px;
-            }
+            .image-grid { padding: 0; gap: 3px; }
         }
 
         /* ── Small phones (≤ 480px) ──────── */
         @media (max-width: 480px) {
-            /* Half-rows collapse to single column */
             .img-row-half { grid-template-columns: 1fr; gap: 3px; }
             .img-row-half .img-block { aspect-ratio: 16 / 9; }
         }
