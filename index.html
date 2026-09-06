@@ -96,10 +96,11 @@
     }
     .home-handle:hover { color: #fff; }
 
-    /* Marquee — speed = the 34s duration */
+    /* Marquee — always visible, no JS dependency. Speed = 34s */
     .marquee-wrap {
         position: absolute; bottom: 0; left: 0; right: 0;
         background: #0a0a0a; overflow: hidden; padding: 7px 0; z-index: 3;
+        opacity: 1 !important; transform: none !important;
     }
     .marquee-track {
         display: flex; width: max-content;
@@ -184,11 +185,8 @@
         margin: clamp(18px, 4vh, 44px) 0;
     }
 
-    /* ── Project name + handwritten overlay ───────────────────
-       Each <a> holds a .po-type (Inter caps) and a .po-hand
-       (handwritten SVG/PNG) layered on top. Hovering one link
-       fades out only its own handwriting.
-       ──────────────────────────────────────────────────────── */
+    /* Project name + handwritten overlay.
+       Hovering a link fades out only its own handwriting. */
     #proj-overlay .po-list a {
         position: relative; display: block;
         text-decoration: none; pointer-events: auto;
@@ -274,7 +272,24 @@
         </div>
     </div>
 
-    <div class="marquee-wrap" data-anim="">
+    <div class="marquee-wrap">
         <div class="marquee-track">
             <div class="marquee-group">
-              
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+            </div>
+            <div class="marquee-group" aria-hidden="true">
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ PROJECTS OVERLAY ══════════════════════════════════════ -->
+<div id="proj-overlay">
+    <div class
