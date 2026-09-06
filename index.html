@@ -12,8 +12,8 @@
 <script src="index.js" defer=""></script>
 
 <style>
-    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--white); }
-    html { background: var(--white); }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+    html { background: #0a0a0a; }
 
     #slider {
         position: fixed; inset: 0;
@@ -23,8 +23,10 @@
     #slider::-webkit-scrollbar { display: none; }
     .slide { height: 100vh; scroll-snap-align: start; position: relative; overflow: hidden; }
 
-    /* ── Home hero photo ─────────────────────────── */
-    #slide-home { background: var(--white); }
+    /* ── HOME ─────────────────────────────────────────────────
+       Full-bleed photo. All type on one band at mid-height.
+       ──────────────────────────────────────────────────────── */
+    #slide-home { background: #0a0a0a; }
 
     .home-bg {
         position: absolute; inset: 0;
@@ -33,18 +35,56 @@
         will-change: transform;
     }
 
-    /* Scrim — keeps nav legible if the photo is light at the top.
-       Delete this rule if you don't need it. */
-    #slide-home::after {
-        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 220px;
-        background: linear-gradient(to bottom, rgba(255,255,255,.85), transparent);
-        pointer-events: none; z-index: 1;
+    /* Scrim — lifts white type off the photo. Tune the alphas. */
+    .home-scrim {
+        position: absolute; inset: 0; z-index: 1;
+        background: linear-gradient(to bottom,
+            rgba(0,0,0,.18) 0%, rgba(0,0,0,.30) 45%, rgba(0,0,0,.18) 100%);
+        pointer-events: none;
     }
 
-    /* ── Marquee ─────────────────────────────────── */
+    .home-band {
+        position: absolute; inset: 0; z-index: 2;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: clamp(24px, 6vw, 90px);
+        padding: 0 clamp(24px, 5vw, 80px);
+    }
+
+    /* Left — signature + cv */
+    .home-id { display: flex; flex-direction: column; align-items: flex-end; }
+    .hero-logo { display: block; line-height: 0; }
+    .hero-logo img {
+        width: clamp(240px, 34vw, 560px);
+        height: auto; display: block;
+        filter: invert(1);                    /* black artwork → white */
+        transition: opacity .25s ease;
+    }
+    .hero-logo:hover img { opacity: .6; }
+
+    .home-cv {
+        font-size: 13px; font-weight: 400; color: rgba(255,255,255,.85);
+        letter-spacing: .04em; margin-top: 6px; margin-right: 8px;
+        text-decoration: none; transition: opacity .2s;
+    }
+    .home-cv:hover { opacity: .55; }
+
+    /* Right — role + handle */
+    .home-role { text-align: right; }
+    .home-role-title {
+        font-size: clamp(20px, 2.3vw, 34px); font-weight: 500;
+        color: #fff; letter-spacing: -.01em; line-height: 1.1; margin: 0;
+    }
+    .home-handle {
+        display: inline-block; margin-top: 10px;
+        font-size: 14px; font-weight: 400; color: rgba(255,255,255,.8);
+        letter-spacing: .02em; text-decoration: none; transition: color .2s;
+    }
+    .home-handle:hover { color: #fff; }
+
+    /* ── Marquee — white on black ─────────────────────────── */
     .marquee-wrap {
         position: absolute; bottom: 0; left: 0; right: 0;
-        background: var(--red); overflow: hidden; padding: 5px 0; z-index: 2;
+        background: #0a0a0a; overflow: hidden; padding: 7px 0; z-index: 3;
     }
     .marquee-track {
         display: flex; white-space: nowrap;
@@ -96,34 +136,49 @@
     .slide-footer { display: flex; flex-direction: column; justify-content: flex-end; background: #0a0a0a; }
     .slide-footer .site-footer { padding-top: 80px; }
 
+    /* ── Responsive ──────────────────────────────── */
     @media (max-width: 768px) {
+        .home-band {
+            flex-direction: column; align-items: flex-start;
+            justify-content: center; gap: 28px;
+            padding: 0 24px;
+        }
+        .home-id { align-items: flex-start; }
+        .hero-logo img { width: min(78vw, 400px); }
+        .home-cv { margin-right: 0; margin-left: 2px; }
+        .home-role { text-align: left; }
+        .home-role-title { font-size: 1.25rem; }
+        .home-handle { font-size: 1rem; }
+
         .marquee-track span { font-size: 18px; padding-right: 90px; }
     }
 </style>
 </head>
-<body>
+<body class="dark-slide">
 
 <div id="cursor"></div>
-
-<nav class="nav-left">
-    <a href="index.html" class="nav-logo" data-anim="" aria-label="Nichita Herascu">
-        <img src="images/logo.svg" alt="Nichita Herascu">
-    </a>
-    <span class="nav-role" data-anim="">Graphic Designer &amp; Art Director</span>
-    <ul class="nav-links">
-        <li data-anim=""><a href="about.html">About</a></li>
-    </ul>
-</nav>
-
-<div class="nav-right" data-anim="">
-    <a href="https://instagram.com/nichita.hera" target="_blank" class="nav-instagram">@nichita.hera</a>
-</div>
 
 <div id="slider">
 
     <!-- ══ HOME ══════════════════════════════════════════════ -->
-    <section class="slide" id="slide-home" data-theme="light">
+    <section class="slide" id="slide-home" data-theme="dark">
         <div id="home-bg" class="home-bg" style="background-image: url('images/home.jpg');"></div>
+        <div class="home-scrim"></div>
+
+        <div class="home-band">
+            <div class="home-id" data-anim="">
+                <a href="index.html" class="hero-logo" aria-label="Nichita Herascu">
+                    <img src="images/logo.svg" alt="Nichita Herascu">
+                </a>
+                <a href="about.html" class="home-cv">cv</a>
+            </div>
+
+            <div class="home-role" data-anim="">
+                <p class="home-role-title">Art Director &amp; Graphic Designer</p>
+                <a href="https://instagram.com/nichita.hera" target="_blank" class="home-handle">@nichita.hera</a>
+            </div>
+        </div>
+
         <div class="marquee-wrap" data-anim="">
             <div class="marquee-track">
                 <span>↓The projects you are about to see are made to impact the culture</span>
