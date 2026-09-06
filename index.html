@@ -23,9 +23,9 @@
 
     .home-bg {
         position: absolute; inset: 0;
+        background-image: url('images/home.jpg');
         background-size: cover;
         background-position: center;
-        will-change: transform;
     }
 
     .home-scrim {
@@ -39,8 +39,10 @@
         position: absolute; inset: -25%;
         z-index: 1;
         pointer-events: none;
-        opacity: .16;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        opacity: .18;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 300px 300px;
         animation: grainShift .6s steps(8) infinite;
     }
 
@@ -57,15 +59,18 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .home-noise { animation: none; }
+        .home-noise, .po-noise { animation: none; }
     }
 
+    /* Band is a positioning layer only — clicks pass through it */
     .home-band {
-        position: absolute; inset: 0; z-index: 2;
+        position: absolute; inset: 0; z-index: 4;
         display: flex; align-items: center; justify-content: space-between;
         gap: clamp(24px, 6vw, 90px);
         padding: 0 clamp(24px, 5vw, 80px);
+        pointer-events: none;
     }
+    .home-id, .home-role { pointer-events: auto; }
 
     .home-id { display: flex; flex-direction: column; align-items: flex-end; }
     .hero-logo { display: block; line-height: 0; }
@@ -85,10 +90,9 @@
         font-size: 13px; font-weight: 400; color: rgba(255,255,255,.85);
         letter-spacing: .04em; text-decoration: none; transition: opacity .2s;
         background: none; border: none; font-family: inherit;
+        pointer-events: auto; cursor: none !important;
     }
     .home-link:hover { opacity: .55; }
-
-    #proj-open { cursor: none !important; pointer-events: auto; position: relative; z-index: 5; }
 
     .home-role { text-align: right; }
     .home-role-title {
@@ -102,9 +106,7 @@
     }
     .home-handle:hover { color: #fff; }
 
-    /* ── Marquee — seamless loop ──────────────────────────────
-       Speed: change the 34s duration only.
-       ──────────────────────────────────────────────────────── */
+    /* ── Marquee — seamless loop. Speed = the 34s duration ─── */
     .marquee-wrap {
         position: absolute; bottom: 0; left: 0; right: 0;
         background: #0a0a0a; overflow: hidden; padding: 7px 0; z-index: 3;
@@ -137,14 +139,12 @@
     }
     #proj-overlay.open { opacity: 1; pointer-events: auto; }
 
-    /* Same photo as home */
     .po-bg {
         position: absolute; inset: 0;
         background-image: url('images/home.jpg');
         background-size: cover; background-position: center;
     }
 
-    /* Darkening layer — 0.80 on hover */
     .po-dark {
         position: absolute; inset: 0; z-index: 1;
         background: #000; opacity: .30;
@@ -155,12 +155,13 @@
 
     .po-noise {
         position: absolute; inset: -25%; z-index: 2;
-        pointer-events: none; opacity: .16;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        pointer-events: none; opacity: .18;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 300px 300px;
         animation: grainShift .6s steps(8) infinite;
     }
 
-    /* Random-position preview — white box for now */
     .po-preview {
         position: absolute; z-index: 3;
         width: clamp(150px, 15vw, 240px);
@@ -171,9 +172,8 @@
         transition: opacity .35s ease, transform .45s ease;
         pointer-events: none;
     }
-    .po-preview.show { opacity: 1; transform: scale(1); }
+    .po-preview.show { opacity: 1; }
 
-    /* Logo, centred at top */
     .po-logo {
         position: absolute; top: clamp(26px, 5vh, 54px); left: 50%;
         transform: translateX(-50%);
@@ -219,11 +219,11 @@
     #proj-overlay.dim .po-list a:hover { opacity: 1; }
 
     .po-close {
-        position: fixed; top: 26px; right: 30px; z-index: 7;
+        position: absolute; top: 26px; right: 30px; z-index: 7;
         font-size: 12px; font-weight: 600; color: #fff;
         letter-spacing: .12em; text-transform: uppercase;
         background: none; border: none; font-family: inherit;
-        transition: opacity .2s;
+        transition: opacity .2s; cursor: none !important;
     }
     .po-close:hover { opacity: .4; }
 
@@ -254,7 +254,7 @@
 <div id="cursor"></div>
 
 <div id="home">
-    <div id="home-bg" class="home-bg" style="background-image: url('images/home.jpg');"></div>
+    <div class="home-bg"></div>
     <div class="home-scrim"></div>
     <div class="home-noise"></div>
 
@@ -304,24 +304,3 @@
     <a href="index.html" class="po-logo" aria-label="Nichita Herascu">
         <img src="images/logo.svg" alt="Nichita Herascu">
     </a>
-
-    <button type="button" id="proj-close" class="po-close">Close</button>
-
-    <div class="po-inner">
-        <p class="po-caption">Trying to find patterns where there are no patterns</p>
-
-        <nav class="po-list">
-            <a href="project-01.html" data-img="">Arhipera</a>
-            <a href="project-02.html" data-img="">Ogilvy</a>
-            <a href="project-03.html" data-img="">Opshop</a>
-            <a href="project-04.html" data-img="">The Map</a>
-            <a href="project-05.html" data-img="">House of Zodiac</a>
-            <a href="project-06.html" data-img="">Dogu</a>
-        </nav>
-
-        <p class="po-caption">Trying to find patterns where there are no patterns</p>
-    </div>
-</div>
-
-
-</body></html>
