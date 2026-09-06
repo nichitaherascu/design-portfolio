@@ -1,280 +1,307 @@
-<html data-type="html" data-identifier="e7f3a291-8b4d-4c2e-9d3a-bc5f1e7d4a82" data-title="project-01.html — Final" data-version="9" width="1200" height="800"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Map — Nichita Herascu</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer=""></script>
-    <script src="project.js" defer=""></script>
-    <style>
-        html { background: #fff; }
-        html, body { width: 100%; height: 100%; overflow: hidden; }
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arhipera: Beyond the Perimeter — Nichita Herascu</title>
 
-        /* ── Nav ─────────────────────────── */
-        .page-nav {
-            position: fixed; top: 0; left: 0; right: 0; height: 52px;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 32px; background: var(--white); z-index: 100;
-        }
-        .page-nav-logo {
-            font-size: 13px; font-weight: 500; letter-spacing: .06em;
-            text-transform: uppercase; color: var(--black);
-            text-decoration: none; transition: opacity .2s;
-        }
-        .page-nav-logo:hover { opacity: .45; }
-        .page-nav-ig {
-            font-size: 12px; font-weight: 400; color: var(--gray);
-            text-decoration: none; letter-spacing: .04em; transition: color .2s;
-        }
-        .page-nav-ig:hover { color: var(--black); }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet">
 
-        /* ── Layout ──────────────────────── */
-        .proj-page {
-            position: fixed; top: 52px; left: 0; right: 0; bottom: 0;
-            display: grid; grid-template-columns: 380px 1fr;
-        }
+<link rel="stylesheet" href="style.css">
+<script src="main.js" defer=""></script>
+<script src="project.js" defer=""></script>
 
-        /* ── Sidebar ─────────────────────── */
-        .proj-sidebar {
-            height: 100%; display: flex; flex-direction: column;
-            background: var(--white); overflow: hidden;
-        }
-        .sidebar-top { padding: 28px 32px 0; flex-shrink: 0; }
-        .proj-page-title {
-            font-size: clamp(22px, 2.4vw, 34px); font-weight: 700;
-            text-transform: uppercase; letter-spacing: -.02em;
-            line-height: 1.0; margin-bottom: 20px;
-        }
-        .proj-nav-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 11px 0;
-        }
-        .proj-nav-link {
-            font-size: 12px; font-weight: 400; color: var(--black);
-            text-decoration: none; letter-spacing: .05em;
-            text-transform: uppercase; transition: opacity .2s;
-        }
-        .proj-nav-link:hover { opacity: .35; }
-        .proj-tags {
-            font-size: 11px; font-weight: 300; color: var(--gray);
-            letter-spacing: .03em; padding: 11px 0;
-        }
-        .sidebar-body { flex: 1; padding: 28px 32px 0; overflow: hidden; }
-        .proj-desc p {
-            font-size: 13px; font-weight: 300; color: var(--gray);
-            line-height: 1.8; margin-bottom: 14px;
-        }
-        .sidebar-bottom { padding: 16px 32px 28px; flex-shrink: 0; }
-        .client-meta {
-            font-size: 11px; font-weight: 300; color: var(--gray); line-height: 1.8;
-        }
+<style>
+/* ═══════════════════════════════════════════════════════════
+   PROJECT PAGE TEMPLATE — block architecture
+   Copy to project-02..05, swap content, keep structure.
+   ═══════════════════════════════════════════════════════════ */
 
-        /* ── Scrollable right panel ──────── */
-        .proj-content {
-            height: 100%; overflow-y: scroll;
-            scrollbar-width: none; background: #0f0f0f;
-        }
-        .proj-content::-webkit-scrollbar { display: none; }
+html { background: var(--white); }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white); color: var(--black);
+  padding-top: 52px;                 /* clears fixed .page-nav */
+  -webkit-font-smoothing: antialiased;
+}
 
-        /* ── Image grid ──────────────────── */
-        .image-grid { display: flex; flex-direction: column; gap: 3px; padding: 20px; }
+/* ── Nav (matches existing pattern) ───────────────────────── */
+.page-nav {
+  position: fixed; top: 0; left: 0; right: 0; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; background: var(--white); z-index: 100;
+}
+.page-nav-logo {
+  font-size: 13px; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--black);
+  text-decoration: none; transition: opacity .2s;
+}
+.page-nav-logo:hover { opacity: .45; }
+.page-nav-ig {
+  font-size: 12px; font-weight: 400; color: var(--gray);
+  text-decoration: none; letter-spacing: .04em; transition: color .2s;
+}
+.page-nav-ig:hover { color: var(--black); }
 
-        .img-row-full { width: 100%; }
-        .img-row-full .img-block {
-            width: 100%; aspect-ratio: 16 / 9;
-            display: block; border-radius: 0;
-        }
-        .img-row-half { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-        .img-row-half .img-block {
-            width: 100%; aspect-ratio: 3 / 2;
-            display: block; border-radius: 0;
-        }
+/* ── BLOCKS ───────────────────────────────────────────────────
+   Full-bleed colour fields. No containers, no gutters.
+   --invert flips to dark. Swap :root vars later to go warm.
+   ──────────────────────────────────────────────────────────── */
+.block { position: relative; width: 100%; }
+.block--invert { background: #0f0f0f; color: var(--white); }
+.block--pad { padding: clamp(48px, 8vw, 130px) clamp(24px, 5vw, 90px); }
+.block--split { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 52px); }
+@media (max-width: 768px) { .block--split { grid-template-columns: 1fr; min-height: 0; } }
 
-        /* ── Image fade in on scroll ─────── */
-        .img-block {
-            position: relative;
-            opacity: 0; transform: translateY(20px);
-            transition: opacity .65s ease, transform .65s ease;
-            user-select: none;
-        }
-        .img-block.img-visible { opacity: 1; transform: translateY(0); }
-        .img-row-half .img-block:nth-child(2) { transition-delay: .1s; }
+/* ── DUAL-VOICE HEADING ───────────────────────────────────────
+   <h2 class="dv"><span class="dv-a">About</span>
+                  <span class="dv-b">About</span></h2>
+   ──────────────────────────────────────────────────────────── */
+.dv { display: flex; align-items: baseline; gap: .28em; flex-wrap: wrap;
+      margin: 0 0 .7em; line-height: .9; }
+.dv-a { font-weight: 900; font-size: clamp(30px, 5.5vw, 74px);
+        letter-spacing: -.035em; text-transform: uppercase; }
+.dv-b { font-weight: 300; font-style: italic; font-size: clamp(22px, 3.4vw, 48px);
+        letter-spacing: -.01em; opacity: .5; }
 
-        .img-block::after {
-            content: ''; position: absolute; inset: 0;
-            z-index: 2; cursor: none !important;
-        }
-        .img-block img {
-            display: block; width: 100%; height: 100%;
-            object-fit: cover; pointer-events: none;
-            user-select: none; -webkit-user-drag: none;
-        }
+/* ── HERO ─────────────────────────────────────────────────── */
+.hero-text {
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: clamp(32px, 5vw, 80px);
+}
+.hero-kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: .22em;
+  text-transform: uppercase; opacity: .45; margin: 0 0 auto;
+}
+.hero-title {
+  font-weight: 900; font-size: clamp(46px, 7vw, 96px); line-height: .86;
+  letter-spacing: -.045em; margin: 0; text-transform: uppercase;
+}
+.hero-title em {
+  display: block; font-weight: 200; font-style: italic; text-transform: none;
+  font-size: .46em; letter-spacing: -.02em; opacity: .55; margin-top: .22em;
+}
+.hero-img { position: relative; overflow: hidden; background: var(--dim); }
+@media (max-width: 768px) {
+  .hero-img { height: 68vh; }
+  .hero-text { padding-top: 60px; }
+}
 
-        .proj-content .site-footer { margin-top: 3px; }
+/* ── META STRIP ───────────────────────────────────────────── */
+.meta {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px;
+  border-top: 1px solid currentColor; padding-top: 22px;
+  margin-top: clamp(40px, 6vw, 76px);
+}
+.meta-k { font-size: 10px; font-weight: 600; letter-spacing: .18em;
+          text-transform: uppercase; opacity: .45; margin: 0 0 7px; }
+.meta-v { font-size: 15px; font-weight: 400; margin: 0; }
+@media (max-width: 768px) { .meta { grid-template-columns: 1fr 1fr; gap: 22px; } }
 
+/* ── BODY COPY ────────────────────────────────────────────── */
+.copy { max-width: 56ch; font-size: 17px; line-height: 1.62; font-weight: 400; }
+.copy p { margin: 0 0 1.1em; }
+.copy p:last-child { margin-bottom: 0; }
+.copy--indent { margin-left: auto; }
 
-        /* ═══════════════════════════════════
-           RESPONSIVE
-        ═══════════════════════════════════ */
+/* ── UNEVEN MOSAIC ────────────────────────────────────────────
+   12 cols, rows 9vw. Spans deliberately mismatched.
+   Edit grid-column / grid-row to rebalance.
+   ──────────────────────────────────────────────────────────── */
+.mosaic { display: grid; grid-template-columns: repeat(12, 1fr);
+          grid-auto-rows: 9vw; gap: 3px; background: #0f0f0f; }
+.m-a { grid-column: 1 / 6;  grid-row: span 4; }
+.m-b { grid-column: 6 / 13; grid-row: span 3; }
+.m-c { grid-column: 6 / 9;  grid-row: span 2; }
+.m-d { grid-column: 9 / 13; grid-row: span 3; }
+.m-e { grid-column: 1 / 5;  grid-row: span 3; }
+.m-f { grid-column: 5 / 13; grid-row: span 4; }
+.m-g { grid-column: 2 / 6;  grid-row: span 2; }
+.m-h { grid-column: 8 / 12; grid-row: span 2; }
 
-        /* ── Tablet (≤ 1024px) ───────────── */
-        @media (max-width: 1024px) {
-            .proj-page    { grid-template-columns: 260px 1fr; }
-            .sidebar-top  { padding: 20px 24px 0; }
-            .sidebar-body { padding: 20px 24px 0; }
-            .sidebar-bottom { padding: 12px 24px 24px; }
-            .page-nav     { padding: 0 24px; }
-        }
+/* ── IMAGE BLOCK (observed by project.js) ─────────────────── */
+.img-block {
+  position: relative; overflow: hidden; background: var(--dim);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .65s ease, transform .65s ease;
+  user-select: none;
+}
+.img-block.img-visible { opacity: 1; transform: translateY(0); }
+.img-block::after { content: ''; position: absolute; inset: 0; z-index: 2; cursor: none !important; }
+.img-block img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  pointer-events: none; user-select: none; -webkit-user-drag: none;
+}
+.mosaic .img-block:nth-child(2) { transition-delay: .08s; }
 
-        /* ── Mobile (≤ 768px) ────────────── */
-        @media (max-width: 768px) {
+/* placeholder — remove .ph once a real <img> is dropped in */
+.ph { display: flex; align-items: center; justify-content: center; }
+.ph::before {
+  content: attr(data-slot); font-size: 11px; font-weight: 600;
+  letter-spacing: .2em; color: rgba(255,255,255,.25); z-index: 1;
+}
 
-            html, body { overflow: auto !important; height: auto !important; }
+/* ── PULL QUOTE ───────────────────────────────────────────── */
+.quote {
+  font-weight: 200; font-style: italic; font-size: clamp(26px, 4vw, 56px);
+  line-height: 1.14; letter-spacing: -.03em; max-width: 24ch;
+  margin: 0 0 0 auto; text-align: right;
+}
+@media (max-width: 768px) { .quote { text-align: left; margin: 0; max-width: none; } }
 
-            .page-nav { padding: 0 20px; }
+/* ── STICKERS (ready, unused) ─────────────────────────────────
+   <span class="sticker" style="top:14%;left:7%;--rot:-5deg">word</span>
+   Drop inside any .img-block or .block.
+   ──────────────────────────────────────────────────────────── */
+.sticker {
+  position: absolute; z-index: 6; transform: rotate(var(--rot, -3deg));
+  background: var(--red); color: #fff; padding: 7px 15px; border-radius: 100px;
+  font-size: 12px; font-weight: 700; letter-spacing: .03em;
+  white-space: nowrap; box-shadow: 0 3px 14px rgba(0,0,0,.2); pointer-events: none;
+}
 
-            .proj-page {
-                position: static !important;
-                display: flex;
-                flex-direction: column;
-            }
+/* ── PREV / NEXT ──────────────────────────────────────────── */
+.proj-next {
+  display: block; text-decoration: none; color: inherit;
+  padding: clamp(44px, 7vw, 96px) clamp(24px, 5vw, 90px);
+  font-weight: 900; font-size: clamp(30px, 5vw, 68px);
+  letter-spacing: -.04em; text-transform: uppercase; line-height: .95;
+  transition: opacity .25s;
+}
+.proj-next:hover { opacity: .5; }
+.proj-next span {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: .22em; opacity: .45; margin-bottom: 14px;
+}
+.proj-nav-row {
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,.18);
+  padding: 24px clamp(24px, 5vw, 90px);
+}
+.proj-nav-link {
+  font-size: 12px; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; text-decoration: none;
+  color: inherit; transition: opacity .2s;
+}
+.proj-nav-link:hover { opacity: .4; }
 
-            /* ── Info panel ──────────────── */
-            .proj-sidebar {
-                height: auto;
-                overflow: visible;
-            }
+/* ═══ RESPONSIVE ═════════════════════════════════════════════ */
+@media (max-width: 1024px) { .page-nav { padding: 0 24px; } }
 
-            .sidebar-top {
-                padding: 28px 24px 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
+@media (max-width: 768px) {
+  .page-nav { padding: 0 20px; }
+  body { font-size: 16px; }
+  .copy { font-size: 1rem; max-width: none; }
+  .copy--indent { margin-left: 0; }
+  .mosaic { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 34vw; }
+  .m-a, .m-b, .m-c, .m-d, .m-e, .m-f, .m-g, .m-h {
+    grid-column: 1 / 7; grid-row: span 1;
+  }
+  .m-a, .m-f { grid-row: span 2; }
+}
 
-            /* 5× hero title */
-            .proj-page-title {
-                font-size: clamp(88px, 28vw, 120px);
-                letter-spacing: -.04em;
-                line-height: .9;
-                margin-bottom: 28px;
-                text-align: center;
-            }
-
-            .proj-nav-row {
-                width: 100%;
-                max-width: 240px;
-                padding: 14px 0;
-            }
-
-            .proj-tags {
-                text-align: center;
-                padding: 8px 0 18px;
-            }
-
-            .sidebar-body {
-                flex: none;
-                overflow: visible;
-                padding: 0 24px 8px;
-            }
-
-            /* Body text — 16px minimum */
-            .proj-desc p {
-                font-size: 1rem;
-                line-height: 1.75;
-                text-align: center;
-            }
-
-            .sidebar-bottom {
-                padding: 8px 24px 28px;
-                text-align: center;
-            }
-
-            /* UI meta — secondary, 14px acceptable */
-            .client-meta { font-size: 0.875rem; }
-
-            /* ── Full-bleed image grid ────── */
-            .proj-content {
-                height: auto;
-                overflow: visible;
-            }
-
-            .image-grid { padding: 0; gap: 3px; }
-        }
-
-        /* ── Small phones (≤ 480px) ──────── */
-        @media (max-width: 480px) {
-            .img-row-half { grid-template-columns: 1fr; gap: 3px; }
-            .img-row-half .img-block { aspect-ratio: 16 / 9; }
-        }
-    </style>
+@media (max-width: 480px) {
+  .mosaic { grid-auto-rows: 44vw; }
+  .m-a, .m-f { grid-row: span 1; }
+}
+</style>
 </head>
 <body>
 
-    <div id="cursor"></div>
+<div id="cursor"></div>
 
-    <nav class="page-nav">
-        <a href="index.html" class="page-nav-logo">Nichita Herascu</a>
-        <a href="https://instagram.com/nichita.hera" target="_blank" class="page-nav-ig">@nichita.hera</a>
-    </nav>
+<nav class="page-nav">
+  <a href="index.html" class="page-nav-logo">Nichita Herascu</a>
+  <a href="https://instagram.com/nichita.hera" target="_blank" class="page-nav-ig">@nichita.hera</a>
+</nav>
 
-    <div class="proj-page">
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section class="block block--split block--invert">
+  <div class="hero-text">
+    <p class="hero-kicker">Project 01 — 2024</p>
+    <h1 class="hero-title">Arhipera<em>Beyond the Perimeter</em></h1>
+  </div>
+  <div class="hero-img img-block">
+    <img src="images/project-01/photo1.jpg" alt="Arhipera — Beyond the Perimeter">
+  </div>
+</section>
 
-        <aside class="proj-sidebar">
-            <div class="sidebar-top">
-                <h1 class="proj-page-title">Arhipera: Beyond the Perimeter</h1>
-                <div class="proj-nav-row">
-                    <a href="index.html" id="proj-back" class="proj-nav-link">← Back</a>
-                    <a href="project-02.html" id="proj-next" class="proj-nav-link">Next →</a>
-                </div>
-                <p class="proj-tags">Art Direction & Graphic Design</p>
-            </div>
-            <div class="sidebar-body">
-                <div class="proj-desc">
-                    <p>Add your project description here.</p>
-                </div>
-            </div>
-            <div class="sidebar-bottom">
-                <p class="client-meta">Client: Arhipera: Beyond the Perimeter</p>
-            </div>
-        </aside>
+<!-- ══ INTRO + META ══════════════════════════════════════════ -->
+<section class="block block--pad">
+  <h2 class="dv"><span class="dv-a">About</span><span class="dv-b">About</span></h2>
+  <div class="copy">
+    <p>Replace this. One paragraph on what the project was, who it was for, and what it needed to do. Two or three sentences — the images carry the rest.</p>
+    <p>Second paragraph for the idea or approach behind it.</p>
+  </div>
+  <div class="meta">
+    <div><p class="meta-k">Client</p><p class="meta-v">Arhipera</p></div>
+    <div><p class="meta-k">Role</p><p class="meta-v">Art Direction, Graphic Design</p></div>
+    <div><p class="meta-k">Year</p><p class="meta-v">2024</p></div>
+    <div><p class="meta-k">Discipline</p><p class="meta-v">Identity, Editorial</p></div>
+  </div>
+</section>
 
-        <main class="proj-content">
-            <div class="image-grid">
-<div class="img-row-full">
-    <div class="img-block">
-        <img src="images/project-01/photo1.jpg" alt="">
+<!-- ══ MOSAIC 1 ══════════════════════════════════════════════ -->
+<section class="block">
+  <div class="mosaic">
+    <div class="m-a img-block ph" data-slot="02"></div>
+    <div class="m-b img-block ph" data-slot="03"></div>
+    <div class="m-c img-block ph" data-slot="04"></div>
+    <div class="m-d img-block ph" data-slot="05"></div>
+  </div>
+</section>
+
+<!-- ══ PULL QUOTE ════════════════════════════════════════════ -->
+<section class="block block--invert block--pad">
+  <p class="quote">A short line that says what the work is really about.</p>
+</section>
+
+<!-- ══ MOSAIC 2 ══════════════════════════════════════════════ -->
+<section class="block">
+  <div class="mosaic">
+    <div class="m-e img-block ph" data-slot="06"></div>
+    <div class="m-f img-block ph" data-slot="07"></div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ═══════════════════════════════════════════════ -->
+<section class="block block--pad">
+  <h2 class="dv"><span class="dv-a">Process</span><span class="dv-b">Process</span></h2>
+  <div class="copy copy--indent">
+    <p>How it was made — sketches, iterations, the dead ends worth mentioning. Keep it short.</p>
+  </div>
+</section>
+
+<!-- ══ MOSAIC 3 ══════════════════════════════════════════════ -->
+<section class="block">
+  <div class="mosaic">
+    <div class="m-g img-block ph" data-slot="08"></div>
+    <div class="m-h img-block ph" data-slot="09"></div>
+  </div>
+</section>
+
+<!-- ══ NEXT ══════════════════════════════════════════════════ -->
+<section class="block block--invert">
+  <a href="project-02.html" id="proj-next" class="proj-next"><span>Next Project</span>OPSHOP →</a>
+  <div class="proj-nav-row">
+    <a href="index.html" id="proj-back" class="proj-nav-link">← All Work</a>
+    <a href="project-02.html" class="proj-nav-link">Next →</a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <h2 class="footer-name">Nichita<br>Herascu</h2>
+    <div class="footer-contact">
+      <p class="footer-cta-text">Want to work together?</p>
+      <a href="mailto:nichitaherascu@gmail.com" class="footer-email">nichitaherascu@gmail.com</a>
     </div>
-</div>                <div class="img-row-half">
-                    <div class="img-block" style="background:#5B8FA8;"></div>
-                    <div class="img-block" style="background:#7A9E7E;"></div>
-                </div>
-                <div class="img-row-full"><div class="img-block" style="background:#C47A7A;"></div></div>
-                <div class="img-row-half">
-                    <div class="img-block" style="background:#8A9A5B;"></div>
-                    <div class="img-block" style="background:#9484B8;"></div>
-                </div>
-                <div class="img-row-full"><div class="img-block" style="background:#B89878;"></div></div>
-            </div>
-
-            <footer class="site-footer">
-                <div class="footer-top">
-                    <h2 class="footer-name">Nichita<br>Herascu</h2>
-                    <div class="footer-contact">
-                        <p class="footer-cta-text">Want to work together?</p>
-                        <a href="mailto:nichitaherascu@gmail.com" class="footer-email">nichitaherascu@gmail.com</a>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p class="footer-copy">Graphic Designer &amp; Art Director — Bucharest &nbsp;·&nbsp; © 2026 Nichita Herascu</p>
-                </div>
-            </footer>
-        </main>
-
-    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">Graphic Designer &amp; Art Director — Bucharest &nbsp;·&nbsp; © 2026 Nichita Herascu</p>
+  </div>
+</footer>
 
 
 </body></html>
