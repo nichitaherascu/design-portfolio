@@ -26,7 +26,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', system-ui, sans-serif;   /* ← was DM Sans */
+    font-family: 'Inter', system-ui, sans-serif;
     background: var(--white);
     color: var(--black);
     opacity: 0;
@@ -94,16 +94,21 @@ body.dark-slide #cursor.hovered { background: transparent; border-color: var(--w
     display: inline-flex;
     align-items: center;
     line-height: 0;
-    align-self: flex-start;      /* stops stretch inside .nav-left column */
+    align-self: flex-start;
 }
 
 .nav-logo img,
 .page-nav-logo img {
-    height: 16px;                /* ← only value to tune. width stays auto */
     width: auto;
     display: block;
     transition: opacity .2s ease, filter .3s ease;
 }
+
+/* Home page — large */
+.nav-logo img      { height: 32px; }
+
+/* Interior pages — small (project pages override to 20px) */
+.page-nav-logo img { height: 16px; }
 
 .nav-logo:hover img,
 .page-nav-logo:hover img { opacity: .45; }
@@ -120,7 +125,7 @@ body.dark-slide .page-nav-logo img { filter: invert(1); }
     display: flex;
     flex-direction: column;
     gap: 8px;
-    align-items: flex-start;     /* ← added, prevents logo stretching */
+    align-items: flex-start;
 }
 
 .nav-role {
@@ -235,7 +240,7 @@ body:not(.dark-slide) .nav-instagram:hover { color: var(--black); }
     .nav-role  { display: none; }
     .nav-right { top: 22px; right: 20px; }
 
-    .nav-logo img,
+    .nav-logo img      { height: 28px; }
     .page-nav-logo img { height: 14px; }
 
     .site-footer { padding: 40px 20px 28px; }
