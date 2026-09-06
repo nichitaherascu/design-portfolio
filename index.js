@@ -3,38 +3,97 @@
 // ─────────────────────────────────────────────────────────────────
 
 
-// ── Square expand to fullscreen, then navigate ────────────────────
+// ── Fit name to full viewport width ───────────────────────────────
+function fitName() {
+const el   = document.getElementById('big-name');
+const wrap = el?.parentElement;
+if (!el || !wrap) return;
 
-document.addEventListener('DOMContentLoaded', () => {
-const entry  = document.getElementById('entry');
-const square = document.getElementById('square');
-const label  = document.getElementById('entry-label');
-const hint   = document.getElementById('hint');
-if (!entry || !square) return;
+let lo = 1, hi = 40;
+for (let i = 0; i < 64; i++) {
+    const mid = (lo + hi) / 2;
+    el.style.fontSize = mid + 'vw';
+    el.scrollWidth <= wrap.clientWidth ? (lo = mid) : (hi = mid);
+}
+el.style.fontSize = lo + 'vw';
+}
 
-entry.addEventListener('click', () => {
 
-    // 1. Fade out the text immediately
-    [label, hint].forEach(el => {
-        if (el) el.style.opacity = '0';
-    });
+// ── Portrait parallax (rAF lerp) ──────────────────────────────────
+function initParallax() {
+const el = document.getElementById('portrait');
+if (!el) return;
 
-    // 2. Calculate the scale needed to cover the full viewport
-    //    Uses the viewport diagonal so every corner is covered
-    const diagonal = Math.sqrt(
-        Math.pow(window.innerWidth,  2) +
-        Math.pow(window.innerHeight, 2)
-    );
-    const scale = Math.ceil(diagonal / 120) + 2; // 120 = square CSS width
+let tx = 0, ty = 0, cx = 0, cy = 0;
 
-    // 3. Override hover transition with the expansion transition
-    square.style.transition = 'transform 0.85s cubic-bezier(0.76, 0, 0.24, 1)';
-    square.style.transform  = `scale(${scale})`;
-
-    // 4. Navigate once the square has filled the screen
-    //    home.html has black bg so the cut is invisible
-    setTimeout(() => {
-        window.location.href = 'home.html';
-    }, 800);
+document.addEventListener('mousemove', e => {
+    tx = (e.clientX / window.innerWidth  - .5) * 24;
+    ty = (e.clientY / window.innerHeight - .5) * 16;
 });
+
+(function loop() {
+    cx += (tx - cx) * .07;
+    cy += (ty - cy) * .07;
+    el.style.transform =
+        `translate(calc(-50% + ${cx}px), calc(-50% + ${cy}px))`;
+    requestAnimationFrame(loop);
+})();
+}
+
+
+// ── Full-page slider ──────────────────────────────────────────────
+function initSlider() {
+const slider = document.getElementById('slider');
+const slides = document.querySelectorAll('.slide');
+if (!slider) return;
+
+let current = 0;
+
+function navigateTo(idx) {
+    idx = Math.max(0, Math.min(slides.length - 1, idx));
+    slider.scrollTo({ top: idx * window.innerHeight, behavior: 'smooth' });
+}
+
+function updateUI(idx) {
+    current = idx;
+    // Toggle dark/light nav + cursor based on slide theme
+    const isDark = slides[idx]?.dataset.theme === 'dark';
+    document.body.classList.toggle('dark-slide', isDark);
+}
+
+// Set correct theme immediately on load (home slide is dark)
+updateUI(0);
+
+slider.addEventListener('scroll', () => {
+    const idx = Math.round(slider.scrollTop / window.innerHeight);
+    if (idx !== current) updateUI(idx);
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') navigateTo(current + 1);
+    if (e.key === 'ArrowUp'   || e.key === 'PageUp')   navigateTo(current - 1);
+});
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target
+            .querySelectorAll('[data-anim-slide]')
+            .forEach((el, i) => {
+                el.classList.remove('in');
+                setTimeout(() => el.classList.add('in'), 80 + i * 110);
+            });
+    });
+}, { threshold: 0.55 });
+
+document.querySelectorAll('.slide-project').forEach(s => observer.observe(s));
+}
+
+
+// ── Bootstrap ─────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+fitName();
+initParallax();
+initSlider();
+window.addEventListener('resize', fitName);
 });
