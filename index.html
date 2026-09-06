@@ -37,7 +37,7 @@
 
     .home-noise {
         position: absolute; inset: -25%;
-        z-index: 1;
+        z-index: 2;
         pointer-events: none;
         opacity: .18;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -62,7 +62,7 @@
         .home-noise, .po-noise { animation: none; }
     }
 
-    /* Band is a positioning layer only — clicks pass through it */
+    /* Band is a positioning layer only — clicks pass through */
     .home-band {
         position: absolute; inset: 0; z-index: 4;
         display: flex; align-items: center; justify-content: space-between;
@@ -90,7 +90,7 @@
         font-size: 13px; font-weight: 400; color: rgba(255,255,255,.85);
         letter-spacing: .04em; text-decoration: none; transition: opacity .2s;
         background: none; border: none; font-family: inherit;
-        pointer-events: auto; cursor: none !important;
+        padding: 0; pointer-events: auto; cursor: none !important;
     }
     .home-link:hover { opacity: .55; }
 
@@ -168,8 +168,8 @@
         aspect-ratio: 4 / 5;
         background: #fff;
         background-size: cover; background-position: center;
-        opacity: 0; transform: scale(.94);
-        transition: opacity .35s ease, transform .45s ease;
+        opacity: 0;
+        transition: opacity .35s ease;
         pointer-events: none;
     }
     .po-preview.show { opacity: 1; }
@@ -223,7 +223,7 @@
         font-size: 12px; font-weight: 600; color: #fff;
         letter-spacing: .12em; text-transform: uppercase;
         background: none; border: none; font-family: inherit;
-        transition: opacity .2s; cursor: none !important;
+        padding: 6px; transition: opacity .2s; cursor: none !important;
     }
     .po-close:hover { opacity: .4; }
 
@@ -265,7 +265,7 @@
             </a>
             <div class="home-links">
                 <a href="about.html" class="home-link">cv</a>
-                <button type="button" id="proj-open" class="home-link">projects</button>
+                <button type="button" id="proj-open" class="home-link" data-no-transition="">projects</button>
             </div>
         </div>
 
@@ -304,3 +304,24 @@
     <a href="index.html" class="po-logo" aria-label="Nichita Herascu">
         <img src="images/logo.svg" alt="Nichita Herascu">
     </a>
+
+    <button type="button" id="proj-close" class="po-close" data-no-transition="">Close</button>
+
+    <div class="po-inner">
+        <p class="po-caption">Trying to find patterns where there are no patterns</p>
+
+        <nav class="po-list">
+            <a href="project-01.html" data-img="">Arhipera</a>
+            <a href="project-02.html" data-img="">Ogilvy</a>
+            <a href="project-03.html" data-img="">Opshop</a>
+            <a href="project-04.html" data-img="">The Map</a>
+            <a href="project-05.html" data-img="">House of Zodiac</a>
+            <a href="project-06.html" data-img="">Dogu</a>
+        </nav>
+
+        <p class="po-caption">Trying to find patterns where there are no patterns</p>
+    </div>
+</div>
+
+
+</body></html>
