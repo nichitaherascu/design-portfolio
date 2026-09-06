@@ -68,7 +68,6 @@
         padding: 0 clamp(24px, 5vw, 80px);
     }
 
-    /* Left — signature + cv + projects */
     .home-id { display: flex; flex-direction: column; align-items: flex-end; }
     .hero-logo { display: block; line-height: 0; }
     .hero-logo img {
@@ -86,10 +85,10 @@
     .home-link {
         font-size: 13px; font-weight: 400; color: rgba(255,255,255,.85);
         letter-spacing: .04em; text-decoration: none; transition: opacity .2s;
+        background: none; border: none; font-family: inherit;
     }
     .home-link:hover { opacity: .55; }
 
-    /* Right — role + handle */
     .home-role { text-align: right; }
     .home-role-title {
         font-size: clamp(20px, 2.3vw, 34px); font-weight: 500;
@@ -102,7 +101,6 @@
     }
     .home-handle:hover { color: #fff; }
 
-    /* Marquee — white on black */
     .marquee-wrap {
         position: absolute; bottom: 0; left: 0; right: 0;
         background: #0a0a0a; overflow: hidden; padding: 7px 0; z-index: 3;
@@ -121,6 +119,48 @@
         to   { transform: translateX(-50%); }
     }
 
+    /* ── Projects overlay ─────────────────────────────────── */
+    #proj-overlay {
+        position: fixed; inset: 0; z-index: 500;
+        background: #f2f2f2;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: clamp(28px, 5vh, 60px) 20px;
+        opacity: 0; visibility: hidden;
+        transition: opacity .4s ease, visibility .4s ease;
+    }
+    #proj-overlay.open { opacity: 1; visibility: visible; }
+
+    .po-caption {
+        font-size: 11px; font-weight: 700; color: #0a0a0a;
+        letter-spacing: .02em; text-transform: uppercase;
+        text-align: center; line-height: 1.35; max-width: 30ch;
+        flex-shrink: 0;
+    }
+
+    .po-list {
+        display: flex; flex-direction: column; align-items: center;
+        justify-content: center; flex: 1; gap: 0;
+        margin: clamp(18px, 4vh, 44px) 0;
+    }
+    .po-list a {
+        display: block; text-decoration: none; color: #0a0a0a;
+        font-size: clamp(34px, 7.2vw, 86px);
+        font-weight: 800; letter-spacing: -.035em;
+        line-height: 1.02; text-transform: uppercase;
+        text-align: center; transition: opacity .2s;
+    }
+    .po-list a:hover { opacity: .35; }
+
+    .po-close {
+        position: fixed; top: 26px; right: 30px; z-index: 501;
+        font-size: 12px; font-weight: 600; color: #0a0a0a;
+        letter-spacing: .12em; text-transform: uppercase;
+        background: none; border: none; font-family: inherit;
+        transition: opacity .2s;
+    }
+    .po-close:hover { opacity: .4; }
+
     @media (max-width: 768px) {
         .home-band {
             flex-direction: column; align-items: flex-start;
@@ -136,6 +176,8 @@
         .home-handle { font-size: 1rem; }
 
         .marquee-track span { font-size: 18px; padding-right: 90px; }
+
+        .po-close { top: 18px; right: 20px; }
     }
 </style>
 </head>
@@ -155,7 +197,7 @@
             </a>
             <div class="home-links">
                 <a href="about.html" class="home-link">cv</a>
-                <a href="projects.html" class="home-link">projects</a>
+                <button type="button" id="proj-open" class="home-link">projects</button>
             </div>
         </div>
 
@@ -177,6 +219,24 @@
             <span>The projects you are about to see are made to impact the culture</span>
         </div>
     </div>
+</div>
+
+<!-- ══ PROJECTS OVERLAY ══════════════════════════════════════ -->
+<div id="proj-overlay">
+    <button type="button" id="proj-close" class="po-close">Close</button>
+
+    <p class="po-caption">Trying to find patterns where there are no patterns</p>
+
+    <nav class="po-list">
+        <a href="project-01.html">Arhipera</a>
+        <a href="project-02.html">Ogilvy</a>
+        <a href="project-03.html">Opshop</a>
+        <a href="project-04.html">The Map</a>
+        <a href="project-05.html">House of Zodiac</a>
+        <a href="project-06.html">Dogu</a>
+    </nav>
+
+    <p class="po-caption">Trying to find patterns where there are no patterns</p>
 </div>
 
 

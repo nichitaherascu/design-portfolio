@@ -8,5 +8,16 @@ document.addEventListener('mousemove', e => { tx = (e.clientX / window.innerWidt
 
 (function loop() { cx += (tx - cx) * .07; cy += (ty - cy) * .07; el.style.transform = translate(${cx}px, ${cy}px) scale(1.06); requestAnimationFrame(loop); })(); }
 
-document.addEventListener('DOMContentLoaded', () => { initParallax(); });
+// ── Projects overlay ────────────────────────────────────────────── function initProjectsOverlay() { const overlay = document.getElementById('proj-overlay'); const openBtn = document.getElementById('proj-open'); const closeBtn = document.getElementById('proj-close'); if (!overlay || !openBtn) return;
 
+function open() { overlay.classList.add('open'); document.body.classList.remove('dark-slide'); // cursor goes dark on light bg }
+
+function close() { overlay.classList.remove('open'); document.body.classList.add('dark-slide'); }
+
+openBtn.addEventListener('click', open); if (closeBtn) closeBtn.addEventListener('click', close);
+
+overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); }); }
+
+document.addEventListener('DOMContentLoaded', () => { initParallax(); initProjectsOverlay(); });
