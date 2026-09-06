@@ -1,38 +1,36 @@
 /* ═══════════════════════════════════════════════
- style.css — Nichita Herascu Portfolio
- Shared base styles & CSS custom properties
+   style.css — Nichita Herascu Portfolio
+   Shared base styles & CSS custom properties
 ═══════════════════════════════════════════════ */
-
 
 /* ── 1. Variables ────────────────────────────── */
 :root {
---black : #0a0a0a;
---white : #ffffff;
---gray  : #888888;
---dim   : #333333;
---red   : #cc2200;
---pad   : 48px;
+    --black : #0a0a0a;
+    --white : #ffffff;
+    --gray  : #888888;
+    --dim   : #333333;
+    --red   : #cc2200;
+    --pad   : 48px;
 }
-
 
 /* ── 2. Reset ────────────────────────────────── */
 *, *::before, *::after {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-font-family: 'DM Sans', system-ui, sans-serif;
-background: var(--white);
-color: var(--black);
-opacity: 0;
-transition: opacity .32s ease;
+    font-family: 'Inter', system-ui, sans-serif;   /* ← was DM Sans */
+    background: var(--white);
+    color: var(--black);
+    opacity: 0;
+    transition: opacity .32s ease;
 }
 
 a      { color: inherit; text-decoration: none; }
@@ -40,207 +38,217 @@ ul, ol { list-style: none; }
 img    { display: block; max-width: 100%; }
 button { font: inherit; background: none; border: none; }
 
-
 /* ── 3. Custom cursor ────────────────────────── */
 * { cursor: none !important; }
 
 #cursor {
-position: fixed;
-top: 0; left: 0;
-width: 10px; height: 10px;
-background: var(--black);
-border-radius: 50%;
-pointer-events: none;
-z-index: 9999;
-transform: translate(-50%, -50%);
-transition:
-  width      .25s ease,
-  height     .25s ease,
-  background .25s ease,
-  border     .25s ease;
+    position: fixed;
+    top: 0; left: 0;
+    width: 10px; height: 10px;
+    background: var(--black);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition:
+      width      .25s ease,
+      height     .25s ease,
+      background .25s ease,
+      border     .25s ease;
 }
 
 #cursor.hovered {
-width: 36px; height: 36px;
-background: transparent;
-border: 1.5px solid var(--black);
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1.5px solid var(--black);
 }
 
-body.dark-slide #cursor              { background: var(--white); }
-body.dark-slide #cursor.hovered      { background: transparent; border-color: var(--white); }
-
+body.dark-slide #cursor         { background: var(--white); }
+body.dark-slide #cursor.hovered { background: transparent; border-color: var(--white); }
 
 /* ── 4. Entrance animations  [data-anim] ─────── */
 [data-anim] {
-opacity: 0;
-transform: translateY(10px);
-transition: opacity .5s ease, transform .5s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .5s ease, transform .5s ease;
 }
 [data-anim].in {
-opacity: 1;
-transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
-
 
 /* ── 5. Slide animations  [data-anim-slide] ───── */
 [data-anim-slide] {
-opacity: 0;
-transform: translateY(16px);
-transition: opacity .5s ease, transform .5s ease;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .5s ease, transform .5s ease;
 }
 [data-anim-slide].in {
-opacity: 1;
-transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
+/* ── 6. Logo mark (handwritten signature) ─────── */
+.nav-logo,
+.page-nav-logo {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    align-self: flex-start;      /* stops stretch inside .nav-left column */
+}
 
-/* ── 6. Home — Left nav ──────────────────────── */
+.nav-logo img,
+.page-nav-logo img {
+    height: 16px;                /* ← only value to tune. width stays auto */
+    width: auto;
+    display: block;
+    transition: opacity .2s ease, filter .3s ease;
+}
+
+.nav-logo:hover img,
+.page-nav-logo:hover img { opacity: .45; }
+
+/* Artwork is black. On dark backgrounds, invert it to white. */
+body.dark-slide .nav-logo img,
+body.dark-slide .page-nav-logo img { filter: invert(1); }
+
+/* ── 7. Home — Left nav ──────────────────────── */
 .nav-left {
-position: fixed;
-top: var(--pad); left: var(--pad);
-z-index: 100;
-display: flex;
-flex-direction: column;
-gap: 8px;
+    position: fixed;
+    top: var(--pad); left: var(--pad);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;     /* ← added, prevents logo stretching */
 }
-
-.nav-logo {
-font-size: 13px;
-font-weight: 500;
-letter-spacing: .06em;
-text-transform: uppercase;
-color: var(--white);
-transition: opacity .2s;
-}
-.nav-logo:hover { opacity: .45; }
 
 .nav-role {
-font-size: 11px;
-font-weight: 300;
-color: rgba(255,255,255,.45);
-letter-spacing: .04em;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255,255,255,.45);
+    letter-spacing: .04em;
 }
 
 .nav-links {
-list-style: none;
-margin-top: 4px;
-display: flex;
-flex-direction: column;
-gap: 4px;
+    list-style: none;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 .nav-links a {
-font-size: 12px;
-font-weight: 400;
-color: rgba(255,255,255,.6);
-letter-spacing: .05em;
-text-transform: uppercase;
-transition: color .2s;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,.6);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    transition: color .2s;
 }
 .nav-links a:hover { color: var(--white); }
 
 /* Light-page variants */
-body:not(.dark-slide) .nav-logo          { color: var(--black); }
 body:not(.dark-slide) .nav-role          { color: var(--gray); }
 body:not(.dark-slide) .nav-links a       { color: var(--gray); }
 body:not(.dark-slide) .nav-links a:hover { color: var(--black); }
 
-
-/* ── 7. Home — Right nav ─────────────────────── */
+/* ── 8. Home — Right nav ─────────────────────── */
 .nav-right {
-position: fixed;
-top: var(--pad); right: var(--pad);
-z-index: 100;
+    position: fixed;
+    top: var(--pad); right: var(--pad);
+    z-index: 100;
 }
 
 .nav-instagram {
-font-size: 12px;
-font-weight: 400;
-color: rgba(255,255,255,.5);
-letter-spacing: .04em;
-transition: color .2s;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,.5);
+    letter-spacing: .04em;
+    transition: color .2s;
 }
 .nav-instagram:hover { color: var(--white); }
 
 body:not(.dark-slide) .nav-instagram       { color: var(--gray); }
 body:not(.dark-slide) .nav-instagram:hover { color: var(--black); }
 
-
-/* ── 8. Footer ───────────────────────────────── */
+/* ── 9. Footer ───────────────────────────────── */
 .site-footer {
-background: var(--black);
-padding: 60px var(--pad) 36px;
-color: var(--white);
+    background: var(--black);
+    padding: 60px var(--pad) 36px;
+    color: var(--white);
 }
 
 .footer-top {
-display: flex;
-justify-content: space-between;
-align-items: flex-end;
-padding-bottom: 40px;
-border-bottom: 1px solid var(--dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--dim);
 }
 
 .footer-name {
-font-size: clamp(36px, 6vw, 80px);
-font-weight: 900;
-letter-spacing: -.03em;
-line-height: .95;
-text-transform: uppercase;
+    font-size: clamp(36px, 6vw, 80px);
+    font-weight: 900;
+    letter-spacing: -.03em;
+    line-height: .95;
+    text-transform: uppercase;
 }
 
 .footer-contact {
-display: flex;
-flex-direction: column;
-align-items: flex-end;
-gap: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
 }
 
 .footer-cta-text {
-font-size: 12px;
-font-weight: 300;
-color: rgba(255,255,255,.4);
-letter-spacing: .04em;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,.4);
+    letter-spacing: .04em;
 }
 
 .footer-email {
-font-size: 18px;
-font-weight: 400;
-color: var(--white);
-border-bottom: 1px solid rgba(255,255,255,.3);
-padding-bottom: 2px;
-transition: opacity .2s;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    padding-bottom: 2px;
+    transition: opacity .2s;
 }
 .footer-email:hover { opacity: .6; }
 
 .footer-bottom { padding-top: 20px; }
 
 .footer-copy {
-font-size: 11px;
-font-weight: 300;
-color: rgba(255,255,255,.3);
-letter-spacing: .04em;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255,255,255,.3);
+    letter-spacing: .04em;
 }
 
-
-/* ── 9. Responsive ───────────────────────────── */
+/* ── 10. Responsive ──────────────────────────── */
 @media (max-width: 768px) {
-:root { --pad: 20px; }
+    :root { --pad: 20px; }
 
-.nav-left  { top: 20px; left: 20px; }
-.nav-role  { display: none; }
-.nav-right { top: 22px; right: 20px; }
+    .nav-left  { top: 20px; left: 20px; }
+    .nav-role  { display: none; }
+    .nav-right { top: 22px; right: 20px; }
 
-.site-footer { padding: 40px 20px 28px; }
+    .nav-logo img,
+    .page-nav-logo img { height: 14px; }
 
-.footer-top {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  padding-bottom: 28px;
-}
+    .site-footer { padding: 40px 20px 28px; }
 
-.footer-contact { align-items: flex-start; }
+    .footer-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding-bottom: 28px;
+    }
 
-/* Body text minimum 16px on mobile */
-.footer-email { font-size: 1rem; }
+    .footer-contact { align-items: flex-start; }
+
+    /* Body text minimum 16px on mobile */
+    .footer-email { font-size: 1rem; }
 }
