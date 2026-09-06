@@ -15,17 +15,12 @@
     html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
     html { background: #0a0a0a; }
 
-    #home {
-        position: fixed; inset: 0;
-        overflow: hidden;
-        background: #0a0a0a;
-    }
+    #home { position: fixed; inset: 0; overflow: hidden; background: #0a0a0a; }
 
     .home-bg {
         position: absolute; inset: 0;
         background-image: url('images/home.jpg');
-        background-size: cover;
-        background-position: center;
+        background-size: cover; background-position: center;
     }
 
     .home-scrim {
@@ -35,14 +30,11 @@
         pointer-events: none;
     }
 
-    .home-noise {
-        position: absolute; inset: -25%;
-        z-index: 2;
-        pointer-events: none;
-        opacity: .18;
+    .home-noise, .po-noise {
+        position: absolute; inset: -25%; z-index: 2;
+        pointer-events: none; opacity: .18;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-        background-repeat: repeat;
-        background-size: 300px 300px;
+        background-repeat: repeat; background-size: 300px 300px;
         animation: grainShift .6s steps(8) infinite;
     }
 
@@ -62,7 +54,6 @@
         .home-noise, .po-noise { animation: none; }
     }
 
-    /* Band is a positioning layer only — clicks pass through */
     .home-band {
         position: absolute; inset: 0; z-index: 4;
         display: flex; align-items: center; justify-content: space-between;
@@ -77,8 +68,7 @@
     .hero-logo img {
         width: clamp(240px, 34vw, 560px);
         height: auto; display: block;
-        filter: invert(1);
-        transition: opacity .25s ease;
+        filter: invert(1); transition: opacity .25s ease;
     }
     .hero-logo:hover img { opacity: .6; }
 
@@ -106,7 +96,7 @@
     }
     .home-handle:hover { color: #fff; }
 
-    /* ── Marquee — seamless loop. Speed = the 34s duration ─── */
+    /* Marquee — speed = the 34s duration */
     .marquee-wrap {
         position: absolute; bottom: 0; left: 0; right: 0;
         background: #0a0a0a; overflow: hidden; padding: 7px 0; z-index: 3;
@@ -114,8 +104,7 @@
     .marquee-track {
         display: flex; width: max-content;
         animation: marqueeScroll 34s linear infinite;
-        will-change: transform;
-        backface-visibility: hidden;
+        will-change: transform; backface-visibility: hidden;
     }
     .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
     .marquee-group { display: flex; flex-shrink: 0; }
@@ -132,62 +121,47 @@
     /* ═══ PROJECTS OVERLAY ═══════════════════════════════════ */
     #proj-overlay {
         position: fixed; inset: 0; z-index: 500;
-        overflow: hidden;
-        background: #0a0a0a;
+        overflow: hidden; background: #0a0a0a;
         opacity: 0; pointer-events: none;
         transition: opacity .4s ease;
     }
     #proj-overlay.open { opacity: 1; pointer-events: auto; }
 
-    .po-bg {
+    #proj-overlay .po-bg {
         position: absolute; inset: 0;
         background-image: url('images/home.jpg');
         background-size: cover; background-position: center;
     }
 
-    .po-dark {
+    #proj-overlay .po-dark {
         position: absolute; inset: 0; z-index: 1;
         background: #000; opacity: .30;
-        transition: opacity .45s ease;
-        pointer-events: none;
+        transition: opacity .45s ease; pointer-events: none;
     }
     #proj-overlay.dim .po-dark { opacity: .80; }
 
-    .po-noise {
-        position: absolute; inset: -25%; z-index: 2;
-        pointer-events: none; opacity: .18;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-        background-repeat: repeat;
-        background-size: 300px 300px;
-        animation: grainShift .6s steps(8) infinite;
-    }
-
-    .po-preview {
+    #proj-overlay .po-preview {
         position: absolute; z-index: 3;
         width: clamp(150px, 15vw, 240px);
         aspect-ratio: 4 / 5;
         background: #fff;
         background-size: cover; background-position: center;
-        opacity: 0;
-        transition: opacity .35s ease;
-        pointer-events: none;
+        opacity: 0; transition: opacity .35s ease; pointer-events: none;
     }
-    .po-preview.show { opacity: 1; }
+    #proj-overlay .po-preview.show { opacity: 1; }
 
-    .po-logo {
+    #proj-overlay .po-logo {
         position: absolute; top: clamp(26px, 5vh, 54px); left: 50%;
-        transform: translateX(-50%);
-        z-index: 6; line-height: 0;
+        transform: translateX(-50%); z-index: 6; line-height: 0;
     }
-    .po-logo img {
+    #proj-overlay .po-logo img {
         width: clamp(170px, 20vw, 300px);
         height: auto; display: block;
-        filter: invert(1);
-        transition: opacity .25s ease;
+        filter: invert(1); transition: opacity .25s ease;
     }
-    .po-logo:hover img { opacity: .6; }
+    #proj-overlay .po-logo:hover img { opacity: .6; }
 
-    .po-inner {
+    #proj-overlay .po-inner {
         position: absolute; inset: 0; z-index: 5;
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
@@ -195,43 +169,45 @@
         pointer-events: none;
     }
 
-    .po-caption {
-        font-size: 11px; font-weight: 700; color: #fff;
+    #proj-overlay .po-caption {
+        font-size: 11px; font-weight: 700; color: #fff !important;
         letter-spacing: .02em; text-transform: uppercase;
         text-align: center; line-height: 1.35; max-width: 30ch;
         flex-shrink: 0;
     }
 
-    .po-list {
+    #proj-overlay .po-list {
         display: flex; flex-direction: column; align-items: center;
         justify-content: center; flex: 1;
         margin: clamp(18px, 4vh, 44px) 0;
         pointer-events: auto;
     }
-    .po-list a {
-        display: block; text-decoration: none; color: #fff;
+    #proj-overlay .po-list a {
+        display: block; text-decoration: none;
+        color: #fff !important; opacity: 1;
         font-size: clamp(30px, 6.4vw, 76px);
         font-weight: 800; letter-spacing: -.035em;
         line-height: 1.04; text-transform: uppercase;
         text-align: center; transition: opacity .28s ease;
     }
-    #proj-overlay.dim .po-list a       { opacity: .40; }
+    #proj-overlay.dim .po-list a       { opacity: .35; }
     #proj-overlay.dim .po-list a:hover { opacity: 1; }
 
-    .po-close {
-        position: absolute; top: 26px; right: 30px; z-index: 7;
-        font-size: 12px; font-weight: 600; color: #fff;
-        letter-spacing: .12em; text-transform: uppercase;
+    #proj-overlay .po-close {
+        position: absolute; top: 20px; right: 26px; z-index: 7;
+        width: 42px; height: 42px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 32px; font-weight: 300; line-height: 1;
+        color: #fff !important;
         background: none; border: none; font-family: inherit;
-        padding: 6px; transition: opacity .2s; cursor: none !important;
+        padding: 0; transition: opacity .2s; cursor: none !important;
     }
-    .po-close:hover { opacity: .4; }
+    #proj-overlay .po-close:hover { opacity: .45; }
 
     @media (max-width: 768px) {
         .home-band {
             flex-direction: column; align-items: flex-start;
-            justify-content: center; gap: 28px;
-            padding: 0 24px;
+            justify-content: center; gap: 28px; padding: 0 24px;
         }
         .home-id { align-items: flex-start; }
         .hero-logo img { width: min(78vw, 400px); }
@@ -244,8 +220,8 @@
         .marquee-group span { font-size: 18px; padding-right: 90px; }
         .marquee-track { animation-duration: 24s; }
 
-        .po-close { top: 18px; right: 20px; }
-        .po-preview { display: none; }
+        #proj-overlay .po-close { top: 12px; right: 14px; }
+        #proj-overlay .po-preview { display: none; }
     }
 </style>
 </head>
@@ -305,7 +281,7 @@
         <img src="images/logo.svg" alt="Nichita Herascu">
     </a>
 
-    <button type="button" id="proj-close" class="po-close" data-no-transition="">Close</button>
+    <button type="button" id="proj-close" class="po-close" aria-label="Close" data-no-transition="">×</button>
 
     <div class="po-inner">
         <p class="po-caption">Trying to find patterns where there are no patterns</p>
