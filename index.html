@@ -118,10 +118,7 @@
         to   { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* ═══ PROJECTS OVERLAY ═══════════════════════════════════
-       visibility:hidden when closed — children cannot re-enable
-       it, so nothing inside is clickable until .open is added.
-       ═══════════════════════════════════════════════════════ */
+    /* ═══ PROJECTS OVERLAY ═══════════════════════════════════ */
     #proj-overlay {
         position: fixed; inset: 0; z-index: 500;
         overflow: hidden; background: #0a0a0a;
@@ -186,17 +183,38 @@
         justify-content: center; flex: 1;
         margin: clamp(18px, 4vh, 44px) 0;
     }
+
+    /* ── Project name + handwritten overlay ───────────────────
+       Each <a> holds a .po-type (Inter caps) and a .po-hand
+       (handwritten SVG/PNG) layered on top. Hovering one link
+       fades out only its own handwriting.
+       ──────────────────────────────────────────────────────── */
     #proj-overlay .po-list a {
-        display: block; text-decoration: none;
-        color: #fff !important; opacity: 1;
-        font-size: clamp(30px, 6.4vw, 76px);
-        font-weight: 800; letter-spacing: -.035em;
-        line-height: 1.04; text-transform: uppercase;
-        text-align: center; transition: opacity .28s ease;
-        pointer-events: auto;
+        position: relative; display: block;
+        text-decoration: none; pointer-events: auto;
+        transition: opacity .28s ease;
     }
     #proj-overlay.dim .po-list a       { opacity: .35; }
     #proj-overlay.dim .po-list a:hover { opacity: 1; }
+
+    #proj-overlay .po-type {
+        display: block;
+        color: #fff !important;
+        font-size: clamp(30px, 6.4vw, 76px);
+        font-weight: 800; letter-spacing: -.035em;
+        line-height: 1.04; text-transform: uppercase;
+        text-align: center;
+    }
+
+    #proj-overlay .po-hand {
+        position: absolute; left: 50%; top: 50%;
+        transform: translate(-50%, -50%) rotate(var(--rot, -2deg));
+        width: var(--hand-w, 108%);
+        height: auto; z-index: 2;
+        pointer-events: none; user-select: none;
+        opacity: 1; transition: opacity .3s ease;
+    }
+    #proj-overlay .po-list a:hover .po-hand { opacity: 0; }
 
     #proj-overlay .po-close {
         position: absolute; top: 20px; right: 26px; z-index: 7;
@@ -259,50 +277,4 @@
     <div class="marquee-wrap" data-anim="">
         <div class="marquee-track">
             <div class="marquee-group">
-                <span>The projects you are about to see are made to impact the culture</span>
-                <span>The projects you are about to see are made to impact the culture</span>
-                <span>The projects you are about to see are made to impact the culture</span>
-                <span>The projects you are about to see are made to impact the culture</span>
-            </div>
-            <div class="marquee-group" aria-hidden="true">
-                <span>The projects you are about to see are made to impact the culture</span>
-                <span>The projects you are about to see are made to impact the culture</span>
-                <span>The projects you are about to see are made to impact the culture</span>
-                <span>The projects you are about to see are made to impact the culture</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ══ PROJECTS OVERLAY ══════════════════════════════════════ -->
-<div id="proj-overlay">
-    <div class="po-bg"></div>
-    <div class="po-dark"></div>
-    <div class="po-noise"></div>
-
-    <div id="po-preview" class="po-preview"></div>
-
-    <a href="index.html" class="po-logo" aria-label="Nichita Herascu">
-        <img src="images/logo.svg" alt="Nichita Herascu">
-    </a>
-
-    <button type="button" id="proj-close" class="po-close" aria-label="Close" data-no-transition="">×</button>
-
-    <div class="po-inner">
-        <p class="po-caption">Trying to find patterns where there are no patterns</p>
-
-        <nav class="po-list">
-            <a href="project-01.html" data-img="">Arhipera</a>
-            <a href="project-02.html" data-img="">Ogilvy</a>
-            <a href="project-03.html" data-img="">Opshop</a>
-            <a href="project-04.html" data-img="">The Map</a>
-            <a href="project-05.html" data-img="">House of Zodiac</a>
-            <a href="project-06.html" data-img="">Dogu</a>
-        </nav>
-
-        <p class="po-caption">Trying to find patterns where there are no patterns</p>
-    </div>
-</div>
-
-
-</body></html>
+              
