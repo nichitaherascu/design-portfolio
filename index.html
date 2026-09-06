@@ -35,26 +35,26 @@
         pointer-events: none;
     }
 
+    /* Grain — smaller layer area than before to cut compositing cost */
     .home-noise {
-        position: absolute; inset: -120%;
+        position: absolute; inset: -25%;
         z-index: 1;
         pointer-events: none;
         opacity: .16;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         animation: grainShift .6s steps(8) infinite;
-        will-change: transform;
     }
 
     @keyframes grainShift {
-        0%   { transform: translate(0, 0); }
-        12%  { transform: translate(-2%, -3%); }
-        25%  { transform: translate(-4%,  2%); }
-        37%  { transform: translate( 2%, -4%); }
-        50%  { transform: translate(-3%,  3%); }
-        62%  { transform: translate( 3%,  1%); }
-        75%  { transform: translate(-1%, -2%); }
-        87%  { transform: translate( 4%, -1%); }
-        100% { transform: translate(0, 0); }
+        0%   { transform: translate3d(0, 0, 0); }
+        12%  { transform: translate3d(-1%, -2%, 0); }
+        25%  { transform: translate3d(-2%,  1%, 0); }
+        37%  { transform: translate3d( 1%, -2%, 0); }
+        50%  { transform: translate3d(-2%,  2%, 0); }
+        62%  { transform: translate3d( 2%,  1%, 0); }
+        75%  { transform: translate3d(-1%, -1%, 0); }
+        87%  { transform: translate3d( 2%, -1%, 0); }
+        100% { transform: translate3d(0, 0, 0); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -101,22 +101,32 @@
     }
     .home-handle:hover { color: #fff; }
 
+    /* ── Marquee — seamless loop ──────────────────────────────
+       Two identical groups. -50% = exactly one group width.
+       Speed: change the 34s duration only.
+       ──────────────────────────────────────────────────────── */
     .marquee-wrap {
         position: absolute; bottom: 0; left: 0; right: 0;
         background: #0a0a0a; overflow: hidden; padding: 7px 0; z-index: 3;
     }
     .marquee-track {
-        display: flex; white-space: nowrap;
-        animation: marqueeScroll 7s linear infinite; will-change: transform;
+        display: flex; width: max-content;
+        animation: marqueeScroll 34s linear infinite;
+        will-change: transform;
+        backface-visibility: hidden;
     }
     .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
-    .marquee-track span {
+    .marquee-group {
+        display: flex; flex-shrink: 0;
+    }
+    .marquee-group span {
         font-size: 26px; font-weight: 400; color: #fff;
-        letter-spacing: .06em; padding-right: 144px; flex-shrink: 0;
+        letter-spacing: .06em; padding-right: 144px;
+        flex-shrink: 0; white-space: nowrap;
     }
     @keyframes marqueeScroll {
-        from { transform: translateX(0); }
-        to   { transform: translateX(-50%); }
+        from { transform: translate3d(0, 0, 0); }
+        to   { transform: translate3d(-50%, 0, 0); }
     }
 
     /* ── Projects overlay ─────────────────────────────────── */
@@ -175,7 +185,8 @@
         .home-role-title { font-size: 1.25rem; }
         .home-handle { font-size: 1rem; }
 
-        .marquee-track span { font-size: 18px; padding-right: 90px; }
+        .marquee-group span { font-size: 18px; padding-right: 90px; }
+        .marquee-track { animation-duration: 24s; }
 
         .po-close { top: 18px; right: 20px; }
     }
@@ -209,14 +220,18 @@
 
     <div class="marquee-wrap" data-anim="">
         <div class="marquee-track">
-            <span>The projects you are about to see are made to impact the culture</span>
-            <span>The projects you are about to see are made to impact the culture</span>
-            <span>The projects you are about to see are made to impact the culture</span>
-            <span>The projects you are about to see are made to impact the culture</span>
-            <span>The projects you are about to see are made to impact the culture</span>
-            <span>The projects you are about to see are made to impact the culture</span>
-            <span>The projects you are about to see are made to impact the culture</span>
-            <span>The projects you are about to see are made to impact the culture</span>
+            <div class="marquee-group">
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+            </div>
+            <div class="marquee-group" aria-hidden="true">
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+                <span>The projects you are about to see are made to impact the culture</span>
+            </div>
         </div>
     </div>
 </div>
