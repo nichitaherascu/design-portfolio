@@ -1,4 +1,4 @@
-<html lang="en" data-type="html" data-identifier="f2a91c47-3b6d-4e18-9a52-7d0c8b1e4f36" data-title="about.html — editorial rebuild" data-version="7" width="1200" height="900">
+<html lang="en" data-type="html" data-identifier="f2a91c47-3b6d-4e18-9a52-7d0c8b1e4f36" data-title="about.html — editorial rebuild" data-version="9" width="1200" height="900">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,19 +110,19 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
            │ HEADLINE — full width, z-index 3 │
            └──────────────────────────────────┘
    row 2   ┌────────┐┌──────────┐┌────────────┐
-           │ tail   ││          ││ right col  │
-   row 3   ├────────┤│  IMAGE   ││ justified  │
-           │ left   ││  cols    ││ italic     │
-           │ col    ││  4–10    ││ cols 10–13 │
+           │ tail   ││          ││ About copy │
+   row 3   ├────────┤│  IMAGE   ││ + Download │
+           │ CV     ││  cols    ││ cols 10–13 │
+           │ LISTS  ││  4–10    ││            │
            └────────┘└──────────┘└────────────┘
 
    Image pulled up by a negative margin so the headline's
-   final lines overlap it. Type z-index 3, image z-index 1.
+   final line overlaps it. Type z-index 3, image z-index 1.
    ═══════════════════════════════════════════ */
 
 /* Top padding clears the floating header:
    16px offset + 56px header height + breathing room */
-.stage { padding: 104px 48px 0; }
+.stage { padding: 104px 48px 90px; }
 
 .grid {
   display: grid;
@@ -148,8 +148,9 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   text-indent: 14%;
 }
 
-/* Headline continues in a narrow left measure, running
-   down the side of the image. The core move. */
+/* Headline's final word drops into the narrow left measure,
+   running down the side of the image. The core move — this
+   is what creates the overlap that defines the layout. */
 .tail {
   grid-column: 1 / 4;
   grid-row: 2;
@@ -157,10 +158,10 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   z-index: 3;
   margin: 0;
   padding-top: 8px;
-  font-size: clamp(22px, 2.7vw, 38px);
+  font-size: clamp(24px, 3.1vw, 44px);
   font-weight: 800;
   letter-spacing: -.03em;
-  line-height: 1.08;
+  line-height: 1.06;
   color: var(--black, #111);
 }
 
@@ -179,34 +180,7 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   background: var(--dim, #e8e4df);
 }
 
-/* ── Left column ──────────────────────── */
-.col-left {
-  grid-column: 1 / 4;
-  grid-row: 3;
-  padding-top: 96px;
-}
-.caption {
-  margin: 0;
-  max-width: 200px;
-  font-size: 13px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.62;
-  color: var(--black, #111);
-}
-.download {
-  display: inline-block;
-  margin-top: 50px;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--black, #111);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  transition: opacity .2s;
-}
-.download:hover { opacity: .5; }
-
-/* ── Right column ─────────────────────────
+/* ── Right column — About + Download ──────
    Justified italic, hyphenated. Without hyphens: auto a
    measure this narrow opens rivers of white space. */
 .col-right {
@@ -233,32 +207,41 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
 }
 .col-body p:last-child { margin-bottom: 0; }
 
+/* Download sits directly beneath the About copy */
+.download {
+  display: inline-block;
+  margin-top: 34px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--black, #111);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity .2s;
+}
+.download:hover { opacity: .5; }
+
 
 /* ═══════════════════════════════════════════
-   CV SECTIONS — Work History, Education, Awards
-   180px uppercase label, tabular date column,
-   semantic lists. Capped at 700px — the composition
-   above runs full-bleed, this deliberately doesn't.
+   CV LISTS — left column, beside the image
+   Narrow measure, so dates stack above each role
+   rather than sitting in a fixed-width column.
    ═══════════════════════════════════════════ */
 
-/* Bottom padding kept low — the footer brings its own
-   generous top padding from style.css */
-.cv-body { padding: 120px 48px 40px; }
-
-.exp-section {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 40px;
-  max-width: 700px;
-  padding: 46px 0;
-  border-top: 1px solid rgba(138, 138, 138, .26);
+.cv-lists {
+  grid-column: 1 / 4;
+  grid-row: 3;
+  position: relative;
+  z-index: 3;
+  padding-top: 76px;
 }
-.exp-section:first-child { border-top: 0; padding-top: 0; }
-.exp-section:last-of-type { padding-bottom: 0; }
+
+.exp-section { margin-bottom: 44px; }
+.exp-section:last-child { margin-bottom: 0; }
 
 .exp-label {
-  margin: 0;
-  padding-top: 4px;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(138, 138, 138, .3);
   font-size: 10px;
   font-weight: 400;
   letter-spacing: .12em;
@@ -266,26 +249,20 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   color: var(--gray, #8a8a8a);
 }
 
-.hist-list {
-  margin: 4px 0 0;
-  padding: 0;
-  list-style: none;
-}
+.hist-list { margin: 0; padding: 0; list-style: none; }
 
-/* Dated rows — Work History and Education */
+/* Stacked rows — date above detail */
 .hist-item {
-  display: flex;
-  gap: 20px;
-  align-items: baseline;
-  padding: 10px 0;
+  display: block;
+  padding: 9px 0;
   font-size: 13px;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--black, #111);
 }
 .hist-date {
-  flex-shrink: 0;
-  min-width: 115px;
+  display: block;
+  margin-bottom: 2px;
   font-size: 11px;
   color: var(--gray, #8a8a8a);
   font-variant-numeric: tabular-nums;
@@ -293,12 +270,12 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
 .hist-detail strong { font-weight: 600; }
 .hist-role { color: #555555; }
 
-/* Undated rows — Awards */
+/* Awards — no dates */
 .award-item {
-  padding: 10px 0;
+  padding: 9px 0;
   font-size: 13px;
   font-weight: 300;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--black, #111);
 }
 .award-item strong { display: block; font-weight: 600; }
@@ -312,7 +289,7 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
 /* ── ≤ 1240px — ease the columns wider ── */
 @media (max-width: 1240px) {
   .figure   { grid-column: 4 / 10; }
-  .col-left { padding-top: 80px; }
+  .cv-lists { padding-top: 60px; }
 }
 
 /* ── ≤ 1024px ─────────────────────────── */
@@ -320,24 +297,23 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   /* Header inset tightens, matching the project pages */
   .page-nav { top: 12px; left: 12px; right: 12px; padding: 16px 22px; }
 
-  .stage     { padding: 92px 32px 0; }
+  .stage     { padding: 92px 32px 80px; }
   .head      { text-indent: 10%; }
   .figure    { grid-column: 4 / 11; }
   .col-right { grid-column: 11 / 13; }
-  .col-left  { padding-top: 60px; }
-  .cv-body   { padding: 100px 32px 40px; }
+  .cv-lists  { padding-top: 48px; }
 }
 
 /* ── ≤ 900px — collapse the overlap ───────
    Three overlapping columns stop being legible well
    before the standard mobile breakpoint, so the
    composition flattens early rather than compressing:
-   headline → tail → image → left → right. */
+   headline → tail → image → about → CV lists. */
 @media (max-width: 900px) {
   .grid { grid-template-columns: 1fr; }
 
   .head, .tail, .figure,
-  .col-left, .col-right {
+  .col-right, .cv-lists {
     grid-column: 1 / -1;
     grid-row: auto;
   }
@@ -346,12 +322,18 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   .tail       { padding-top: 12px; }
   .figure     { margin: 36px 0 0; }
   .figure img { aspect-ratio: 4 / 5; }
-  .col-left   { padding-top: 36px; }
-  .caption    { max-width: 100%; }
-  .download   { margin-top: 24px; }
-  .col-right  { padding-top: 48px; }
+  .col-right  { padding-top: 40px; }
   .col-label  { margin-bottom: 16px; }
-  .cv-body    { padding-top: 88px; }
+  .cv-lists   { padding-top: 60px; max-width: 520px; }
+
+  /* Wider measure available — restore the side-by-side rows */
+  .hist-item {
+    display: flex; gap: 20px; align-items: baseline;
+  }
+  .hist-date {
+    display: block; margin-bottom: 0;
+    flex-shrink: 0; min-width: 115px;
+  }
 }
 
 /* ── ≤ 768px — 16px minimum body text ── */
@@ -360,24 +342,20 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   .page-nav .page-nav-logo img { height: 16px; }
 
   body   { font-size: 16px; }
-  .stage { padding: 78px 20px 0; }
+  .stage { padding: 78px 20px 64px; }
   .grid  { padding-top: 32px; }
 
-  .caption,
   .download,
   .col-label,
   .col-body p { font-size: 1rem; }
 
   .col-body p { line-height: 1.72; }
 
-  /* CV sections: single column, label above list */
-  .cv-body     { padding: 72px 20px 32px; }
-  .exp-section { grid-template-columns: 1fr; gap: 10px; padding: 36px 0; }
-  .hist-item   { font-size: 1rem; gap: 14px; flex-wrap: wrap; }
-  .award-item  { font-size: 1rem; padding: 12px 0; }
+  .hist-item  { font-size: 1rem; gap: 14px; flex-wrap: wrap; }
+  .award-item { font-size: 1rem; padding: 12px 0; }
   /* UI labels stay below 16px — secondary information */
-  .exp-label   { font-size: .6875rem; }
-  .hist-date   { font-size: .8125rem; min-width: 90px; }
+  .exp-label  { font-size: .6875rem; }
+  .hist-date  { font-size: .8125rem; min-width: 90px; }
 }
 
 /* ── ≤ 480px ──────────────────────────────
@@ -406,7 +384,7 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
    ═══════════════════════════════════════════ */
 @media print {
   .page-nav, .skip-link, .figure,
-  .site-footer, #cursor { display: none !important; }
+  .site-footer, .download, #cursor { display: none !important; }
 
   html, body {
     background: #fff; color: #000;
@@ -437,31 +415,28 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   .head { font-size: 20pt; text-indent: 0; line-height: 1.18; }
   .tail { font-size: 20pt; padding-top: 0; }
 
-  .col-left { padding-top: 16pt; }
-  .caption  { max-width: none; font-size: 10pt; font-style: normal; }
-  .download { display: none; }
-
   .col-right { padding-top: 14pt; }
   .col-label {
     font-size: 8pt; letter-spacing: .1em;
-    text-transform: uppercase;
+    text-transform: uppercase; margin-bottom: 8pt;
   }
   .col-body p {
     font-size: 10pt; font-style: normal;
     text-align: left; line-height: 1.5;
   }
 
-  .cv-body { padding: 18pt 0 0; }
+  .cv-lists { padding-top: 18pt; max-width: none; }
   .exp-section {
-    grid-template-columns: 100pt 1fr;
-    gap: 18pt; max-width: none;
-    padding: 12pt 0; border-top: 0;
+    margin-bottom: 14pt;
     break-inside: avoid; page-break-inside: avoid;
   }
-  .exp-label  { font-size: 8pt; color: #555; }
-  .hist-item,
+  .exp-label { font-size: 8pt; color: #555; }
+  .hist-item {
+    display: flex; gap: 18pt;
+    font-size: 10pt; color: #000; line-height: 1.5;
+  }
+  .hist-date  { min-width: 100pt; color: #555; margin-bottom: 0; }
   .award-item { font-size: 10pt; color: #000; line-height: 1.5; }
-  .hist-date  { color: #555; }
 }
 </style>
 </head>
@@ -492,75 +467,64 @@ a:focus-visible { outline: 2px solid var(--black, #111); outline-offset: 3px; }
   <div class="grid">
 
     <!-- Headline, full width, overlapping the image -->
-    <h1 class="head" id="head">Multidisciplinary art director &amp; graphic designer with agency background and a</h1>
+    <h1 class="head" id="head">Multidisciplinary art director &amp; graphic designer with agency</h1>
 
-    <!-- Headline tail, narrow left measure -->
-    <p class="tail" id="tail">passion for culture.</p>
+    <!-- Final word drops into the narrow left measure -->
+    <p class="tail" id="tail">background</p>
 
     <!-- Centre image -->
     <figure class="figure">
       <img src="images/about.jpg" alt="Nichita Herascu" width="620" height="620">
     </figure>
 
-    <!-- Left column: caption + download -->
-    <div class="col-left">
-      <p class="caption" id="caption">Hello, I am Nichita. My inspiration comes from all kinds of art, design, culture and music.</p>
-      <!-- download attribute forces a save rather than opening the
-           PDF in the browser viewer. Its value sets the filename the
-           visitor ends up with. Works because the file is same-origin. -->
-      <a href="cv/nichita-herascu-cv.pdf" class="download" download="nichita-herascu-cv.pdf" type="application/pdf">Download my CV</a>
-    </div>
-
-    <!-- Right column: justified italic -->
+    <!-- Right column: About copy + Download CV beneath it -->
     <div class="col-right">
       <p class="col-label" id="col-label">About</p>
       <div class="col-body">
         <p id="body-1">Multidisciplinary Art Director with agency background (Ogilvy) and strong illustration skills. My expertise also spans brand design, video editing, 3D modelling and web design.</p>
         <p id="body-2">With over 6 years of experience with international brands such as DOVE, Mastercard, LIDL, Milka and more. I've collaborated with post-production houses, gaining diverse and interesting experiences.</p>
       </div>
+      <!-- download attribute forces a save rather than opening the
+           PDF in the browser viewer. Its value sets the filename the
+           visitor ends up with. Works because the file is same-origin. -->
+      <a href="cv/nichita-herascu-cv.pdf" class="download" download="nichita-herascu-cv.pdf" type="application/pdf">Download my CV</a>
+    </div>
+
+    <!-- Left column: CV lists, running down beside the image -->
+    <div class="cv-lists">
+
+      <section class="exp-section" aria-labelledby="label-work">
+        <h2 class="exp-label" id="label-work">Work History</h2>
+        <ul class="hist-list">
+          <li class="hist-item"><span class="hist-date">2024 – Present</span><span class="hist-detail"><strong>Ogilvy</strong><span class="hist-role"> — Junior Art Director</span></span></li>
+          <li class="hist-item"><span class="hist-date">2022 – 2024</span><span class="hist-detail"><strong>Nos Praesenti</strong><span class="hist-role"> — Brand Designer</span></span></li>
+          <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Freeways Global</strong><span class="hist-role"> — Graphic Designer</span></span></li>
+          <li class="hist-item"><span class="hist-date">2019 – 2021</span><span class="hist-detail"><strong>Cromatic Studios</strong><span class="hist-role"> — Junior Graphic Designer</span></span></li>
+          <li class="hist-item"><span class="hist-date">2019</span><span class="hist-detail"><strong>Pain Plaisir</strong><span class="hist-role"> — Social Media Designer</span></span></li>
+        </ul>
+      </section>
+
+      <section class="exp-section" aria-labelledby="label-edu">
+        <h2 class="exp-label" id="label-edu">Education</h2>
+        <ul class="hist-list">
+          <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Bucharest University of Arts</strong><span class="hist-role"> — Photography &amp; Film</span></span></li>
+          <li class="hist-item"><span class="hist-date">2015 – 2019</span><span class="hist-detail"><strong>Nicolae Tonitza</strong><span class="hist-role"> — Industrial &amp; Product Design</span></span></li>
+        </ul>
+      </section>
+
+      <section class="exp-section" aria-labelledby="label-awards">
+        <h2 class="exp-label" id="label-awards">Awards</h2>
+        <ul class="hist-list">
+          <li class="award-item"><strong>AAB 2025 Awards</strong><span>Research through architecture / architecture books section</span></li>
+          <li class="award-item"><strong>Internetics 2025 — Silver</strong><span>LIDL — Best Community Engagement</span></li>
+          <li class="award-item"><strong>Webstock 2025</strong><span>LIDL — Best Brand Engagement</span></li>
+        </ul>
+      </section>
+
     </div>
 
   </div>
 </main>
-
-<!-- ══ CV SECTIONS ═══════════════════════════════════════════ -->
-<div class="cv-body">
-
-  <section class="exp-section" aria-labelledby="label-work">
-    <h2 class="exp-label" id="label-work">Work History</h2>
-    <div>
-      <ul class="hist-list">
-        <li class="hist-item"><span class="hist-date">2024 – Present</span><span class="hist-detail"><strong>Ogilvy</strong><span class="hist-role"> — Junior Art Director</span></span></li>
-        <li class="hist-item"><span class="hist-date">2022 – 2024</span><span class="hist-detail"><strong>Nos Praesenti</strong><span class="hist-role"> — Brand Designer</span></span></li>
-        <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Freeways Global</strong><span class="hist-role"> — Graphic Designer</span></span></li>
-        <li class="hist-item"><span class="hist-date">2019 – 2021</span><span class="hist-detail"><strong>Cromatic Studios</strong><span class="hist-role"> — Junior Graphic Designer</span></span></li>
-        <li class="hist-item"><span class="hist-date">2019</span><span class="hist-detail"><strong>Pain Plaisir</strong><span class="hist-role"> — Social Media Designer</span></span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="exp-section" aria-labelledby="label-edu">
-    <h2 class="exp-label" id="label-edu">Education</h2>
-    <div>
-      <ul class="hist-list">
-        <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Bucharest University of Arts</strong><span class="hist-role"> — Photography &amp; Film</span></span></li>
-        <li class="hist-item"><span class="hist-date">2015 – 2019</span><span class="hist-detail"><strong>Nicolae Tonitza</strong><span class="hist-role"> — Industrial &amp; Product Design</span></span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="exp-section" aria-labelledby="label-awards">
-    <h2 class="exp-label" id="label-awards">Awards</h2>
-    <div>
-      <ul class="hist-list">
-        <li class="award-item"><strong>AAB 2025 Awards</strong><span>Research through architecture / architecture books section</span></li>
-        <li class="award-item"><strong>Internetics 2025 — Silver</strong><span>LIDL — Best Community Engagement</span></li>
-        <li class="award-item"><strong>Webstock 2025</strong><span>LIDL — Best Brand Engagement</span></li>
-      </ul>
-    </div>
-  </section>
-
-</div>
 
 <!-- ══ FOOTER ════════════════════════════════════════════════ -->
 <footer class="site-footer">
