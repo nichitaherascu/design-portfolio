@@ -5,15 +5,22 @@
 //  2. initCopyEmail   — copy-to-clipboard on the contact email
 // ─────────────────────────────────────────────────────────────────
 
+console.log('[about.js] v2 loaded');
+// ^ If you don't see this in the console, the file isn't being
+//   served — check the path in <script src> and hard-refresh.
+
 // ── 1. Photo float on scroll (parallax) ──────────────────────────
 //  The sticky portrait drifts upward as the user scrolls — slower
 //  than the content, creating a floating / depth effect.
 //  Lerp (0.06) gives the movement a smooth, natural lag.
 //
 //  NOTE: targets .photo-sticky. The photo must stay position: sticky
-//  in the CSS — as position: fixed it overlapped the footer, and the
-//  original version of this file targeted .photo-sticky while the
-//  markup said .photo-fixed, so the parallax never ran at all.
+//  in the CSS. Two historical bugs here:
+//    (a) the markup once said .photo-fixed while this file said
+//        .photo-sticky, so the function bailed on line 2 and the
+//        parallax never ran;
+//    (b) overflow-x: hidden on html/body silently disables sticky —
+//        it must be overflow-x: clip.
 
 function initPhotoFloat() {
     const photo = document.querySelector('.photo-sticky');
@@ -98,11 +105,15 @@ function initPhotoFloat() {
 
 function initCopyEmail() {
     const btn = document.getElementById('c-copy');
-    if (!btn) return; // contact section not on this page
+    if (!btn) {
+        console.warn('[about.js] #c-copy not found — copy button skipped.');
+        return;
+    }
 
     const email = btn.dataset.email;
 
     if (!email || !navigator.clipboard) {
+        console.warn('[about.js] Clipboard API unavailable — button removed.');
         btn.remove();
         return;
     }
