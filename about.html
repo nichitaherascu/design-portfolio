@@ -1,4 +1,4 @@
-<html lang="en" data-type="html" data-identifier="a4b5c6d7-e8f9-4a2b-8c3d-1e2f3a4b5c6d" data-title="about.html — Final" data-version="7" width="1200" height="800">
+<html lang="en" data-type="html" data-identifier="a4b5c6d7-e8f9-4a2b-8c3d-1e2f3a4b5c6d" data-title="about.html — Final" data-version="9" width="1200" height="800" imagemodel="imagen-4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,35 +6,43 @@
     <meta name="description" content="Nichita Herascu — Art Director &amp; Graphic Designer based in Bucharest. Agency background at Ogilvy, with work for Dove, Mastercard, LIDL and Milka.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <!-- Italic 300–500 added for the contact section's editorial side-columns -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..900;1,300..500&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer=""></script>
     <script src="about.js" defer=""></script>
     <style>
+        /* ── CRITICAL: overflow-x ─────────
+           overflow-x: hidden on html/body turns the body into a
+           scroll container, which SILENTLY DISABLES position: sticky
+           on every descendant — including .photo-sticky below.
+           overflow-x: clip prevents horizontal scroll WITHOUT
+           creating a scroll container. Do not change this back. */
         html { background: #fff; }
-        html, body { height: auto; overflow-x: hidden; background: #fff; }
+        html, body {
+            height: auto;
+            background: #fff;
+            overflow-x: hidden;   /* fallback for Safari < 16 */
+            overflow-x: clip;     /* preferred — keeps sticky alive */
+        }
 
         /* ── FONT OVERRIDE ────────────────
            Matches the new Inter-based index.html. If Inter gets
            promoted into style.css sitewide, delete this rule and the
-           Google Fonts <link> above. If Nichita wants DM Sans back,
-           swap both back — nothing else on this page depends on it. */
+           Google Fonts <link> above. */
         body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
 
-        /* Smooth in-page scroll to #contact (guarded below) */
         html { scroll-behavior: smooth; }
 
         /* ── Accessibility ───────────────── */
         .skip-link {
             position: absolute; left: -9999px; top: 0;
-            background: var(--black); color: #fff;
+            background: var(--black, #111); color: #fff;
             padding: 10px 16px; font-size: 13px; z-index: 200;
         }
         .skip-link:focus { left: 8px; top: 8px; }
 
         a:focus-visible, .skip-link:focus-visible, button:focus-visible {
-            outline: 2px solid var(--black);
+            outline: 2px solid var(--black, #111);
             outline-offset: 3px;
         }
 
@@ -47,21 +55,21 @@
         }
         .page-nav-logo {
             font-size: 13px; font-weight: 500; letter-spacing: .06em;
-            text-transform: uppercase; color: var(--black);
+            text-transform: uppercase; color: var(--black, #111);
             text-decoration: none; transition: opacity .2s;
         }
         .page-nav-logo:hover { opacity: .45; }
         .page-nav-right { display: flex; align-items: center; gap: 24px; }
         .page-nav-link {
-            font-size: 12px; font-weight: 400; color: var(--gray);
+            font-size: 12px; font-weight: 400; color: var(--gray, #8a8a8a);
             text-decoration: none; letter-spacing: .04em; transition: color .2s;
         }
-        .page-nav-link:hover { color: var(--black); }
+        .page-nav-link:hover { color: var(--black, #111); }
         .page-nav-ig {
-            font-size: 12px; font-weight: 400; color: var(--gray);
+            font-size: 12px; font-weight: 400; color: var(--gray, #8a8a8a);
             text-decoration: none; letter-spacing: .04em; transition: color .2s;
         }
-        .page-nav-ig:hover { color: var(--black); }
+        .page-nav-ig:hover { color: var(--black, #111); }
 
         /* ── Layout ──────────────────────── */
         /* align-items: stretch is REQUIRED — the photo column must
@@ -71,9 +79,6 @@
         .about-main { flex: 1; min-width: 0; padding: 0 48px 100px; }
 
         /* ── Sticky photo ────────────────── */
-        /* Was position: fixed — reverted to sticky so it (a) stops at
-           the end of .about-wrap instead of floating over the footer,
-           and (b) matches the .photo-sticky selector in about.js. */
         .about-photo-col {
             width: 360px; flex-shrink: 0;
             padding: 20px 48px 0 0;
@@ -96,7 +101,7 @@
         .about-hero h1 {
             font-size: clamp(28px, 4vw, 54px); font-weight: 900;
             text-transform: uppercase; letter-spacing: -.025em;
-            line-height: 1.04; color: var(--black);
+            line-height: 1.04; color: var(--black, #111);
         }
 
         /* ── Sections ────────────────────── */
@@ -107,7 +112,7 @@
         }
         .a-label {
             font-size: 10px; font-weight: 400; letter-spacing: .12em;
-            text-transform: uppercase; color: var(--gray);
+            text-transform: uppercase; color: var(--gray, #8a8a8a);
             padding-top: 4px; margin: 0;
         }
         .a-body p {
@@ -120,11 +125,11 @@
         .hist-list { margin: 4px 0 0; padding: 0; list-style: none; }
         .hist-item {
             display: flex; gap: 20px; padding: 10px 0;
-            font-size: 13px; font-weight: 300; color: var(--black);
+            font-size: 13px; font-weight: 300; color: var(--black, #111);
             line-height: 1.5; align-items: baseline;
         }
         .hist-date {
-            font-size: 11px; color: var(--gray);
+            font-size: 11px; color: var(--gray, #8a8a8a);
             min-width: 115px; flex-shrink: 0;
             font-variant-numeric: tabular-nums;
         }
@@ -134,7 +139,7 @@
         /* ── Awards ──────────────────────── */
         .award-item {
             padding: 10px 0; font-size: 13px;
-            font-weight: 300; color: var(--black); line-height: 1.6;
+            font-weight: 300; color: var(--black, #111); line-height: 1.6;
         }
         .award-item strong { font-weight: 600; display: block; }
         .award-item span { color: #555; }
@@ -142,21 +147,32 @@
         /* ── CV link ─────────────────────── */
         .cv-wrap { padding: 48px 0 0; max-width: 700px; }
         .cv-link {
-            font-size: 13px; font-weight: 400; color: var(--black);
-            text-decoration: underline; text-underline-offset: 4px; transition: opacity .2s;
+            font-size: 13px; font-weight: 400; color: var(--black, #111);
+            text-decoration: underline; text-underline-offset: 4px;
+            transition: opacity .2s;
         }
         .cv-link:hover { opacity: .5; }
         .cv-meta {
-            font-size: 11px; color: var(--gray); text-decoration: none;
-            margin-left: 8px; font-variant-numeric: tabular-nums;
+            font-size: 11px; color: var(--gray, #8a8a8a);
+            text-decoration: none; margin-left: 8px;
+            font-variant-numeric: tabular-nums;
         }
 
 
         /* ═══════════════════════════════════
-           CONTACT SECTION
-           Replaces the deleted contact.html. Sits outside
-           .about-wrap so it can run full-bleed — the photo column
-           and its sticky track both end above it.
+           CONTACT — editorial layout
+           Replaces the deleted contact.html.
+
+           Structure (mirrors the reference):
+             row 1  → huge headline, full 12 columns
+             row 2  → narrow left tail  |  centre image  |  right column
+             row 3  → left caption+link |      ↑         |      ↑
+           The image is pulled up with a negative margin so the
+           headline's last lines overlap it. Headline z-index 3 sits
+           above the image at z-index 1.
+
+           Sits OUTSIDE .about-wrap so it can run full width —
+           .about-main is capped at 700px and can't hold display type.
         ═══════════════════════════════════ */
 
         .c-contact {
@@ -168,85 +184,103 @@
             padding-top: 34px;
         }
 
-        /* ── Editorial grid ──────────────── */
-        /* Columns 5–8 are left empty where the reference places its
-           portrait — the page already has one, and a second would
-           compete. To add a work image, drop it into
-           grid-column: 5 / 9; grid-row: 2. */
         .c-grid {
-            display: grid; grid-template-columns: repeat(12, 1fr);
-            column-gap: 24px; padding-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            column-gap: 24px;
+            padding-top: 40px;
         }
+
+        /* Huge headline, full measure, above the image */
         .c-head {
             grid-column: 1 / -1; grid-row: 1;
+            position: relative; z-index: 3;
             margin: 0;
-            font-size: clamp(30px, 5.2vw, 72px);
+            font-size: clamp(30px, 5vw, 68px);
             font-weight: 900; letter-spacing: -.03em;
-            line-height: .98; color: var(--black);
+            line-height: 1.0; color: var(--black, #111);
             text-wrap: balance;
         }
-        /* The headline's tail drops into a narrow left measure — the
-           key move from the reference layout. */
+
+        /* The tail — headline continues in a narrow left measure
+           beside the image. This is the key move from the reference. */
         .c-tail {
-            grid-column: 1 / 5; grid-row: 2;
-            margin: 0; padding-top: 14px;
-            font-size: clamp(22px, 2.9vw, 40px);
+            grid-column: 1 / 4; grid-row: 2;
+            position: relative; z-index: 3;
+            margin: 0; padding-top: 10px;
+            font-size: clamp(22px, 2.7vw, 38px);
             font-weight: 900; letter-spacing: -.028em;
-            line-height: 1.0; color: var(--black);
+            line-height: 1.02; color: var(--black, #111);
         }
+
+        /* Centre-anchored image, tucked under the type */
+        .c-figure {
+            grid-column: 4 / 10; grid-row: 2 / 5;
+            position: relative; z-index: 1;
+            margin: -14px 0 0;
+        }
+        .c-img {
+            width: 100%; display: block;
+            aspect-ratio: 1 / 1; object-fit: cover;
+            background: #e8e4df;
+        }
+
+        /* ── Left column, below the tail ─── */
         .c-aside-l {
-            grid-column: 1 / 5; grid-row: 3;
-            padding-top: 54px;
+            grid-column: 1 / 4; grid-row: 3;
+            padding-top: 92px;
         }
         .c-cap {
             margin: 0; font-size: 13px; font-style: italic;
-            font-weight: 400; line-height: 1.6;
-            color: var(--black); max-width: 230px;
+            font-weight: 400; line-height: 1.62;
+            color: var(--black, #111); max-width: 210px;
         }
         .c-inline-link {
-            display: inline-block; margin-top: 38px;
-            font-size: 13px; font-style: italic; color: var(--black);
+            display: inline-block; margin-top: 46px;
+            font-size: 13px; font-style: italic; color: var(--black, #111);
             text-decoration: underline; text-underline-offset: 4px;
             transition: color .2s;
         }
         .c-inline-link:hover { color: var(--red, #e63329); }
 
-        /* Justified italic column — the reference's "Article" block.
-           hyphens: auto prevents the rivers of white space it has. */
+        /* ── Right column — justified italic ──
+           hyphens: auto prevents the rivers of white space that
+           justifying a narrow measure produces (the reference has
+           them badly on its last line). */
         .c-aside-r {
-            grid-column: 9 / 13; grid-row: 2 / 4;
-            padding-top: 22px;
+            grid-column: 10 / 13; grid-row: 2 / 5;
+            padding-top: 26px;
             display: flex; flex-direction: column;
         }
         .c-aside-label {
-            margin: 0 0 24px; font-size: 13px;
-            font-style: italic; color: var(--black);
+            margin: 0 0 26px; font-size: 13px;
+            font-style: italic; color: var(--black, #111);
         }
         .c-just {
             margin: 0; font-size: 12.5px; font-style: italic;
-            font-weight: 300; line-height: 1.72; color: var(--black);
+            font-weight: 300; line-height: 1.72; color: var(--black, #111);
             text-align: justify; hyphens: auto; -webkit-hyphens: auto;
         }
         .c-more {
-            margin-top: auto; padding-top: 44px;
-            font-size: 13px; font-style: italic; color: var(--black);
+            margin-top: auto; padding-top: 48px;
+            font-size: 13px; font-style: italic; color: var(--black, #111);
             text-decoration: underline; text-underline-offset: 4px;
             transition: color .2s;
         }
         .c-more:hover { color: var(--red, #e63329); }
 
-        /* ── Direct band ─────────────────── */
-        .c-direct { padding-top: 92px; }
+        /* ── Direct band below the composition ── */
+        .c-direct { padding-top: 96px; }
         .c-motto {
             margin: 0 0 40px; font-size: 11px;
             letter-spacing: .1em; text-transform: uppercase;
-            color: var(--gray);
+            color: var(--gray, #8a8a8a);
         }
         .c-email-line {
             display: inline-block; margin: 0 0 12px;
-            font-size: clamp(22px, 3.5vw, 48px);
+            font-size: clamp(22px, 3.4vw, 46px);
             font-weight: 900; letter-spacing: -.03em;
-            line-height: 1.05; color: var(--black);
+            line-height: 1.05; color: var(--black, #111);
             text-decoration: none; transition: color .2s;
             word-break: break-word;
         }
@@ -256,9 +290,9 @@
             background: none; border: 0; cursor: pointer;
             font-family: inherit; font-size: 11px;
             letter-spacing: .1em; text-transform: uppercase;
-            color: var(--gray); transition: color .2s;
+            color: var(--gray, #8a8a8a); transition: color .2s;
         }
-        .c-copy-btn:hover { color: var(--black); }
+        .c-copy-btn:hover { color: var(--black, #111); }
 
         .c-meta-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
@@ -267,14 +301,14 @@
         .c-meta h3 {
             margin: 0 0 10px; font-size: 10px; font-weight: 400;
             letter-spacing: .12em; text-transform: uppercase;
-            color: var(--gray);
+            color: var(--gray, #8a8a8a);
         }
         .c-meta p {
             margin: 0; font-size: 13px; font-weight: 300;
-            line-height: 1.65; color: var(--black);
+            line-height: 1.65; color: var(--black, #111);
         }
         .c-meta a {
-            color: var(--black); text-decoration: underline;
+            color: var(--black, #111); text-decoration: underline;
             text-underline-offset: 3px; transition: color .2s;
         }
         .c-meta a:hover { color: var(--red, #e63329); }
@@ -289,27 +323,36 @@
             .about-main { padding: 0 32px 80px; }
             .about-photo-col { width: 300px; padding: 20px 32px 0 0; }
             .page-nav { padding: 0 32px; }
+
             .c-contact { padding: 0 32px 90px; }
-            .c-tail, .c-aside-l { grid-column: 1 / 6; }
-            .c-aside-r { grid-column: 9 / 13; }
+            .c-figure  { grid-column: 4 / 11; }
+            .c-aside-r { grid-column: 11 / 13; }
+            .c-aside-l { padding-top: 64px; }
             .c-meta-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
         }
 
-        /* ── Editorial overlap collapse (≤ 900px) ──
-           The three-column arrangement stops being legible before the
-           standard mobile breakpoint, so it flattens earlier. */
+        /* ── Editorial collapse (≤ 900px) ──
+           The three-column overlap stops being legible before the
+           site's standard 768px breakpoint, so it flattens earlier:
+           headline → tail → image → left column → right column.
+           One extra breakpoint beyond 1024 / 768 / 480, scoped to
+           the contact section only. */
         @media (max-width: 900px) {
             .c-grid { grid-template-columns: 1fr; }
-            .c-head, .c-tail, .c-aside-l, .c-aside-r {
+            .c-head, .c-tail, .c-figure,
+            .c-aside-l, .c-aside-r {
                 grid-column: 1 / -1; grid-row: auto;
             }
+            .c-tail   { padding-top: 14px; }
+            .c-figure { margin: 34px 0 0; }
+            .c-img    { aspect-ratio: 4 / 5; }
             .c-aside-l { padding-top: 34px; }
-            .c-cap { max-width: 100%; }
-            .c-inline-link { margin-top: 20px; }
-            .c-aside-r { padding-top: 46px; }
-            .c-aside-label { margin-bottom: 14px; }
-            .c-more { margin-top: 0; padding-top: 26px; }
-            .c-direct { padding-top: 64px; }
+            .c-cap     { max-width: 100%; }
+            .c-inline-link { margin-top: 22px; }
+            .c-aside-r { padding-top: 44px; }
+            .c-aside-label { margin-bottom: 16px; }
+            .c-more   { margin-top: 0; padding-top: 28px; }
+            .c-direct { padding-top: 68px; }
         }
 
         /* ── Mobile (≤ 768px) ────────────── */
@@ -362,13 +405,14 @@
             /* UI labels — secondary, fine below 16px */
             .hist-date  { font-size: 0.8125rem; min-width: 90px; } /* 13px */
             .a-label    { font-size: 0.6875rem; }                   /* 11px */
+            .cv-meta    { font-size: 0.75rem; }                     /* 12px */
 
-            /* Contact */
+            /* Contact — 16px minimum on all body copy */
             .c-contact { padding: 0 20px 72px; }
+            .c-grid    { padding-top: 30px; }
             .c-cap, .c-just, .c-inline-link,
             .c-more, .c-aside-label, .c-meta p { font-size: 1rem; }
-            /* Justification is unreadable in a narrow measure */
-            .c-just { line-height: 1.7; text-align: left; hyphens: manual; }
+            .c-just { line-height: 1.7; }
             .c-meta-grid { grid-template-columns: 1fr; gap: 26px; }
         }
 
@@ -376,6 +420,8 @@
         @media (max-width: 480px) {
             .hist-item  { flex-direction: column; gap: 2px; }
             .hist-date  { min-width: unset; }
+            /* Justification is unreadable this narrow */
+            .c-just     { text-align: left; hyphens: manual; }
         }
 
         /* ── Reduced motion ──────────────── */
@@ -393,6 +439,8 @@
             .page-nav, .site-footer, #cursor,
             .about-photo-col, .skip-link, .cv-wrap,
             .c-contact { display: none !important; }
+            /* .c-contact is hidden because .print-head below already
+               carries name, role, email and Instagram. */
 
             html, body { background: #fff; color: #000; }
 
@@ -454,21 +502,21 @@
             </p>
 
             <div class="about-hero">
-                <h1>Multidisciplinary art director &amp; graphic designer with agency background and a passion for culture.</h1>
+                <h1 id="a-h1">Multidisciplinary art director &amp; graphic designer with agency background and a passion for culture.</h1>
             </div>
 
             <section class="a-section">
-                <h2 class="a-label">A Little About Me</h2>
+                <h2 class="a-label" id="a-l1">A Little About Me</h2>
                 <div class="a-body">
-                    <p>Hello, I am Nichita.</p>
-                    <p>Multidisciplinary Art Director with agency background (Ogilvy) and strong illustration skills. My expertise also spans brand design, video editing, 3D modelling and web design.</p>
-                    <p>With over 6 years of experience with international brands such as DOVE, Mastercard, LIDL, Milka and more. I've collaborated with post-production houses, gaining diverse and interesting experiences.</p>
-                    <p>My inspiration comes from all kinds of art, design, culture and music.</p>
+                    <p id="a-p1">Hello, I am Nichita.</p>
+                    <p id="a-p2">Multidisciplinary Art Director with agency background (Ogilvy) and strong illustration skills. My expertise also spans brand design, video editing, 3D modelling and web design.</p>
+                    <p id="a-p3">With over 6 years of experience with international brands such as DOVE, Mastercard, LIDL, Milka and more. I've collaborated with post-production houses, gaining diverse and interesting experiences.</p>
+                    <p id="a-p4">My inspiration comes from all kinds of art, design, culture and music.</p>
                 </div>
             </section>
 
             <section class="a-section">
-                <h2 class="a-label">Work History</h2>
+                <h2 class="a-label" id="a-l2">Work History</h2>
                 <div class="a-body">
                     <ul class="hist-list">
                         <li class="hist-item"><span class="hist-date">2024 – Present</span><span class="hist-detail"><strong>Ogilvy</strong><span class="hist-role"> — Junior Art Director</span></span></li>
@@ -481,7 +529,7 @@
             </section>
 
             <section class="a-section">
-                <h2 class="a-label">Education</h2>
+                <h2 class="a-label" id="a-l3">Education</h2>
                 <div class="a-body">
                     <ul class="hist-list">
                         <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Bucharest University of Arts</strong><span class="hist-role"> — Photography &amp; Film</span></span></li>
@@ -491,7 +539,7 @@
             </section>
 
             <section class="a-section">
-                <h2 class="a-label">Awards</h2>
+                <h2 class="a-label" id="a-l4">Awards</h2>
                 <div class="a-body">
                     <ul class="hist-list">
                         <li class="award-item"><strong>AAB 2025 Awards</strong><span>Research through architecture / architecture books section</span></li>
@@ -517,11 +565,17 @@
     <!-- ═══ CONTACT ═══ replaces the deleted contact.html ═══ -->
     <section class="c-contact" id="contact" aria-labelledby="c-head">
         <div class="c-inner">
-            <p class="a-label">Contact</p>
+            <p class="a-label" id="c-eyebrow">Contact</p>
 
             <div class="c-grid">
-                <h2 class="c-head" id="c-head">Open to conversations about brand, print, illustration and the</h2>
+
+                <h2 class="c-head" id="c-head">Currently at Ogilvy in Bucharest and open to conversations about brand, print, illustration and the</h2>
+
                 <p class="c-tail" id="c-tail">occasional strange idea.</p>
+
+                <figure class="c-figure">
+                    <img class="c-img" data-src="A bold graphic design poster propped against a plain warm off-white studio wall, dense black geometric typographic composition on textured uncoated paper, soft raking daylight from the left casting a gentle shadow, square crop, shot on medium format, in a restrained minimalist editorial style" alt="Selected work — poster design" width="600" height="600">
+                </figure>
 
                 <div class="c-aside-l">
                     <p class="c-cap" id="c-cap">Based in Bucharest, Romania. Working across Europe and remotely.</p>
@@ -533,6 +587,7 @@
                     <p class="c-just" id="c-just">The fastest way to reach me is email. If it is a project, a rough outline is plenty to start with — what it is, roughly when you need it, and where the budget sits. I read everything and reply within two working days, usually sooner. I am at Ogilvy during the week and take on selected freelance work outside of it, across brand design, illustration, editorial and web. Instagram is where things tend to appear first, often long before they reach this site.</p>
                     <a href="index.html" class="c-more">See the work</a>
                 </div>
+
             </div>
 
             <div class="c-direct">
@@ -565,14 +620,14 @@
 
     <footer class="site-footer">
         <div class="footer-top">
-            <h2 class="footer-name">Nichita<br>Herascu</h2>
+            <h2 class="footer-name" id="f-name">Nichita<br>Herascu</h2>
             <div class="footer-contact">
-                <p class="footer-cta-text">Want to work together?</p>
+                <p class="footer-cta-text" id="f-cta">Want to work together?</p>
                 <a href="mailto:nichitaherascu@gmail.com" class="footer-email">nichitaherascu@gmail.com</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="footer-copy">Graphic Designer &amp; Art Director — Bucharest &nbsp;·&nbsp; © 2026 Nichita Herascu</p>
+            <p class="footer-copy" id="f-copy">Graphic Designer &amp; Art Director — Bucharest &nbsp;·&nbsp; © 2026 Nichita Herascu</p>
         </div>
     </footer>
 

@@ -7,18 +7,17 @@
 
 console.log('[about.js] v2 loaded');
 // ^ If you don't see this in the console, the file isn't being
-//   served — check the path in <script src> and hard-refresh.
+//   served — check the <script src> path and hard-refresh.
 
 // ── 1. Photo float on scroll (parallax) ──────────────────────────
 //  The sticky portrait drifts upward as the user scrolls — slower
 //  than the content, creating a floating / depth effect.
 //  Lerp (0.06) gives the movement a smooth, natural lag.
 //
-//  NOTE: targets .photo-sticky. The photo must stay position: sticky
-//  in the CSS. Two historical bugs here:
+//  NOTE: targets .photo-sticky. Two historical bugs here:
 //    (a) the markup once said .photo-fixed while this file said
-//        .photo-sticky, so the function bailed on line 2 and the
-//        parallax never ran;
+//        .photo-sticky, so the function bailed and the parallax
+//        never ran at all;
 //    (b) overflow-x: hidden on html/body silently disables sticky —
 //        it must be overflow-x: clip.
 
