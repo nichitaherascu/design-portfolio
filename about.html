@@ -1,4 +1,4 @@
-<html lang="en" data-type="html" data-identifier="f2a91c47-3b6d-4e18-9a52-7d0c8b1e4f36" data-title="about.html — editorial rebuild" data-version="1" width="1200" height="900" imagemodel="imagen-4">
+<html lang="en" data-type="html" data-identifier="f2a91c47-3b6d-4e18-9a52-7d0c8b1e4f36" data-title="about.html — editorial rebuild" data-version="3" width="1200" height="900" imagemodel="imagen-4">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,8 @@
 <style>
 /* ═══════════════════════════════════════════════════════
    about.html — editorial layout
-   Written from scratch. Self-contained: no values depend
-   on style.css, so it renders the same everywhere.
+   Self-contained: no values depend on style.css, so it
+   renders identically in preview and in the repo.
    ═══════════════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -32,14 +32,13 @@ body {
     font-family: 'Inter', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
 
-    /* FAILSAFE — main.js sets body opacity to 0 for its fade-in
-       transition. index.html carries the same override. If you
-       resolve the fade properly in main.js, delete this line. */
+    /* FAILSAFE — main.js sets body opacity to 0 for its fade-in.
+       index.html carries the same override. If you resolve the
+       fade properly in main.js, delete this line. */
     opacity: 1 !important;
 }
 
 img { max-width: 100%; display: block; }
-
 a { color: inherit; }
 
 /* ── Accessibility ─────────────────────── */
@@ -51,36 +50,52 @@ a { color: inherit; }
 }
 .skip-link:focus { left: 8px; top: 8px; }
 
-a:focus-visible {
-    outline: 2px solid #111111;
-    outline-offset: 3px;
-}
+a:focus-visible { outline: 2px solid #111111; outline-offset: 3px; }
 
-/* ── Header ────────────────────────────────
-   Matched to about.html's existing nav. Swap for the
-   project-page header once that file is confirmed. */
+
+/* ═══════════════════════════════════════════
+   HEADER — matched to the project pages
+   White band, handwritten logo centred, handle right.
+   Three-column grid keeps the logo optically centred
+   regardless of how wide the handle is.
+   ═══════════════════════════════════════════ */
 .page-nav {
     position: fixed; top: 0; left: 0; right: 0;
-    height: 52px; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 48px;
+    height: 64px; z-index: 100;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 32px;
     background: #ffffff;
 }
-.page-nav-logo {
-    font-size: 13px; font-weight: 500;
-    letter-spacing: .06em; text-transform: uppercase;
-    text-decoration: none; color: #111111;
+.nav-left { justify-self: start; }
+
+.nav-logo {
+    grid-column: 2;
+    justify-self: center;
+    display: block;
     transition: opacity .2s;
 }
-.page-nav-logo:hover { opacity: .45; }
-
-.page-nav-right { display: flex; align-items: center; gap: 24px; }
-.page-nav-link {
-    font-size: 12px; font-weight: 400;
-    letter-spacing: .04em; text-decoration: none;
-    color: #8a8a8a; transition: color .2s;
+.nav-logo:hover { opacity: .5; }
+.nav-logo img {
+    height: 26px;
+    width: auto;
 }
-.page-nav-link:hover { color: #111111; }
+
+.nav-handle {
+    grid-column: 3;
+    justify-self: end;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .04em;
+    text-decoration: none;
+    color: #8a8a8a;
+    transition: color .2s;
+}
+.nav-handle:hover { color: #111111; }
+
+/* Print-only text header — the logo image is hidden on paper */
+.print-head { display: none; }
 
 
 /* ═══════════════════════════════════════════
@@ -98,14 +113,11 @@ a:focus-visible {
            │ col    ││  4–10    ││ cols 10–13 │
            └────────┘└──────────┘└────────────┘
 
-   The image is pulled up by a negative margin so the
-   headline's final lines overlap it. Type sits at
-   z-index 3, image at z-index 1.
+   Image pulled up by a negative margin so the headline's
+   final lines overlap it. Type z-index 3, image z-index 1.
    ═══════════════════════════════════════════ */
 
-.stage {
-    padding: 52px 48px 120px;
-}
+.stage { padding: 64px 48px 0; }
 
 .grid {
     display: grid;
@@ -197,8 +209,8 @@ a:focus-visible {
 }
 
 /* ── Right column ─────────────────────────
-   Justified italic, hyphenated. Without hyphens: auto
-   a measure this narrow opens rivers of white space —
+   Justified italic, hyphenated. Without hyphens: auto a
+   measure this narrow opens rivers of white space —
    visible on the reference's own last line. */
 .col-right {
     grid-column: 10 / 13;
@@ -226,23 +238,92 @@ a:focus-visible {
 
 
 /* ═══════════════════════════════════════════
+   CV SECTIONS — Work History, Education, Awards
+   Original styling restored: 180px uppercase label,
+   tabular date column, semantic lists. Capped at 700px —
+   the composition above runs full-bleed, this doesn't.
+   ═══════════════════════════════════════════ */
+
+.cv-body { padding: 128px 48px 110px; }
+
+.exp-section {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    max-width: 700px;
+    padding: 46px 0;
+    border-top: 1px solid rgba(138, 138, 138, .26);
+}
+.exp-section:first-child { border-top: 0; padding-top: 0; }
+.exp-section:last-of-type { padding-bottom: 0; }
+
+.exp-label {
+    margin: 0;
+    padding-top: 4px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+.hist-list {
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Dated rows — Work History and Education */
+.hist-item {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #111111;
+}
+.hist-date {
+    flex-shrink: 0;
+    min-width: 115px;
+    font-size: 11px;
+    color: #8a8a8a;
+    font-variant-numeric: tabular-nums;
+}
+.hist-detail strong { font-weight: 600; }
+.hist-role { color: #555555; }
+
+/* Undated rows — Awards */
+.award-item {
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #111111;
+}
+.award-item strong { display: block; font-weight: 600; }
+.award-item span { color: #555555; }
+
+
+/* ═══════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════ */
 
 /* ── ≤ 1240px — ease the columns wider ── */
 @media (max-width: 1240px) {
-    .figure    { grid-column: 4 / 10; }
-    .col-left  { padding-top: 84px; }
+    .figure   { grid-column: 4 / 10; }
+    .col-left { padding-top: 84px; }
 }
 
 /* ── ≤ 1024px ─────────────────────────── */
 @media (max-width: 1024px) {
-    .page-nav { padding: 0 32px; }
-    .stage    { padding: 52px 32px 100px; }
-    .head     { text-indent: 10%; }
-    .figure   { grid-column: 4 / 11; }
+    .stage     { padding: 64px 32px 0; }
+    .head      { text-indent: 10%; }
+    .figure    { grid-column: 4 / 11; }
     .col-right { grid-column: 11 / 13; }
-    .col-left { padding-top: 64px; }
+    .col-left  { padding-top: 64px; }
+    .cv-body   { padding: 104px 32px 90px; }
 }
 
 /* ── ≤ 900px — collapse the overlap ───────
@@ -259,23 +340,24 @@ a:focus-visible {
         grid-row: auto;
     }
 
-    .head      { text-indent: 0; }
-    .tail      { padding-top: 12px; }
-    .figure    { margin: 36px 0 0; }
+    .head       { text-indent: 0; }
+    .tail       { padding-top: 12px; }
+    .figure     { margin: 36px 0 0; }
     .figure img { aspect-ratio: 4 / 5; }
-    .col-left  { padding-top: 36px; }
-    .caption   { max-width: 100%; }
-    .download  { margin-top: 24px; }
-    .col-right { padding-top: 48px; }
-    .col-label { margin-bottom: 16px; }
+    .col-left   { padding-top: 36px; }
+    .caption    { max-width: 100%; }
+    .download   { margin-top: 24px; }
+    .col-right  { padding-top: 48px; }
+    .col-label  { margin-bottom: 16px; }
+    .cv-body    { padding-top: 88px; }
 }
 
 /* ── ≤ 768px — 16px minimum body text ── */
 @media (max-width: 768px) {
-    .page-nav { padding: 0 20px; }
-    .page-nav-right { gap: 16px; }
+    .page-nav { height: 56px; padding: 0 20px; }
+    .nav-logo img { height: 22px; }
 
-    .stage { padding: 52px 20px 80px; }
+    .stage { padding: 56px 20px 0; }
     .grid  { padding-top: 34px; }
 
     .caption,
@@ -283,14 +365,26 @@ a:focus-visible {
     .col-label,
     .col-body p { font-size: 1rem; }
 
-    .col-body p { line-height: 1.72; }
+    .col-body p    { line-height: 1.72; }
     .download-meta { font-size: .75rem; }
+
+    /* CV sections: single column, label above list */
+    .cv-body     { padding: 72px 20px 80px; }
+    .exp-section { grid-template-columns: 1fr; gap: 10px; padding: 36px 0; }
+    .hist-item   { font-size: 1rem; gap: 14px; flex-wrap: wrap; }
+    .award-item  { font-size: 1rem; padding: 12px 0; }
+    /* UI labels stay below 16px — secondary information */
+    .exp-label   { font-size: .6875rem; }
+    .hist-date   { font-size: .8125rem; min-width: 90px; }
 }
 
 /* ── ≤ 480px ──────────────────────────── */
 @media (max-width: 480px) {
     /* Justification is unreadable at this measure */
     .col-body p { text-align: left; hyphens: manual; }
+
+    .hist-item { flex-direction: column; gap: 2px; }
+    .hist-date { min-width: unset; }
 }
 
 /* ── Reduced motion ───────────────────── */
@@ -308,22 +402,55 @@ a:focus-visible {
 
     html, body { background: #fff; color: #000; }
 
+    /* Text header replaces the logo image on paper */
+    .print-head {
+        display: block;
+        margin: 0 0 20pt;
+        padding-bottom: 10pt;
+        border-bottom: 1px solid #000;
+    }
+    .print-head strong {
+        display: block;
+        font-size: 15pt; font-weight: 700;
+        letter-spacing: -.01em;
+    }
+    .print-head span {
+        display: block;
+        font-size: 9.5pt; color: #333;
+        margin-top: 3pt;
+    }
+
     .stage { padding: 0; }
     .grid  { display: block; padding-top: 0; }
 
     .head { font-size: 20pt; text-indent: 0; line-height: 1.18; }
     .tail { font-size: 20pt; padding-top: 0; }
 
-    .col-left  { padding-top: 16pt; }
-    .caption   { max-width: none; font-size: 10pt; font-style: normal; }
-    .download  { display: none; }
+    .col-left { padding-top: 16pt; }
+    .caption  { max-width: none; font-size: 10pt; font-style: normal; }
+    .download { display: none; }
 
     .col-right { padding-top: 14pt; }
-    .col-label { font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; }
+    .col-label {
+        font-size: 8pt; letter-spacing: .1em;
+        text-transform: uppercase;
+    }
     .col-body p {
         font-size: 10pt; font-style: normal;
         text-align: left; line-height: 1.5;
     }
+
+    .cv-body { padding: 18pt 0 0; }
+    .exp-section {
+        grid-template-columns: 100pt 1fr;
+        gap: 18pt; max-width: none;
+        padding: 12pt 0; border-top: 0;
+        break-inside: avoid; page-break-inside: avoid;
+    }
+    .exp-label  { font-size: 8pt; color: #555; }
+    .hist-item,
+    .award-item { font-size: 10pt; color: #000; line-height: 1.5; }
+    .hist-date  { color: #555; }
 }
 </style>
 </head>
@@ -334,14 +461,21 @@ a:focus-visible {
 <div id="cursor"></div>
 
 <nav class="page-nav">
-    <a href="index.html" class="page-nav-logo">Nichita Herascu</a>
-    <div class="page-nav-right">
-        <a href="index.html" class="page-nav-link">projects</a>
-        <a href="https://instagram.com/nichita.hera" target="_blank" rel="noopener noreferrer" class="page-nav-link">@nichita.hera</a>
-    </div>
+    <span class="nav-left"></span>
+    <a href="index.html" class="nav-logo" aria-label="Nichita Herascu — home">
+        <img data-src="A handwritten signature reading the two words Nichita Herascu in a loose black ink capital script on a plain white background, thin uneven marker strokes, no other elements, in a minimal monochrome style" alt="Nichita Herascu" width="220" height="26">
+    </a>
+    <a href="https://instagram.com/nichita.hera" target="_blank" rel="noopener noreferrer" class="nav-handle">@nichita.hera</a>
 </nav>
 
 <main class="stage" id="main">
+
+    <p class="print-head">
+        <strong>Nichita Herascu</strong>
+        <span>Art Director &amp; Graphic Designer — Bucharest</span>
+        <span>nichitaherascu@gmail.com &nbsp;·&nbsp; instagram.com/nichita.hera</span>
+    </p>
+
     <div class="grid">
 
         <!-- Headline, full width, overlapping the image -->
@@ -372,5 +506,44 @@ a:focus-visible {
 
     </div>
 </main>
+
+<!-- ═══ CV SECTIONS ═══ -->
+<div class="cv-body">
+
+    <section class="exp-section" aria-labelledby="label-work">
+        <h2 class="exp-label" id="label-work">Work History</h2>
+        <div>
+            <ul class="hist-list">
+                <li class="hist-item"><span class="hist-date">2024 – Present</span><span class="hist-detail"><strong>Ogilvy</strong><span class="hist-role"> — Junior Art Director</span></span></li>
+                <li class="hist-item"><span class="hist-date">2022 – 2024</span><span class="hist-detail"><strong>Nos Praesenti</strong><span class="hist-role"> — Brand Designer</span></span></li>
+                <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Freeways Global</strong><span class="hist-role"> — Graphic Designer</span></span></li>
+                <li class="hist-item"><span class="hist-date">2019 – 2021</span><span class="hist-detail"><strong>Cromatic Studios</strong><span class="hist-role"> — Junior Graphic Designer</span></span></li>
+                <li class="hist-item"><span class="hist-date">2019</span><span class="hist-detail"><strong>Pain Plaisir</strong><span class="hist-role"> — Social Media Designer</span></span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="exp-section" aria-labelledby="label-edu">
+        <h2 class="exp-label" id="label-edu">Education</h2>
+        <div>
+            <ul class="hist-list">
+                <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Bucharest University of Arts</strong><span class="hist-role"> — Photography &amp; Film</span></span></li>
+                <li class="hist-item"><span class="hist-date">2015 – 2019</span><span class="hist-detail"><strong>Nicolae Tonitza</strong><span class="hist-role"> — Industrial &amp; Product Design</span></span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="exp-section" aria-labelledby="label-awards">
+        <h2 class="exp-label" id="label-awards">Awards</h2>
+        <div>
+            <ul class="hist-list">
+                <li class="award-item"><strong>AAB 2025 Awards</strong><span>Research through architecture / architecture books section</span></li>
+                <li class="award-item"><strong>Internetics 2025 — Silver</strong><span>LIDL — Best Community Engagement</span></li>
+                <li class="award-item"><strong>Webstock 2025</strong><span>LIDL — Best Brand Engagement</span></li>
+            </ul>
+        </div>
+    </section>
+
+</div>
 
 </body></html>
