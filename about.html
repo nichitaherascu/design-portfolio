@@ -1,11 +1,13 @@
-<html lang="en" data-type="html" data-identifier="a4b5c6d7-e8f9-4a2b-8c3d-1e2f3a4b5c6d" data-title="about.html — Final" data-version="6" width="1200" height="800"><head>
+<html lang="en" data-type="html" data-identifier="a4b5c6d7-e8f9-4a2b-8c3d-1e2f3a4b5c6d" data-title="about.html — Final" data-version="7" width="1200" height="800">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV — Nichita Herascu</title>
     <meta name="description" content="Nichita Herascu — Art Director &amp; Graphic Designer based in Bucharest. Agency background at Ogilvy, with work for Dove, Mastercard, LIDL and Milka.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&amp;display=swap" rel="stylesheet">
+    <!-- Italic 300–500 added for the contact section's editorial side-columns -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..900;1,300..500&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer=""></script>
     <script src="about.js" defer=""></script>
@@ -20,6 +22,9 @@
            swap both back — nothing else on this page depends on it. */
         body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
 
+        /* Smooth in-page scroll to #contact (guarded below) */
+        html { scroll-behavior: smooth; }
+
         /* ── Accessibility ───────────────── */
         .skip-link {
             position: absolute; left: -9999px; top: 0;
@@ -28,7 +33,7 @@
         }
         .skip-link:focus { left: 8px; top: 8px; }
 
-        a:focus-visible, .skip-link:focus-visible {
+        a:focus-visible, .skip-link:focus-visible, button:focus-visible {
             outline: 2px solid var(--black);
             outline-offset: 3px;
         }
@@ -141,6 +146,138 @@
             text-decoration: underline; text-underline-offset: 4px; transition: opacity .2s;
         }
         .cv-link:hover { opacity: .5; }
+        .cv-meta {
+            font-size: 11px; color: var(--gray); text-decoration: none;
+            margin-left: 8px; font-variant-numeric: tabular-nums;
+        }
+
+
+        /* ═══════════════════════════════════
+           CONTACT SECTION
+           Replaces the deleted contact.html. Sits outside
+           .about-wrap so it can run full-bleed — the photo column
+           and its sticky track both end above it.
+        ═══════════════════════════════════ */
+
+        .c-contact {
+            padding: 0 48px 110px;
+            scroll-margin-top: 72px;   /* clears the fixed 52px nav */
+        }
+        .c-inner {
+            border-top: 1px solid rgba(138,138,138,.32);
+            padding-top: 34px;
+        }
+
+        /* ── Editorial grid ──────────────── */
+        /* Columns 5–8 are left empty where the reference places its
+           portrait — the page already has one, and a second would
+           compete. To add a work image, drop it into
+           grid-column: 5 / 9; grid-row: 2. */
+        .c-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr);
+            column-gap: 24px; padding-top: 40px;
+        }
+        .c-head {
+            grid-column: 1 / -1; grid-row: 1;
+            margin: 0;
+            font-size: clamp(30px, 5.2vw, 72px);
+            font-weight: 900; letter-spacing: -.03em;
+            line-height: .98; color: var(--black);
+            text-wrap: balance;
+        }
+        /* The headline's tail drops into a narrow left measure — the
+           key move from the reference layout. */
+        .c-tail {
+            grid-column: 1 / 5; grid-row: 2;
+            margin: 0; padding-top: 14px;
+            font-size: clamp(22px, 2.9vw, 40px);
+            font-weight: 900; letter-spacing: -.028em;
+            line-height: 1.0; color: var(--black);
+        }
+        .c-aside-l {
+            grid-column: 1 / 5; grid-row: 3;
+            padding-top: 54px;
+        }
+        .c-cap {
+            margin: 0; font-size: 13px; font-style: italic;
+            font-weight: 400; line-height: 1.6;
+            color: var(--black); max-width: 230px;
+        }
+        .c-inline-link {
+            display: inline-block; margin-top: 38px;
+            font-size: 13px; font-style: italic; color: var(--black);
+            text-decoration: underline; text-underline-offset: 4px;
+            transition: color .2s;
+        }
+        .c-inline-link:hover { color: var(--red, #e63329); }
+
+        /* Justified italic column — the reference's "Article" block.
+           hyphens: auto prevents the rivers of white space it has. */
+        .c-aside-r {
+            grid-column: 9 / 13; grid-row: 2 / 4;
+            padding-top: 22px;
+            display: flex; flex-direction: column;
+        }
+        .c-aside-label {
+            margin: 0 0 24px; font-size: 13px;
+            font-style: italic; color: var(--black);
+        }
+        .c-just {
+            margin: 0; font-size: 12.5px; font-style: italic;
+            font-weight: 300; line-height: 1.72; color: var(--black);
+            text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+        }
+        .c-more {
+            margin-top: auto; padding-top: 44px;
+            font-size: 13px; font-style: italic; color: var(--black);
+            text-decoration: underline; text-underline-offset: 4px;
+            transition: color .2s;
+        }
+        .c-more:hover { color: var(--red, #e63329); }
+
+        /* ── Direct band ─────────────────── */
+        .c-direct { padding-top: 92px; }
+        .c-motto {
+            margin: 0 0 40px; font-size: 11px;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: var(--gray);
+        }
+        .c-email-line {
+            display: inline-block; margin: 0 0 12px;
+            font-size: clamp(22px, 3.5vw, 48px);
+            font-weight: 900; letter-spacing: -.03em;
+            line-height: 1.05; color: var(--black);
+            text-decoration: none; transition: color .2s;
+            word-break: break-word;
+        }
+        .c-email-line:hover { color: var(--red, #e63329); }
+        .c-copy-btn {
+            display: block; margin: 0 0 56px; padding: 0;
+            background: none; border: 0; cursor: pointer;
+            font-family: inherit; font-size: 11px;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: var(--gray); transition: color .2s;
+        }
+        .c-copy-btn:hover { color: var(--black); }
+
+        .c-meta-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 32px; max-width: 940px;
+        }
+        .c-meta h3 {
+            margin: 0 0 10px; font-size: 10px; font-weight: 400;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: var(--gray);
+        }
+        .c-meta p {
+            margin: 0; font-size: 13px; font-weight: 300;
+            line-height: 1.65; color: var(--black);
+        }
+        .c-meta a {
+            color: var(--black); text-decoration: underline;
+            text-underline-offset: 3px; transition: color .2s;
+        }
+        .c-meta a:hover { color: var(--red, #e63329); }
 
 
         /* ═══════════════════════════════════
@@ -152,6 +289,27 @@
             .about-main { padding: 0 32px 80px; }
             .about-photo-col { width: 300px; padding: 20px 32px 0 0; }
             .page-nav { padding: 0 32px; }
+            .c-contact { padding: 0 32px 90px; }
+            .c-tail, .c-aside-l { grid-column: 1 / 6; }
+            .c-aside-r { grid-column: 9 / 13; }
+            .c-meta-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+        }
+
+        /* ── Editorial overlap collapse (≤ 900px) ──
+           The three-column arrangement stops being legible before the
+           standard mobile breakpoint, so it flattens earlier. */
+        @media (max-width: 900px) {
+            .c-grid { grid-template-columns: 1fr; }
+            .c-head, .c-tail, .c-aside-l, .c-aside-r {
+                grid-column: 1 / -1; grid-row: auto;
+            }
+            .c-aside-l { padding-top: 34px; }
+            .c-cap { max-width: 100%; }
+            .c-inline-link { margin-top: 20px; }
+            .c-aside-r { padding-top: 46px; }
+            .c-aside-label { margin-bottom: 14px; }
+            .c-more { margin-top: 0; padding-top: 26px; }
+            .c-direct { padding-top: 64px; }
         }
 
         /* ── Mobile (≤ 768px) ────────────── */
@@ -204,6 +362,14 @@
             /* UI labels — secondary, fine below 16px */
             .hist-date  { font-size: 0.8125rem; min-width: 90px; } /* 13px */
             .a-label    { font-size: 0.6875rem; }                   /* 11px */
+
+            /* Contact */
+            .c-contact { padding: 0 20px 72px; }
+            .c-cap, .c-just, .c-inline-link,
+            .c-more, .c-aside-label, .c-meta p { font-size: 1rem; }
+            /* Justification is unreadable in a narrow measure */
+            .c-just { line-height: 1.7; text-align: left; hyphens: manual; }
+            .c-meta-grid { grid-template-columns: 1fr; gap: 26px; }
         }
 
         /* ── Small phones (≤ 480px) ──────── */
@@ -214,6 +380,7 @@
 
         /* ── Reduced motion ──────────────── */
         @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
             .photo-sticky { transform: none !important; }
             * { transition-duration: .01ms !important; }
         }
@@ -224,7 +391,8 @@
         ═══════════════════════════════════ */
         @media print {
             .page-nav, .site-footer, #cursor,
-            .about-photo-col, .skip-link, .cv-wrap { display: none !important; }
+            .about-photo-col, .skip-link, .cv-wrap,
+            .c-contact { display: none !important; }
 
             html, body { background: #fff; color: #000; }
 
@@ -271,6 +439,7 @@
         <a href="index.html" class="page-nav-logo">Nichita Herascu</a>
         <div class="page-nav-right">
             <a href="index.html" class="page-nav-link">projects</a>
+            <a href="#contact" class="page-nav-link">contact</a>
             <a href="https://instagram.com/nichita.hera" target="_blank" rel="noopener noreferrer" class="page-nav-ig">@nichita.hera</a>
         </div>
     </nav>
@@ -333,7 +502,7 @@
             </section>
 
             <div class="cv-wrap">
-                <a href="images/cv.pdf" class="cv-link" target="_blank" rel="noopener noreferrer">Download CV (PDF)</a>
+                <a href="images/cv.pdf" class="cv-link" type="application/pdf" target="_blank" rel="noopener noreferrer">Download CV<span class="cv-meta">PDF</span></a>
             </div>
 
         </main>
@@ -344,6 +513,55 @@
             </div>
         </div>
     </div>
+
+    <!-- ═══ CONTACT ═══ replaces the deleted contact.html ═══ -->
+    <section class="c-contact" id="contact" aria-labelledby="c-head">
+        <div class="c-inner">
+            <p class="a-label">Contact</p>
+
+            <div class="c-grid">
+                <h2 class="c-head" id="c-head">Open to conversations about brand, print, illustration and the</h2>
+                <p class="c-tail" id="c-tail">occasional strange idea.</p>
+
+                <div class="c-aside-l">
+                    <p class="c-cap" id="c-cap">Based in Bucharest, Romania. Working across Europe and remotely.</p>
+                    <a href="mailto:nichitaherascu@gmail.com" class="c-inline-link">Email here</a>
+                </div>
+
+                <div class="c-aside-r">
+                    <p class="c-aside-label" id="c-aside-label">Enquiries</p>
+                    <p class="c-just" id="c-just">The fastest way to reach me is email. If it is a project, a rough outline is plenty to start with — what it is, roughly when you need it, and where the budget sits. I read everything and reply within two working days, usually sooner. I am at Ogilvy during the week and take on selected freelance work outside of it, across brand design, illustration, editorial and web. Instagram is where things tend to appear first, often long before they reach this site.</p>
+                    <a href="index.html" class="c-more">See the work</a>
+                </div>
+            </div>
+
+            <div class="c-direct">
+                <p class="c-motto" id="c-motto">Trying to find patterns where there are no patterns</p>
+
+                <a href="mailto:nichitaherascu@gmail.com" class="c-email-line" id="c-email">nichitaherascu@gmail.com</a>
+                <button type="button" class="c-copy-btn" id="c-copy" data-email="nichitaherascu@gmail.com">Copy address</button>
+
+                <div class="c-meta-grid">
+                    <div class="c-meta">
+                        <h3 id="c-m1">Location</h3>
+                        <p id="c-p1">Bucharest, Romania<br>EET / EEST</p>
+                    </div>
+                    <div class="c-meta">
+                        <h3 id="c-m2">Currently</h3>
+                        <p id="c-p2">Junior Art Director<br>at Ogilvy</p>
+                    </div>
+                    <div class="c-meta">
+                        <h3 id="c-m3">Elsewhere</h3>
+                        <p id="c-p3"><a href="https://instagram.com/nichita.hera" target="_blank" rel="noopener noreferrer">Instagram</a><br><a href="images/cv.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></p>
+                    </div>
+                    <div class="c-meta">
+                        <h3 id="c-m4">Available for</h3>
+                        <p id="c-p4">Brand, print, illustration, editorial, web</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="site-footer">
         <div class="footer-top">
@@ -357,6 +575,5 @@
             <p class="footer-copy">Graphic Designer &amp; Art Director — Bucharest &nbsp;·&nbsp; © 2026 Nichita Herascu</p>
         </div>
     </footer>
-
 
 </body></html>
