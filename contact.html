@@ -1,0 +1,367 @@
+<html lang="en" data-type="html" data-identifier="1c05c0ae-5db0-4e29-b310-7b911069bb89" data-title="contact.html" data-version="1" width="1200" height="800" imagemodel="imagen-4"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Nichita Herascu</title>
+<meta name="description" content="Get in touch with Nichita Herascu — Art Director & Graphic Designer based in Bucharest, Romania.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..900;1,300..500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="main.js" defer=""></script>
+<style>
+    /* Fallback values on every var() so this page still renders if
+       style.css fails to load. Remove the fallbacks if you'd rather
+       they inherit strictly from the design system. */
+    :root {
+        --c-black: var(--black, #111111);
+        --c-white: var(--white, #ffffff);
+        --c-gray:  var(--gray,  #8a8a8a);
+        --c-red:   var(--red,   #e63329);
+    }
+
+    html { background: var(--c-white); }
+    html, body {
+        height: auto; overflow-x: hidden;
+        background: var(--c-white);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ── DARK VARIANT SWITCH ──────────────
+       To flip this page to the hero's dark register, add
+       class="dark" to <body>. Nothing else needs changing. */
+    body.dark { background: #0d0d0d; }
+    body.dark { --c-black: #f4f4f4; --c-gray: #7c7c7c; }
+    body.dark .page-nav { background: #0d0d0d; }
+    body.dark .c-portrait-img { background: #1c1c1c; }
+
+    /* ── Accessibility ───────────────── */
+    .skip-link {
+        position: absolute; left: -9999px; top: 0;
+        background: var(--c-black); color: var(--c-white);
+        padding: 10px 16px; font-size: 13px; z-index: 200;
+    }
+    .skip-link:focus { left: 8px; top: 8px; }
+    a:focus-visible { outline: 2px solid var(--c-red); outline-offset: 3px; }
+
+    /* ── Nav (identical to about.html) ── */
+    .page-nav {
+        position: fixed; top: 0; left: 0; right: 0;
+        height: 52px; display: flex; align-items: center;
+        justify-content: space-between; padding: 0 48px;
+        background: var(--c-white); z-index: 100;
+    }
+    .page-nav-logo {
+        font-size: 13px; font-weight: 500; letter-spacing: .06em;
+        text-transform: uppercase; color: var(--c-black);
+        text-decoration: none; transition: opacity .2s;
+    }
+    .page-nav-logo:hover { opacity: .45; }
+    .page-nav-right { display: flex; align-items: center; gap: 24px; }
+    .page-nav-link {
+        font-size: 12px; color: var(--c-gray); text-decoration: none;
+        letter-spacing: .04em; transition: color .2s;
+    }
+    .page-nav-link:hover { color: var(--c-black); }
+
+    /* ── Editorial grid ──────────────── */
+    .c-wrap { padding: 52px 48px 0; }
+
+    .c-hero {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        column-gap: 24px;
+        padding-top: 44px;
+    }
+
+    /* Oversized headline — spans full width, sits above the image */
+    .c-head {
+        grid-column: 1 / -1; grid-row: 1;
+        position: relative; z-index: 3;
+        margin: 0;
+        font-size: clamp(30px, 5.4vw, 74px);
+        font-weight: 900; letter-spacing: -.03em;
+        line-height: .98; color: var(--c-black);
+        text-wrap: balance;
+    }
+
+    /* The headline's tail — drops into a narrow left measure and
+       overlaps the portrait, exactly as in the reference */
+    .c-head-tail {
+        grid-column: 1 / 4; grid-row: 2;
+        position: relative; z-index: 3;
+        margin: 0; padding-top: 10px;
+        font-size: clamp(24px, 3.1vw, 42px);
+        font-weight: 900; letter-spacing: -.028em;
+        line-height: 1.0; color: var(--c-black);
+    }
+
+    /* Centre-anchored portrait, tucked under the type */
+    .c-portrait {
+        grid-column: 4 / 10; grid-row: 2 / 5;
+        margin: -18px 0 0; z-index: 2;
+    }
+    .c-portrait-img {
+        width: 100%; display: block;
+        aspect-ratio: 1 / 1; object-fit: cover;
+        background: #e8e4df;
+    }
+
+    /* ── Left aside ──────────────────── */
+    .c-aside-l {
+        grid-column: 1 / 4; grid-row: 3;
+        padding-top: 96px;
+    }
+    .c-cap {
+        margin: 0; font-size: 13px; font-style: italic;
+        font-weight: 400; line-height: 1.6;
+        color: var(--c-black); max-width: 210px;
+    }
+    .c-inline-link {
+        display: inline-block; margin-top: 44px;
+        font-size: 13px; font-style: italic; color: var(--c-black);
+        text-decoration: underline; text-underline-offset: 4px;
+        transition: color .2s, opacity .2s;
+    }
+    .c-inline-link:hover { color: var(--c-red); opacity: 1; }
+
+    /* ── Right aside — justified editorial column ── */
+    .c-aside-r {
+        grid-column: 10 / 13; grid-row: 2 / 5;
+        padding-top: 34px;
+        display: flex; flex-direction: column;
+    }
+    .c-label {
+        margin: 0 0 26px; font-size: 13px; font-style: italic;
+        color: var(--c-black);
+    }
+    .c-just {
+        margin: 0; font-size: 12.5px; font-style: italic;
+        font-weight: 300; line-height: 1.72; color: var(--c-black);
+        text-align: justify;
+        /* hyphens prevent the rivers of white space the reference has */
+        hyphens: auto; -webkit-hyphens: auto;
+    }
+    .c-more {
+        margin-top: auto; padding-top: 48px;
+        font-size: 13px; font-style: italic; color: var(--c-black);
+        text-decoration: underline; text-underline-offset: 4px;
+        transition: color .2s;
+    }
+    .c-more:hover { color: var(--c-red); }
+
+    /* ── Details band ────────────────── */
+    .c-details {
+        border-top: 1px solid rgba(138,138,138,.35);
+        margin-top: 88px; padding: 34px 0 100px;
+    }
+    .c-motto {
+        margin: 0 0 46px; font-size: 11px;
+        letter-spacing: .1em; text-transform: uppercase;
+        color: var(--c-gray);
+    }
+    .c-email-line {
+        display: inline-block; margin: 0 0 12px;
+        font-size: clamp(24px, 3.6vw, 50px);
+        font-weight: 900; letter-spacing: -.03em;
+        color: var(--c-black); text-decoration: none;
+        transition: color .2s;
+    }
+    .c-email-line:hover { color: var(--c-red); }
+    .c-copy-btn {
+        display: block; margin: 0 0 54px; padding: 0;
+        background: none; border: 0; cursor: pointer;
+        font-family: inherit; font-size: 11px;
+        letter-spacing: .1em; text-transform: uppercase;
+        color: var(--c-gray); transition: color .2s;
+    }
+    .c-copy-btn:hover { color: var(--c-black); }
+
+    .c-meta-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr);
+        gap: 32px; max-width: 900px;
+    }
+    .c-meta h3 {
+        margin: 0 0 10px; font-size: 10px; font-weight: 400;
+        letter-spacing: .12em; text-transform: uppercase;
+        color: var(--c-gray);
+    }
+    .c-meta p {
+        margin: 0; font-size: 13px; font-weight: 300;
+        line-height: 1.6; color: var(--c-black);
+    }
+    .c-meta a {
+        color: var(--c-black); text-decoration: underline;
+        text-underline-offset: 3px; transition: color .2s;
+    }
+    .c-meta a:hover { color: var(--c-red); }
+
+
+    /* ═══════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════ */
+
+    @media (max-width: 1024px) {
+        .page-nav { padding: 0 32px; }
+        .c-wrap { padding: 52px 32px 0; }
+        .c-portrait { grid-column: 4 / 11; }
+        .c-aside-r { grid-column: 11 / 13; }
+        .c-aside-l { padding-top: 64px; }
+        .c-meta-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    }
+
+    /* Below 900px the three-column overlap stops being legible —
+       collapse to a clean single column rather than compressing it. */
+    @media (max-width: 900px) {
+        .c-hero { grid-template-columns: 1fr; row-gap: 0; }
+        .c-head, .c-head-tail, .c-portrait,
+        .c-aside-l, .c-aside-r {
+            grid-column: 1 / -1; grid-row: auto;
+        }
+        .c-head-tail { padding-top: 14px; max-width: 100%; }
+        .c-portrait { margin: 34px 0 0; }
+        .c-portrait-img { aspect-ratio: 4 / 5; }
+        .c-aside-l { padding-top: 34px; }
+        .c-cap { max-width: 100%; }
+        .c-inline-link { margin-top: 22px; }
+        .c-aside-r { padding-top: 44px; }
+        .c-label { margin-bottom: 16px; }
+        .c-more { margin-top: 0; padding-top: 28px; }
+    }
+
+    @media (max-width: 768px) {
+        .page-nav { padding: 0 20px; }
+        .page-nav-right { gap: 16px; }
+        .c-wrap { padding: 52px 20px 0; }
+        .c-hero { padding-top: 30px; }
+
+        /* 16px minimum for body copy, per the rest of the site */
+        .c-cap, .c-just, .c-inline-link,
+        .c-more, .c-label, .c-meta p { font-size: 1rem; }
+        .c-just { line-height: 1.7; text-align: left; }
+        .c-details { margin-top: 56px; padding-bottom: 72px; }
+        .c-meta-grid { grid-template-columns: 1fr; gap: 26px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        * { transition-duration: .01ms !important; }
+    }
+
+    @media print {
+        .page-nav, .site-footer, #cursor,
+        .skip-link, .c-portrait, .c-copy-btn { display: none !important; }
+        html, body { background: #fff; color: #000; }
+        .c-hero { display: block; }
+        .c-just { text-align: left; }
+    }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div id="cursor"></div>
+
+<nav class="page-nav">
+    <a href="index.html" class="page-nav-logo">Nichita Herascu</a>
+    <div class="page-nav-right">
+        <a href="index.html" class="page-nav-link">projects</a>
+        <a href="about.html" class="page-nav-link">cv</a>
+        <a href="https://instagram.com/nichita.hera" target="_blank" rel="noopener noreferrer" class="page-nav-link">@nichita.hera</a>
+    </div>
+</nav>
+
+<main class="c-wrap" id="main">
+
+    <section class="c-hero">
+
+        <h1 class="c-head" id="c-head">Nichita Herascu is a graphic designer and art director in Bucharest, currently at Ogilvy, open to conversations about brand, print,</h1>
+
+        <p class="c-head-tail" id="c-head-tail">illustration and the occasional strange idea.</p>
+
+        <figure class="c-portrait">
+            <img class="c-portrait-img" data-src="Editorial square portrait of a young man in his mid-twenties with closely cropped dark hair, photographed in three-quarter profile looking off-frame, plain warm off-white studio backdrop, soft directional daylight from the left, simple dark crew-neck top, sharp medium-format detail with visible skin texture, restrained and quietly confident, in a minimalist editorial style" alt="Nichita Herascu" width="600" height="600">
+        </figure>
+
+        <div class="c-aside-l">
+            <p class="c-cap" id="c-cap">Graphic designer and art director based in Bucharest, Romania.</p>
+            <a href="mailto:nichitaherascu@gmail.com" class="c-inline-link">Email here</a>
+        </div>
+
+        <div class="c-aside-r">
+            <p class="c-label" id="c-label">Enquiries</p>
+            <p class="c-just" id="c-just">The fastest way to reach me is email. If it is a project, a rough outline is plenty to start with — what it is, roughly when you need it, and where the budget sits. I read everything and reply within two working days, usually sooner. I am at Ogilvy Romania during the week and take on selected freelance work outside of it, across brand design, illustration, editorial and web. Instagram is where things tend to appear first, often long before they reach this site.</p>
+            <a href="index.html" class="c-more">See the work</a>
+        </div>
+
+    </section>
+
+    <section class="c-details">
+        <p class="c-motto" id="c-motto">Trying to find patterns where there are no patterns</p>
+
+        <a href="mailto:nichitaherascu@gmail.com" class="c-email-line" id="c-email">nichitaherascu@gmail.com</a>
+        <button type="button" class="c-copy-btn" id="c-copy" data-email="nichitaherascu@gmail.com">Copy address</button>
+
+        <div class="c-meta-grid">
+            <div class="c-meta">
+                <h3 id="c-m1">Location</h3>
+                <p id="c-p1">Bucharest, Romania<br>EET / EEST</p>
+            </div>
+            <div class="c-meta">
+                <h3 id="c-m2">Currently</h3>
+                <p id="c-p2">Junior Art Director<br>at Ogilvy</p>
+            </div>
+            <div class="c-meta">
+                <h3 id="c-m3">Elsewhere</h3>
+                <p id="c-p3"><a href="https://instagram.com/nichita.hera" target="_blank" rel="noopener noreferrer">Instagram</a><br><a href="about.html">CV</a></p>
+            </div>
+            <div class="c-meta">
+                <h3 id="c-m4">Available for</h3>
+                <p id="c-p4">Brand, print, illustration, editorial, web</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-top">
+        <h2 class="footer-name" id="c-fname">Nichita<br>Herascu</h2>
+        <div class="footer-contact">
+            <p class="footer-cta-text" id="c-fcta">Want to work together?</p>
+            <a href="mailto:nichitaherascu@gmail.com" class="footer-email">nichitaherascu@gmail.com</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p class="footer-copy" id="c-fcopy">Graphic Designer &amp; Art Director — Bucharest &nbsp;·&nbsp; © 2026 Nichita Herascu</p>
+    </div>
+</footer>
+
+<script>
+    // Copy-to-clipboard on the email address.
+    // Uses addEventListener (no inline handlers) and degrades
+    // silently — the mailto: link above always works regardless.
+    document.addEventListener('DOMContentLoaded', function () {
+        var btn = document.getElementById('c-copy');
+        if (!btn) return;
+
+        if (!navigator.clipboard) {
+            btn.style.display = 'none';
+            return;
+        }
+
+        var label = btn.textContent;
+        var timer = null;
+
+        btn.addEventListener('click', function () {
+            navigator.clipboard.writeText(btn.getAttribute('data-email')).then(function () {
+                btn.textContent = 'Copied';
+                clearTimeout(timer);
+                timer = setTimeout(function () { btn.textContent = label; }, 1800);
+            }).catch(function () {
+                btn.style.display = 'none';
+            });
+        });
+    });
+</script>
+
+</body></html>

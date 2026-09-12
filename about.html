@@ -1,16 +1,37 @@
-<html data-type="html" data-identifier="a4b5c6d7-e8f9-4a2b-8c3d-1e2f3a4b5c6d" data-title="about.html — Final" data-version="5" width="1200" height="800"><head>
+<html lang="en" data-type="html" data-identifier="a4b5c6d7-e8f9-4a2b-8c3d-1e2f3a4b5c6d" data-title="about.html — Final" data-version="6" width="1200" height="800"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Nichita Herascu</title>
+    <title>CV — Nichita Herascu</title>
+    <meta name="description" content="Nichita Herascu — Art Director &amp; Graphic Designer based in Bucharest. Agency background at Ogilvy, with work for Dove, Mastercard, LIDL and Milka.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer=""></script>
     <script src="about.js" defer=""></script>
     <style>
         html { background: #fff; }
         html, body { height: auto; overflow-x: hidden; background: #fff; }
+
+        /* ── FONT OVERRIDE ────────────────
+           Matches the new Inter-based index.html. If Inter gets
+           promoted into style.css sitewide, delete this rule and the
+           Google Fonts <link> above. If Nichita wants DM Sans back,
+           swap both back — nothing else on this page depends on it. */
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+
+        /* ── Accessibility ───────────────── */
+        .skip-link {
+            position: absolute; left: -9999px; top: 0;
+            background: var(--black); color: #fff;
+            padding: 10px 16px; font-size: 13px; z-index: 200;
+        }
+        .skip-link:focus { left: 8px; top: 8px; }
+
+        a:focus-visible, .skip-link:focus-visible {
+            outline: 2px solid var(--black);
+            outline-offset: 3px;
+        }
 
         /* ── Nav ─────────────────────────── */
         .page-nav {
@@ -25,6 +46,12 @@
             text-decoration: none; transition: opacity .2s;
         }
         .page-nav-logo:hover { opacity: .45; }
+        .page-nav-right { display: flex; align-items: center; gap: 24px; }
+        .page-nav-link {
+            font-size: 12px; font-weight: 400; color: var(--gray);
+            text-decoration: none; letter-spacing: .04em; transition: color .2s;
+        }
+        .page-nav-link:hover { color: var(--black); }
         .page-nav-ig {
             font-size: 12px; font-weight: 400; color: var(--gray);
             text-decoration: none; letter-spacing: .04em; transition: color .2s;
@@ -32,21 +59,32 @@
         .page-nav-ig:hover { color: var(--black); }
 
         /* ── Layout ──────────────────────── */
-        .about-wrap { padding-top: 52px; display: flex; align-items: flex-start; }
+        /* align-items: stretch is REQUIRED — the photo column must
+           inherit the wrapper's full height or position: sticky on
+           .photo-sticky has no track to travel along. */
+        .about-wrap { padding-top: 52px; display: flex; align-items: stretch; }
         .about-main { flex: 1; min-width: 0; padding: 0 48px 100px; }
 
-        /* ── Fixed photo ─────────────────── */
-        .about-photo-col { width: 360px; flex-shrink: 0; }
-        .photo-fixed {
-            position: fixed; top: 72px; right: 48px;
-            width: 320px; will-change: transform;
-            transition: opacity .4s ease;
+        /* ── Sticky photo ────────────────── */
+        /* Was position: fixed — reverted to sticky so it (a) stops at
+           the end of .about-wrap instead of floating over the footer,
+           and (b) matches the .photo-sticky selector in about.js. */
+        .about-photo-col {
+            width: 360px; flex-shrink: 0;
+            padding: 20px 48px 0 0;
+        }
+        .photo-sticky {
+            position: sticky; top: 72px;
+            width: 100%; will-change: transform;
         }
         .about-img {
             width: 100%; display: block;
             aspect-ratio: 3 / 4; object-fit: cover; object-position: top;
             background: #e8e4df;
         }
+
+        /* ── Print-only contact header ───── */
+        .print-head { display: none; }
 
         /* ── Hero ────────────────────────── */
         .about-hero { padding: 56px 0 52px; max-width: 680px; }
@@ -64,7 +102,8 @@
         }
         .a-label {
             font-size: 10px; font-weight: 400; letter-spacing: .12em;
-            text-transform: uppercase; color: var(--gray); padding-top: 4px;
+            text-transform: uppercase; color: var(--gray);
+            padding-top: 4px; margin: 0;
         }
         .a-body p {
             font-size: 14px; font-weight: 300; color: #3a3a3a;
@@ -73,13 +112,17 @@
         .a-body p:last-child { margin-bottom: 0; }
 
         /* ── History items ───────────────── */
-        .hist-list { margin-top: 4px; }
+        .hist-list { margin: 4px 0 0; padding: 0; list-style: none; }
         .hist-item {
             display: flex; gap: 20px; padding: 10px 0;
             font-size: 13px; font-weight: 300; color: var(--black);
             line-height: 1.5; align-items: baseline;
         }
-        .hist-date { font-size: 11px; color: var(--gray); min-width: 115px; flex-shrink: 0; }
+        .hist-date {
+            font-size: 11px; color: var(--gray);
+            min-width: 115px; flex-shrink: 0;
+            font-variant-numeric: tabular-nums;
+        }
         .hist-detail strong { font-weight: 600; }
         .hist-detail .hist-role { color: #555; }
 
@@ -107,8 +150,7 @@
         /* ── Tablet (≤ 1024px) ───────────── */
         @media (max-width: 1024px) {
             .about-main { padding: 0 32px 80px; }
-            .photo-fixed { width: 260px; right: 32px; }
-            .about-photo-col { width: 300px; }
+            .about-photo-col { width: 300px; padding: 20px 32px 0 0; }
             .page-nav { padding: 0 32px; }
         }
 
@@ -116,8 +158,9 @@
         @media (max-width: 768px) {
 
             .page-nav { padding: 0 20px; }
+            .page-nav-right { gap: 16px; }
 
-            /* Hide fixed portrait — too complex in single-column flow */
+            /* Hide portrait — too complex in single-column flow */
             .about-photo-col { display: none; }
 
             /* Stack to single column */
@@ -168,77 +211,136 @@
             .hist-item  { flex-direction: column; gap: 2px; }
             .hist-date  { min-width: unset; }
         }
+
+        /* ── Reduced motion ──────────────── */
+        @media (prefers-reduced-motion: reduce) {
+            .photo-sticky { transform: none !important; }
+            * { transition-duration: .01ms !important; }
+        }
+
+
+        /* ═══════════════════════════════════
+           PRINT — it's a CV, people will ⌘P it
+        ═══════════════════════════════════ */
+        @media print {
+            .page-nav, .site-footer, #cursor,
+            .about-photo-col, .skip-link, .cv-wrap { display: none !important; }
+
+            html, body { background: #fff; color: #000; }
+
+            .about-wrap { display: block; padding-top: 0; }
+            .about-main { padding: 0; }
+
+            .print-head {
+                display: block; margin: 0 0 20pt;
+                padding-bottom: 10pt; border-bottom: 1px solid #000;
+            }
+            .print-head strong {
+                display: block; font-size: 15pt;
+                font-weight: 700; letter-spacing: -.01em;
+            }
+            .print-head span {
+                display: block; font-size: 9.5pt;
+                color: #333; margin-top: 3pt;
+            }
+
+            .about-hero { padding: 0 0 20pt; max-width: none; }
+            .about-hero h1 { font-size: 19pt; line-height: 1.2; }
+
+            .a-section {
+                grid-template-columns: 100pt 1fr; gap: 18pt;
+                padding: 12pt 0; max-width: none;
+                break-inside: avoid; page-break-inside: avoid;
+            }
+            .a-label { font-size: 8pt; color: #555; }
+            .a-body p, .hist-item, .award-item {
+                font-size: 10pt; color: #000; line-height: 1.5;
+            }
+            .hist-date { color: #555; }
+            a { color: #000; text-decoration: none; }
+        }
     </style>
 </head>
 <body>
+
+    <a href="#main" class="skip-link">Skip to content</a>
 
     <div id="cursor"></div>
 
     <nav class="page-nav">
         <a href="index.html" class="page-nav-logo">Nichita Herascu</a>
-        <a href="https://instagram.com/nichita.hera" target="_blank" class="page-nav-ig">@nichita.hera</a>
+        <div class="page-nav-right">
+            <a href="index.html" class="page-nav-link">projects</a>
+            <a href="https://instagram.com/nichita.hera" target="_blank" rel="noopener noreferrer" class="page-nav-ig">@nichita.hera</a>
+        </div>
     </nav>
 
     <div class="about-wrap">
-        <main class="about-main">
+        <main class="about-main" id="main">
+
+            <p class="print-head">
+                <strong>Nichita Herascu</strong>
+                <span>Art Director &amp; Graphic Designer — Bucharest</span>
+                <span>nichitaherascu@gmail.com &nbsp;·&nbsp; instagram.com/nichita.hera</span>
+            </p>
 
             <div class="about-hero">
                 <h1>Multidisciplinary art director &amp; graphic designer with agency background and a passion for culture.</h1>
             </div>
 
             <section class="a-section">
-                <p class="a-label">A Little About Me</p>
+                <h2 class="a-label">A Little About Me</h2>
                 <div class="a-body">
                     <p>Hello, I am Nichita.</p>
-                    <p>Multidisciplinary Art Director with agency background (Ogilvy) and strong illustration skills. My expertise also spans brand design, video editing, 3D modeling and web design.</p>
+                    <p>Multidisciplinary Art Director with agency background (Ogilvy) and strong illustration skills. My expertise also spans brand design, video editing, 3D modelling and web design.</p>
                     <p>With over 6 years of experience with international brands such as DOVE, Mastercard, LIDL, Milka and more. I've collaborated with post-production houses, gaining diverse and interesting experiences.</p>
                     <p>My inspiration comes from all kinds of art, design, culture and music.</p>
                 </div>
             </section>
 
             <section class="a-section">
-                <p class="a-label">Work History</p>
+                <h2 class="a-label">Work History</h2>
                 <div class="a-body">
-                    <div class="hist-list">
-                        <div class="hist-item"><span class="hist-date">2024 – Present</span><div class="hist-detail"><strong>Ogilvy</strong><span class="hist-role"> — Junior Art Director</span></div></div>
-                        <div class="hist-item"><span class="hist-date">2022 – 2024</span><div class="hist-detail"><strong>Nos Praesenti</strong><span class="hist-role"> — Brand Designer</span></div></div>
-                        <div class="hist-item"><span class="hist-date">2021 – 2022</span><div class="hist-detail"><strong>Freeways Global</strong><span class="hist-role"> — Graphic Designer</span></div></div>
-                        <div class="hist-item"><span class="hist-date">2019 – 2021</span><div class="hist-detail"><strong>Cromatic Studios</strong><span class="hist-role"> — Junior Graphic Designer</span></div></div>
-                        <div class="hist-item"><span class="hist-date">2019</span><div class="hist-detail"><strong>Pain Plaisir</strong><span class="hist-role"> — Social Media Designer</span></div></div>
-                    </div>
+                    <ul class="hist-list">
+                        <li class="hist-item"><span class="hist-date">2024 – Present</span><span class="hist-detail"><strong>Ogilvy</strong><span class="hist-role"> — Junior Art Director</span></span></li>
+                        <li class="hist-item"><span class="hist-date">2022 – 2024</span><span class="hist-detail"><strong>Nos Praesenti</strong><span class="hist-role"> — Brand Designer</span></span></li>
+                        <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Freeways Global</strong><span class="hist-role"> — Graphic Designer</span></span></li>
+                        <li class="hist-item"><span class="hist-date">2019 – 2021</span><span class="hist-detail"><strong>Cromatic Studios</strong><span class="hist-role"> — Junior Graphic Designer</span></span></li>
+                        <li class="hist-item"><span class="hist-date">2019</span><span class="hist-detail"><strong>Pain Plaisir</strong><span class="hist-role"> — Social Media Designer</span></span></li>
+                    </ul>
                 </div>
             </section>
 
             <section class="a-section">
-                <p class="a-label">Education</p>
+                <h2 class="a-label">Education</h2>
                 <div class="a-body">
-                    <div class="hist-list">
-                        <div class="hist-item"><span class="hist-date">2021 – 2022</span><div class="hist-detail"><strong>Bucharest University of Arts</strong><span class="hist-role"> — Photography &amp; Film</span></div></div>
-                        <div class="hist-item"><span class="hist-date">2015 – 2019</span><div class="hist-detail"><strong>Nicolae Tonitza</strong><span class="hist-role"> — Industrial &amp; Product Design</span></div></div>
-                    </div>
+                    <ul class="hist-list">
+                        <li class="hist-item"><span class="hist-date">2021 – 2022</span><span class="hist-detail"><strong>Bucharest University of Arts</strong><span class="hist-role"> — Photography &amp; Film</span></span></li>
+                        <li class="hist-item"><span class="hist-date">2015 – 2019</span><span class="hist-detail"><strong>Nicolae Tonitza</strong><span class="hist-role"> — Industrial &amp; Product Design</span></span></li>
+                    </ul>
                 </div>
             </section>
 
             <section class="a-section">
-                <p class="a-label">Awards</p>
+                <h2 class="a-label">Awards</h2>
                 <div class="a-body">
-                    <div class="hist-list">
-                        <div class="award-item"><strong>AAB2025 Awards</strong><span>Research through architecture / architecture books section</span></div>
-                        <div class="award-item"><strong>Internetics 2025 — Silver</strong><span>LIDL — Best Community Engagement</span></div>
-                        <div class="award-item"><strong>Webstock 2025</strong><span>LIDL — Best Brand Engagement</span></div>
-                    </div>
+                    <ul class="hist-list">
+                        <li class="award-item"><strong>AAB 2025 Awards</strong><span>Research through architecture / architecture books section</span></li>
+                        <li class="award-item"><strong>Internetics 2025 — Silver</strong><span>LIDL — Best Community Engagement</span></li>
+                        <li class="award-item"><strong>Webstock 2025</strong><span>LIDL — Best Brand Engagement</span></li>
+                    </ul>
                 </div>
             </section>
 
             <div class="cv-wrap">
-                <a href="images/cv.pdf" class="cv-link" target="_blank">Download my CV from here</a>
+                <a href="images/cv.pdf" class="cv-link" target="_blank" rel="noopener noreferrer">Download CV (PDF)</a>
             </div>
 
         </main>
 
         <div class="about-photo-col">
-            <div class="photo-fixed" id="about-photo">
-                <img src="images/about.jpg" alt="Nichita Herascu" class="about-img">
+            <div class="photo-sticky" id="about-photo">
+                <img data-src="Editorial portrait of a young man in his mid-twenties with short dark hair and a calm, direct gaze, seated against a plain warm off-white wall, wearing a simple dark shirt, soft natural window light from the left, shot on medium format, vertical 3:4 crop, in a restrained minimalist editorial style" alt="Nichita Herascu" class="about-img" width="312" height="416">
             </div>
         </div>
     </div>
